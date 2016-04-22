@@ -172,6 +172,7 @@ CodeCathedra = '".$CodeCathedra."',CodeEventType = '".$CodeEventType."'
    WHERE IDEvent=".$id;
    
   mysqli_query ($connect, $query ); 
+   // die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 

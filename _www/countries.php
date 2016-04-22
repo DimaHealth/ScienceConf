@@ -20,10 +20,10 @@
       <ul>
         <li><a href="mainform.html">Main</a></li>
         <li><a href="addnewuser.html">Пользователи</a></li>
-        <li class="active">
+        <li >
           <a href="tableofevents.php">Мероприятия</a>
         </li>
-        <li><a href="addnewdictionary.html">Справочники</a></li>
+        <li class="active" ><a href="addnewdictionary.html">Справочники</a></li>
         <li><a href="addnewreport.html">Отчеты</a></li>
         <li><a href="addnewtables.html">Другие таблицы</a></li>
       </ul>
@@ -70,13 +70,14 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>Страна</th><th>Ред.</th><th>Удл.</th></tr>'; 
+  echo '<tr><th>ID</th><th>Страна</th><th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
+    echo '<td>'.$item['IDCountry'].'</td>'; 
     echo '<td>'.$item['Country'].'</td>'; 
-    echo '<td><a href="?action=editform&id='.$item['IDEvent'].'">Ред.</a></td>'; 
-    echo '<td><a href="?action=delete&id='.$item['IDEvent'].'">Удл.</a></td></tr>'; 
+    echo '<td><a href="?action=editform&id='.$item['IDCountry'].'">Ред.</a></td>'; 
+    echo '<td><a href="?action=delete&id='.$item['IDCountry'].'">Удл.</a></td></tr>'; 
   } 
   echo '</table>';
   echo '<p><a href="'.$_SERVER['PHP_SELF'].'?action=addform">Добавить</a></p>';  
@@ -110,7 +111,7 @@ function get_edit_item_form()
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from countries WHERE IDCountry='.$id; 
-  
+  //die(var_dump($_POST, $_GET, $id));
   $res = mysqli_query($connect ,$query ); 
   $item = mysqli_fetch_array( $res ); 
   include("templates/updateCountry.php");
@@ -122,10 +123,13 @@ function get_edit_item_form()
 function update_item() 
 { 
 require_once("dbconnect.php");
-$IDCountry = mysqli_escape_string($connect, $_GET['IDCountry'] );
-$country = mysqli_escape_string($connect, $_GET['Country'] );
-  $query = "UPDATE countries SET Country='".$country."WHERE IDEvent=".$IDCountry;
+//$IDCountry = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
+$id = mysqli_escape_string($connect, $_GET['IDCountry'] );
+$country = mysqli_escape_string($connect, $_POST['Country'] );
+  $query = "UPDATE countries SET Country='".$country."' WHERE IDCountry=".$id;
+  
   mysqli_query ($connect, $query ); 
+ //die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 
@@ -134,7 +138,7 @@ $country = mysqli_escape_string($connect, $_GET['Country'] );
 function delete_item() 
 { 
   require_once("dbconnect.php");
-  $id = empty($_GET["IDCountry"]) ? 0 : intval($_GET["IDCountry"]);
+  $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM countries WHERE IDCountry =".$id; 
   mysqli_query ($connect, $query ); 
  // die(var_dump($_POST, $_GET, $id));
