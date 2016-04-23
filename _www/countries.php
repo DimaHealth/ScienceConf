@@ -70,11 +70,13 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>Страна</th></tr>'; 
+  echo '<tr><th>Страна</th><th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
-    echo '<td>'.$item['Country'].'</td></tr>'; 
+    echo '<td>'.$item['Country'].'</td>'; 
+    echo '<td><a href="?action=editform&id='.$item['IDEvent'].'">Ред.</a></td>'; 
+    echo '<td><a href="?action=delete&id='.$item['IDEvent'].'">Удл.</a></td></tr>'; 
   } 
   echo '</table>';
   echo '<p><a href="'.$_SERVER['PHP_SELF'].'?action=addform">Добавить</a></p>';  
