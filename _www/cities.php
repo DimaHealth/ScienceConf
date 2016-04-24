@@ -129,8 +129,8 @@ function update_item()
 { 
   require_once("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDCity'] );
-  $City = mysqli_escape_string($connect, $_POST['City'] ); 
-  $CodeCountry = mysqli_escape_string($connect, $_POST['CodeCountry'] ); 
+  $City = mysqli_escape_string($connect, $_GET['City'] ); 
+  $CodeCountry = mysqli_escape_string($connect, $_GET['CodeCountry'] ); 
   $query = "UPDATE cities SET City='".$City."', CodeCountry ='".$CodeCountry."' WHERE IDCity=".$id;
    
   mysqli_query ($connect, $query ); 

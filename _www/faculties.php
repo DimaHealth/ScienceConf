@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="favicon.ico" rel="shortcut icon">
   <link rel="stylesheet" href="css/style.css">
-  <title>Университеты</title>  
+  <title>Факультеты</title>  
   
 </head>
 <body>
@@ -60,31 +60,30 @@ function show_list()
 { 
 
  
-$sql = "SELECT * FROM universities";
+$sql = "SELECT * FROM faculties";
 require_once("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
-  echo '<h2>Университеты</h2>'; 
+  echo '<h2>Факультеты</h2>'; 
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDUniversity</th><th>Университет</th><th>Телефон</th>
-  <th>Веб-сайт</th><th>E-mail</th><th>Город</th>
+  echo '<tr><th>IDFaculty</th><th>Факультет</th><th>Телефон</th>
+  <th>E-mail</th><th>Университет</th>
   <th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
-	echo '<td>'.$item['IDUniversity'].'</td>'; 
-    echo '<td>'.$item['University'].'</td>'; 
+    echo '<td>'.$item['IDFaculty'].'</td>'; 
+    echo '<td>'.$item['Faculty'].'</td>'; 
     echo '<td>'.$item['Phone'].'</td>'; 
-    echo '<td>'.$item['Website'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
     
-	$sql2 = "SELECT 'City' FROM 'cities' WHERE IDCity = ".$item['CodeCity'];
+	$sql2 = "SELECT 'University' FROM 'universities' WHERE IDUniversity = ".$item['CodeUniversity'];
 	$res2 =  mysqli_query($connect, $sql2);
-	 echo '<td>'.mysqli_fetch_array( $res2 )['City'].'</td>';
-    echo '<td><a href="?action=editform&id='.$item['IDUniversity'].'">Ред.</a></td>'; 
-    echo '<td><a href="?action=delete&id='.$item['IDUniversity'].'">Удл.</a></td>'; 
+	 echo '<td>'.mysqli_fetch_array( $res2 )['University'].'</td>';
+    echo '<td><a href="?action=editform&id='.$item['IDFaculty'].'">Ред.</a></td>'; 
+    echo '<td><a href="?action=delete&id='.$item['IDFaculty'].'">Удл.</a></td>'; 
     echo '</tr>'; 
   } 
   echo '</table>';
@@ -95,7 +94,7 @@ $res = mysqli_query($connect, $sql);
 // Функция формирует форму для добавления записи в таблице БД 
 function get_add_item_form() 
 { 
-include("templates/addUniversity.php");
+include("templates/addFaculty.php");
  
 }
 
@@ -103,14 +102,13 @@ include("templates/addUniversity.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-  require_once("dbconnect.php");
-  $University = mysqli_escape_string($connect, $_POST['University'] ); 
+require_once("dbconnect.php");
+  $Faculty = mysqli_escape_string($connect, $_POST['Faculty'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
-  $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
-  $CodeCity = mysqli_escape_string($connect, $_POST['CodeCity'] ); 
-  $query = " INSERT INTO 'universities'('University', 'Phone', 'Website', 'Email', 'CodeCity') 
- VALUES ('$University', '$Phone', '$Website', '$Email', '$CodeCity')";
+  $CodeUniversity = mysqli_escape_string($connect, $_POST['CodeUniversity'] ); 
+  $query = " INSERT INTO 'faculties'('Faculty', 'Phone', 'Email', 'CodeUniversity') 
+            VALUES ('$Faculty', '$Phone', '$Email', '$CodeUniversity')";
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
@@ -122,11 +120,11 @@ function get_edit_item_form()
   require_once("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = 'select * from universities WHERE IDUniversity='.$id; 
+  $query = 'select * from faculties WHERE IDFaculty ='.$id; 
   
   $res = mysqli_query($connect ,$query ); 
   $item = mysqli_fetch_array( $res ); 
-  include("templates/updateUniversity.php");
+  include("templates/updateFaculty.php");
 } 
 
 // Функция обновляет запись в таблице БД  
@@ -135,18 +133,13 @@ function get_edit_item_form()
 function update_item() 
 { 
   require_once("dbconnect.php");
-  $id = mysqli_escape_string($connect, $_GET['IDUniversity'] );
-  $University = mysqli_escape_string($connect, $_GET['University'] ); 
+  $id = mysqli_escape_string($connect, $_GET['IDFaculty'] );
+  $Faculty = mysqli_escape_string($connect, $_GET['Faculty'] ); 
   $Phone = mysqli_escape_string($connect, $_GET['Phone'] ); 
-  $Website = mysqli_escape_string($connect, $_GET['Website'] ); 
   $Email = mysqli_escape_string($connect, $_GET['Email'] ); 
-  $CodeCity = mysqli_escape_string($connect, $_GET['CodeCity'] ); 
-  $query = "UPDATE universities SET University='".$University.
-                                "', Phone ='".$Phone.
-                                "', Website ='".$Website.
-                                "', Email = '".$Email.
-                                "', CodeCity = '".$CodeCity.
-                                "' WHERE IDUniversity=".$id;
+  $CodeUniversity = mysqli_escape_string($connect, $_GET['CodeUniversity'] ); 
+  $query = "UPDATE faculties SET Faculty='".$City."', Phone ='".$Phone
+  ."', Email = '".$Email."', CodeUniversity = '".$CodeUniversity."' WHERE IDCity=".$id;
    
   mysqli_query ($connect, $query ); 
    // die(var_dump($_POST, $_GET, $id));
@@ -159,7 +152,7 @@ function delete_item()
 { 
   require_once("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = "DELETE FROM universities WHERE IDUniversity=".$id; 
+  $query = "DELETE FROM faculties WHERE IDFaculty=".$id; 
   mysqli_query ($connect, $query ); 
  // die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
