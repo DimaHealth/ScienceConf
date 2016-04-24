@@ -13,7 +13,7 @@
 	<table class="table" > 
 		<tr> 
 			<td>Город</td>
-			<td><input type="text" name="EventName" value="" required=" " /></td>
+			<td><input type="text" name="City" value="" required=" " /></td>
 		</tr>
 
 		<tr>

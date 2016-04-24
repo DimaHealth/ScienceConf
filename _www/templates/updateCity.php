@@ -11,7 +11,7 @@
 
 	<table class="table"> 
 		<tr> 
-			<td>Название</td> 
+			<td>Город</td> 
 			<td><input type="text" name="City" value="<?= htmlspecialchars($item["City"]) ?>" /></td> 
 		</tr> 
 
