@@ -127,11 +127,11 @@ function get_edit_item_form()
   require_once("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = 'select * from events WHERE IDEvent='.$id; 
+  $query = 'select * from partners WHERE IDPartner='.$id; 
   
   $res = mysqli_query($connect ,$query ); 
   $item = mysqli_fetch_array( $res ); 
-  include("templates/update.php");
+  include("templates/updatePartner.php");
 } 
 
 // Функция обновляет запись в таблице БД  
@@ -140,27 +140,23 @@ function get_edit_item_form()
 function update_item() 
 { 
 require_once("dbconnect.php");
-$id = mysqli_escape_string($connect, $_GET['IDEvent'] );
-  $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
-  $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
-  $ExpirationDate = mysqli_escape_string($connect, $_POST['ExpirationDate'] ); 
-  $PressReleaseRef = mysqli_escape_string($connect, $_POST['PressReleaseRef'] ); 
-  $PostReleaseRef = mysqli_escape_string($connect, $_POST['PostReleaseRef'] ); 
-  $NumberOfTeachersDonNTU = mysqli_escape_string($connect, $_POST['NumberOfTeachersDonNTU'] ); 
+$id = mysqli_escape_string($connect, $_GET['IDPartner'] );
+  $Partner = mysqli_escape_string($connect, $_POST['Partner'] ); 
+  $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
-  $ReferenceToProgram = mysqli_escape_string($connect, $_POST['ReferenceToProgram'] ); 
-  $ExpectedCountries = mysqli_escape_string($connect, $_POST['ExpectedCountries'] ); 
-  $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
-   $CodeEventType = mysqli_escape_string($connect, $_POST['CodeEventType'] ); 
-   $query = "UPDATE events SET EventName='".$EventName."', StartDate ='".$StartDate."' ,ExpirationDate = '".$ExpirationDate."',
-  PressReleaseRef ='".$PressReleaseRef."', 
- PostReleaseRef = '".$PostReleaseRef."', NumberOfTeachersDonNTU = '".$NumberOfTeachersDonNTU."',  Website = '".$Website."', 
-ReferenceToProgram = '".$ReferenceToProgram."', ExpectedCountries = '".$ExpectedCountries."',
-CodeCathedra = '".$CodeCathedra."',CodeEventType = '".$CodeEventType."'
-   WHERE IDEvent=".$id;
-   
-  mysqli_query ($connect, $query ); 
-   // die(var_dump($_POST, $_GET, $id));
+  $Email = mysqli_escape_string($connect, $_POST['E-mail'] ); 
+  $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
+  $NumberOfParticipants = mysqli_escape_string($connect, $_POST['NumberOfParticipants'] ); 
+ //  , E-mail = '".$Email."',
+//E-mail = '".$Email."'
+
+   $query = "UPDATE partners SET Partner='".$Partner."', Phone ='".$Phone."', Website = '".$Website."',
+   CodeEvent = '".$CodeEvent."', NumberOfParticipants = '".$NumberOfParticipants."'
+   WHERE IDPartner=".$id;
+   mysqli_query ($connect, $query ); 
+   print($Email);
+ //  die(var_dump($_POST, $_GET, $Email));
+  //  die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 
@@ -170,7 +166,7 @@ function delete_item()
 { 
   require_once("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = "DELETE FROM events WHERE IDEvent=".$id; 
+  $query = "DELETE FROM partners WHERE IDPartner=".$id; 
   mysqli_query ($connect, $query ); 
  // die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );

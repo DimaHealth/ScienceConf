@@ -79,10 +79,9 @@ $res = mysqli_query($connect, $sql);
     echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Website'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
-    
-	$sql2 = "SELECT 'City' FROM 'cities' WHERE IDCity = ".$item['CodeCity'];
-	$res2 =  mysqli_query($connect, $sql2);
-	 echo '<td>'.mysqli_fetch_array( $res2 )['City'].'</td>';
+	 $sql3 = "SELECT `City` FROM `cities` WHERE  IDCity = ".$item['CodeCity'];
+	$res3 =  mysqli_query($connect, $sql3);
+	 echo '<td>'.mysqli_fetch_array( $res3 )['City'].'</td>'; 
     echo '<td><a href="?action=editform&id='.$item['IDUniversity'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDUniversity'].'">Удл.</a></td>'; 
     echo '</tr>'; 

@@ -58,8 +58,6 @@ switch ( $_GET["action"] )
 // Функция выводит список всех записей в таблице БД
 function show_list() 
 { 
-
- 
 $sql = "SELECT * FROM cities";
 require_once("dbconnect.php");
 $res = mysqli_query($connect, $sql);
@@ -68,29 +66,32 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDCity</th><th>Город</th><th>Страна</th>
-  <th>Ред.</th><th>Удл.</th></tr>'; 
+  echo '<tr><th>ID</th><th>Город</th><th>Страна</th>
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
 	echo '<td>'.$item['IDCity'].'</td>'; 
     echo '<td>'.$item['City'].'</td>'; 
-    
-	$sql2 = "SELECT 'Country' FROM 'countries' WHERE IDCountry = ".$item['CodeCountry'];
+  	$sql2 = "SELECT `Country` FROM `countries` WHERE IDCountry = ".$item['CodeCountry'];
 	$res2 =  mysqli_query($connect, $sql2);
-	 echo '<td>'.mysqli_fetch_array( $res2 )['Country'].'</td>';
-    echo '<td><a href="?action=editform&id='.$item['IDCity'].'">Ред.</a></td>'; 
+	 echo '<td>'.mysqli_fetch_array( $res2 )['Country'].'</td>'; 
+
+	 echo '<td><a href="?action=editform&id='.$item['IDCity'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDCity'].'">Удл.</a></td>'; 
+	
     echo '</tr>'; 
   } 
   echo '</table>';
-  echo '<p><a href="'.$_SERVER['PHP_SELF'].'?action=addform">Добавить</a></p>';  
+  echo '<p><a href="?action=addform&id='.$item['IDCity'].'">Добавить</a></p>';  
 } 
 
 
 // Функция формирует форму для добавления записи в таблице БД 
 function get_add_item_form() 
 { 
+  $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
+// die(var_dump($_POST, $_GET, $id));
 include("templates/addCity.php");
  
 }
@@ -104,6 +105,7 @@ require_once("dbconnect.php");
   $CodeCountry = mysqli_escape_string($connect, $_POST['CodeCountry'] ); 
   $query = " INSERT INTO 'cities'('City', 'CodeCountry') 
  VALUES ('$City','$CodeCountry')";
+//die(var_dump($_POST, $_GET, $City));
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
@@ -129,12 +131,12 @@ function update_item()
 { 
   require_once("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDCity'] );
-  $City = mysqli_escape_string($connect, $_GET['City'] ); 
-  $CodeCountry = mysqli_escape_string($connect, $_GET['CodeCountry'] ); 
+  $City = mysqli_escape_string($connect, $_POST['City'] ); 
+  $CodeCountry = mysqli_escape_string($connect, $_POST['CodeCountry'] ); 
   $query = "UPDATE cities SET City='".$City."', CodeCountry ='".$CodeCountry."' WHERE IDCity=".$id;
    
   mysqli_query ($connect, $query ); 
-   // die(var_dump($_POST, $_GET, $id));
+  // die(var_dump($_POST, $_GET, $City));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 
