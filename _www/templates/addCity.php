@@ -9,7 +9,7 @@
   
 </head>
 <body>
-  <form name="addform" action="?action=add&IDCity=<?= htmlspecialchars($id) ?>" method="POST"> 
+  <form name="addform" action="?action=add" method="POST"> 
 
   <table class="table" > 
 <tr> 

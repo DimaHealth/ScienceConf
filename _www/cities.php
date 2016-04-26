@@ -83,15 +83,16 @@ $res = mysqli_query($connect, $sql);
     echo '</tr>'; 
   } 
   echo '</table>';
-  echo '<p><a href="?action=addform&id='.$item['IDCity'].'">Добавить</a></p>';  
+  
+  echo '<p><a href="'.$_SERVER['PHP_SELF'].'?action=addform">Добавить</a></p>';  
 } 
 
 
 // Функция формирует форму для добавления записи в таблице БД 
 function get_add_item_form() 
 { 
-  $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-// die(var_dump($_POST, $_GET, $id));
+  //$id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
+ 
 include("templates/addCity.php");
  
 }
@@ -103,9 +104,9 @@ function add_item()
 require_once("dbconnect.php");
   $City = mysqli_escape_string($connect, $_POST['City'] ); 
   $CodeCountry = mysqli_escape_string($connect, $_POST['CodeCountry'] ); 
-  $query = " INSERT INTO 'cities'('City', 'CodeCountry') 
- VALUES ('$City','$CodeCountry')";
-//die(var_dump($_POST, $_GET, $City));
+  $query = " INSERT INTO `cities` (`City`,'CodeCountry') 
+ VALUES ('$City', '$CodeCountry')"; 
+  die(var_dump($_POST, $_GET, $City));
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
