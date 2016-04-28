@@ -20,8 +20,8 @@
         <ul>
           <li><a href="mainform.html">Main</a></li>
           <li><a href="addnewuser.html">Пользователи</a></li>
-          <li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-          <li><a href="addnewdictionary.html">Справочники</a></li>
+          <li><a href="tableofevents.php">Мероприятия</a></li>
+          <li class="active"><a href="addnewdictionary.html">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
         </ul>
@@ -70,7 +70,7 @@ $res = mysqli_query($connect, $sql);
    
   echo '<tr><th>IDCathedra</th><th>Кафедра</th><th>Телефон</th>
   <th>E-mail</th><th>Факультет</th>
-  <th>Ред.</th><th>Удл.</th></tr>'; 
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
@@ -79,7 +79,7 @@ $res = mysqli_query($connect, $sql);
     echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
     
-	$sql2 = "SELECT 'Faculty' FROM 'faculties' WHERE IDFaculty = ".$item['CodeFaculty'];
+	$sql2 = "SELECT `Faculty` FROM `faculties` WHERE IDFaculty = ".$item['CodeFaculty'];
 	$res2 =  mysqli_query($connect, $sql2);
 	 echo '<td>'.mysqli_fetch_array( $res2 )['Faculty'].'</td>';
     echo '<td><a href="?action=editform&id='.$item['IDCathedra'].'">Ред.</a></td>'; 
@@ -107,8 +107,7 @@ require_once("dbconnect.php");
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeFaculty = mysqli_escape_string($connect, $_POST['CodeFaculty'] ); 
-  $query = " INSERT INTO 'cathedrae
-'('Cathedra', 'Phone', 'Email', 'CodeFaculty') 
+  $query = " INSERT INTO `cathedrae`(`Cathedra`, `Phone`, `Email`, `CodeFaculty`) 
             VALUES ('$Cathedra', '$Phone', '$Email', '$CodeFaculty')";
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
@@ -135,10 +134,10 @@ function update_item()
 { 
   require_once("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDCathedra'] );
-  $Cathedra = mysqli_escape_string($connect, $_GET['Cathedra'] ); 
-  $Phone = mysqli_escape_string($connect, $_GET['Phone'] ); 
-  $Email = mysqli_escape_string($connect, $_GET['Email'] ); 
-  $CodeFaculty = mysqli_escape_string($connect, $_GET['CodeFaculty'] ); 
+  $Cathedra = mysqli_escape_string($connect, $_POST['Cathedra'] ); 
+  $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
+  $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
+  $CodeFaculty = mysqli_escape_string($connect, $_POST['CodeFaculty'] ); 
   $query = "UPDATE cathedrae SET Cathedra='".$City."', Phone ='".$Phone
   ."', Email = '".$Email."', CodeFaculty = '".$CodeFaculty."' WHERE IDCathedra=".$id;
    
