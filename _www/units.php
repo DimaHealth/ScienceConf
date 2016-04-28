@@ -20,8 +20,8 @@
         <ul>
           <li><a href="mainform.html">Main</a></li>
           <li><a href="addnewuser.html">Пользователи</a></li>
-          <li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-          <li><a href="addnewdictionary.html">Справочники</a></li>
+          <li><a href="tableofevents.php">Мероприятия</a></li>
+          <li class="active"><a href="addnewdictionary.html">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
         </ul>
@@ -68,19 +68,18 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDUnit</th><th>Отдел</th><th>Сотрудник</th>
-  <th>Ред.</th><th>Удл.</th></tr>'; 
+  echo '<tr><th>ID</th><th>Отдел</th><th>Сотрудник</th>
+  <th></th><th><th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
 	echo '<td>'.$item['IDUnit'].'</td>'; 
-    echo '<td>'.$item['Unit'].'</td>'; 
     
-  	$sql2 = "SELECT 'Department' FROM 'departments' WHERE IDDepartment = ".$item['CodeDepartment'];
+  	$sql2 = "SELECT `Department` FROM `departments` WHERE IDDepartment = ".$item['CodeDepartment'];
   	$res2 =  mysqli_query($connect, $sql2);
     echo '<td>'.mysqli_fetch_array( $res2 )['Department'].'</td>';
 
-    $sql3 = "SELECT 'Employee' FROM 'employees' WHERE IDEmployee = ".$item['CodeEmployee'];
+    $sql3 = "SELECT `Employee` FROM `employees` WHERE IDEmployee = ".$item['CodeEmployee'];
     $res3 =  mysqli_query($connect, $sql3);
     echo '<td>'.mysqli_fetch_array( $res3 )['Employee'].'</td>';
     echo '<td><a href="?action=editform&id='.$item['IDUnit'].'">Ред.</a></td>'; 
@@ -104,10 +103,9 @@ include("templates/addUnit.php");
 function add_item() 
 { 
 require_once("dbconnect.php");
-  $Unit = mysqli_escape_string($connect, $_POST['Unit'] ); 
   $CodeDepartment = mysqli_escape_string($connect, $_POST['CodeDepartment'] ); 
   $CodeEmployee = mysqli_escape_string($connect, $_POST['CodeEmployee'] ); 
-  $query = " INSERT INTO 'units'('Unit', 'CodeDepartment', 'CodeEmployee') 
+  $query = " INSERT INTO `units`(`Unit`, `CodeDepartment`, `CodeEmployee`) 
  VALUES ('$Unit', '$CodeDepartment', '$CodeEmployee')";
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
@@ -134,10 +132,9 @@ function update_item()
 { 
   require_once("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDUnit'] );
-  $Unit = mysqli_escape_string($connect, $_GET['Unit'] ); 
-  $CodeDepartment = mysqli_escape_string($connect, $_GET['CodeDepartment'] ); 
-  $CodeEmployee = mysqli_escape_string($connect, $_GET['CodeEmployee'] ); 
-  $query = "UPDATE units SET Unit='".$Unit."', CodeDepartment ='".$CodeDepartment
+  $CodeDepartment = mysqli_escape_string($connect, $_POST['CodeDepartment'] ); 
+  $CodeEmployee = mysqli_escape_string($connect, $_POST['CodeEmployee'] ); 
+  $query = "UPDATE units SET CodeDepartment ='".$CodeDepartment
   ."', CodeEmployee ='".$CodeEmployee."' WHERE IDUnit=".$id;
    
   mysqli_query ($connect, $query ); 
