@@ -20,8 +20,8 @@
         <ul>
           <li><a href="mainform.html">Main</a></li>
           <li><a href="addnewuser.html">Пользователи</a></li>
-          <li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-          <li><a href="addnewdictionary.html">Справочники</a></li>
+          <li><a href="tableofevents.php">Мероприятия</a></li>
+          <li class="active"><a href="addnewdictionary.html">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
         </ul>
@@ -68,15 +68,15 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDDeparment</th><th>Отдел</th><th>Университет</th>
-  <th>Ред.</th><th>Удл.</th></tr>'; 
+  echo '<tr><th>ID</th><th>Отдел</th><th>Университет</th>
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
 	echo '<td>'.$item['IDDeparment'].'</td>'; 
     echo '<td>'.$item['Department'].'</td>'; 
     
-	$sql2 = "SELECT 'University' FROM 'countries' WHERE IDUniversity = ".$item['CodeUniversity'];
+	$sql2 = "SELECT `University` FROM `universities` WHERE IDUniversity = ".$item['CodeUniversity'];
 	$res2 =  mysqli_query($connect, $sql2);
 	 echo '<td>'.mysqli_fetch_array( $res2 )['University'].'</td>';
     echo '<td><a href="?action=editform&id='.$item['IDDeparment'].'">Ред.</a></td>'; 
@@ -102,7 +102,7 @@ function add_item()
 require_once("dbconnect.php");
   $Department = mysqli_escape_string($connect, $_POST['Department'] ); 
   $CodeUniversity = mysqli_escape_string($connect, $_POST['CodeUniversity'] ); 
-  $query = " INSERT INTO 'departments'('Department', 'CodeUniversity') 
+  $query = " INSERT INTO `departments`(`Department`, `CodeUniversity`) 
  VALUES ('$Department','$CodeUniversity')";
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
@@ -129,8 +129,8 @@ function update_item()
 { 
   require_once("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDDeparment'] );
-  $Department = mysqli_escape_string($connect, $_GET['Department'] ); 
-  $CodeUniversity = mysqli_escape_string($connect, $_GET['CodeUniversity'] ); 
+  $Department = mysqli_escape_string($connect, $_POST['Department'] ); 
+  $CodeUniversity = mysqli_escape_string($connect, $_POST['CodeUniversity'] ); 
   $query = "UPDATE departments SET Department='".$Department."', CodeUniversity ='".$CodeUniversity."' WHERE IDDeparment=".$id;
    
   mysqli_query ($connect, $query ); 
