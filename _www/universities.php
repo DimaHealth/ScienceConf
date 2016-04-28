@@ -20,8 +20,8 @@
         <ul>
           <li><a href="mainform.html">Main</a></li>
           <li><a href="addnewuser.html">Пользователи</a></li>
-          <li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-          <li><a href="addnewdictionary.html">Справочники</a></li>
+          <li><a href="tableofevents.php">Мероприятия</a></li>
+          <li class="active"><a href="addnewdictionary.html">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
         </ul>
@@ -59,29 +59,27 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
- 
-$sql = "SELECT * FROM universities";
 require_once("dbconnect.php");
+$sql = "SELECT * FROM universities";
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Университеты</h2>'; 
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDUniversity</th><th>Университет</th><th>Телефон</th>
-  <th>Веб-сайт</th><th>E-mail</th><th>Город</th>
-  <th>Ред.</th><th>Удл.</th></tr>'; 
+  echo '<tr><th>ID</th><th>Университет</th><th>Телефон</th><th>Web-site</th><th>E-mail</th><th>Город</th>
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
-	echo '<td>'.$item['IDUniversity'].'</td>'; 
+    echo '<td>'.$item['IDUniversity'].'</td>';
     echo '<td>'.$item['University'].'</td>'; 
     echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Website'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
-	 $sql3 = "SELECT `City` FROM `cities` WHERE  IDCity = ".$item['CodeCity'];
-	$res3 =  mysqli_query($connect, $sql3);
-	 echo '<td>'.mysqli_fetch_array( $res3 )['City'].'</td>'; 
+   	$sql2 = "SELECT `City` FROM `cities` WHERE IDCity = ".$item['CodeCity'];
+	$res2 =  mysqli_query($connect, $sql2);
+	 echo '<td>'.mysqli_fetch_array( $res2 )['City'].'</td>'; 
     echo '<td><a href="?action=editform&id='.$item['IDUniversity'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDUniversity'].'">Удл.</a></td>'; 
     echo '</tr>'; 
@@ -102,14 +100,14 @@ include("templates/addUniversity.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-  require_once("dbconnect.php");
+require_once("dbconnect.php");
   $University = mysqli_escape_string($connect, $_POST['University'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeCity = mysqli_escape_string($connect, $_POST['CodeCity'] ); 
-  $query = " INSERT INTO 'universities'('University', 'Phone', 'Website', 'Email', 'CodeCity') 
- VALUES ('$University', '$Phone', '$Website', '$Email', '$CodeCity')";
+  $query = " INSERT INTO `universities`(`University`, `Phone`, `Website`, `Email`, `CodeCity`) 
+ VALUES ('$University','$Phone','$Website','$Email',' $CodeCity')"; 
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
@@ -133,19 +131,16 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-  require_once("dbconnect.php");
-  $id = mysqli_escape_string($connect, $_GET['IDUniversity'] );
-  $University = mysqli_escape_string($connect, $_GET['University'] ); 
-  $Phone = mysqli_escape_string($connect, $_GET['Phone'] ); 
-  $Website = mysqli_escape_string($connect, $_GET['Website'] ); 
-  $Email = mysqli_escape_string($connect, $_GET['Email'] ); 
-  $CodeCity = mysqli_escape_string($connect, $_GET['CodeCity'] ); 
-  $query = "UPDATE universities SET University='".$University.
-                                "', Phone ='".$Phone.
-                                "', Website ='".$Website.
-                                "', Email = '".$Email.
-                                "', CodeCity = '".$CodeCity.
-                                "' WHERE IDUniversity=".$id;
+require_once("dbconnect.php");
+$id = mysqli_escape_string($connect, $_GET['IDUniversity'] );
+  $University = mysqli_escape_string($connect, $_POST['University'] ); 
+  $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
+  $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
+  $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
+  $CodeCity = mysqli_escape_string($connect, $_POST['CodeCity'] ); 
+  $query = "UPDATE universities SET University='".$University."', Phone ='"
+  .$Phone."', Website ='".$Website."', Email ='".$Email."', CodeCity ='".$CodeCity."' 
+   WHERE IDUniversity=".$id;
    
   mysqli_query ($connect, $query ); 
    // die(var_dump($_POST, $_GET, $id));
