@@ -20,8 +20,8 @@
         <ul>
           <li><a href="mainform.html">Main</a></li>
           <li><a href="addnewuser.html">Пользователи</a></li>
-          <li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-          <li><a href="addnewdictionary.html">Справочники</a></li>
+          <li><a href="tableofevents.php">Мероприятия</a></li>
+          <li class="active"><a href="addnewdictionary.html">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
         </ul>
@@ -69,22 +69,22 @@ $res = mysqli_query($connect, $sql);
     echo '<table border="1" class="table">';      
    
   echo '<tr><th>IDEmployee</th><th>ФИО</th><th>Должность</th><th>Степень</th><th>Звание</th><th>Телефон</th>
-  <th>E-mail</th><th>Ред.</th><th>Удл.</th></tr>'; 
+  <th>E-mail</th><th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
     echo '<td>'.$item['IDEmployee'].'</td>'; 
     echo '<td>'.$item['FIO'].'</td>'; 
     
-    $sql2 = "SELECT 'Post' FROM 'posts' WHERE IDPost = ".$item['CodePost'];
+    $sql2 = "SELECT `Post` FROM `posts` WHERE IDPost = ".$item['CodePost'];
     $res2 =  mysqli_query($connect, $sql2);
-    echo '<td>'.mysqli_fetch_array( $res2 )['University'].'</td>';
+    echo '<td>'.mysqli_fetch_array( $res2 )['Post'].'</td>';
 
-    $sql3 = "SELECT 'Degree' FROM 'degrees' WHERE IDDegree = ".$item['CodeDegree'];
+    $sql3 = "SELECT `Degree` FROM `degrees` WHERE IDDegree = ".$item['CodeDegree'];
     $res3 =  mysqli_query($connect, $sql3);
     echo '<td>'.mysqli_fetch_array( $res3 )['Degree'].'</td>';
 
-    $sql4 = "SELECT 'Rank' FROM 'ranks' WHERE IDRank = ".$item['CodeRank'];
+    $sql4 = "SELECT `Rank` FROM `ranks` WHERE IDRank = ".$item['CodeRank'];
     $res4 =  mysqli_query($connect, $sql4);
     echo '<td>'.mysqli_fetch_array( $res4 )['Rank'].'</td>';
 
@@ -145,13 +145,13 @@ function update_item()
 { 
   require_once("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDEmployee'] );
-  $FIO = mysqli_escape_string($connect, $_GET['FIO'] ); 
-  $CodePost = mysqli_escape_string($connect, $_GET['CodePost'] ); 
-  $CodeDegree = mysqli_escape_string($connect, $_GET['CodeDegree'] ); 
-  $CodePost = mysqli_escape_string($connect, $_GET['CodePost'] ); 
-  $Phone = mysqli_escape_string($connect, $_GET['Phone'] ); 
-  $Email = mysqli_escape_string($connect, $_GET['Email'] ); 
-  $query = "UPDATE employees SET FIO='".$City."', Phone ='".$Phone
+  $FIO = mysqli_escape_string($connect, $_POST['FIO'] ); 
+  $CodePost = mysqli_escape_string($connect, $_POST['CodePost'] ); 
+  $CodeDegree = mysqli_escape_string($connect, $_POST['CodeDegree'] ); 
+  $CodePost = mysqli_escape_string($connect, $_POST['CodePost'] ); 
+  $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
+  $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
+  $query = "UPDATE employees SET FIO='".$FIO."', Phone ='".$Phone
   ."', Email = '".$Email."', CodePost = '".$CodePost."', CodeDegree = '"
   .$CodeDegree."', CodeRank = '".$CodeRank."' WHERE IDEmployee=".$id;
    
