@@ -69,7 +69,7 @@ $res = mysqli_query($connect, $sql);
     echo '<table border="1" class="table">';      
    
   echo '<tr><th>ID</th><th>Отдел</th><th>Сотрудник</th>
-  <th></th><th><th></tr>'; 
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
@@ -79,9 +79,9 @@ $res = mysqli_query($connect, $sql);
   	$res2 =  mysqli_query($connect, $sql2);
     echo '<td>'.mysqli_fetch_array( $res2 )['Department'].'</td>';
 
-    $sql3 = "SELECT `Employee` FROM `employees` WHERE IDEmployee = ".$item['CodeEmployee'];
+    $sql3 = "SELECT `FIO` FROM `employees` WHERE IDEmployee = ".$item['CodeEmployee'];
     $res3 =  mysqli_query($connect, $sql3);
-    echo '<td>'.mysqli_fetch_array( $res3 )['Employee'].'</td>';
+    echo '<td>'.mysqli_fetch_array( $res3 )['FIO'].'</td>';
     echo '<td><a href="?action=editform&id='.$item['IDUnit'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDUnit'].'">Удл.</a></td>'; 
     echo '</tr>'; 
@@ -105,8 +105,8 @@ function add_item()
 require_once("dbconnect.php");
   $CodeDepartment = mysqli_escape_string($connect, $_POST['CodeDepartment'] ); 
   $CodeEmployee = mysqli_escape_string($connect, $_POST['CodeEmployee'] ); 
-  $query = " INSERT INTO `units`(`Unit`, `CodeDepartment`, `CodeEmployee`) 
- VALUES ('$Unit', '$CodeDepartment', '$CodeEmployee')";
+  $query = " INSERT INTO `units`(`CodeDepartment`, `CodeEmployee`) 
+ VALUES ('$CodeDepartment', '$CodeEmployee')";
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();

@@ -62,18 +62,18 @@
 		</tr> 
 
 		<tr> 
-			<td>Должность</td> 
+			<td>Звание</td> 
 			<td> 
 				<?php
 					require_once("dbconnect.php");
 
-					$sql = "SELECT * FROM posts";
+					$sql = "SELECT * FROM ranks";
 
 					$result_select = mysqli_query($connect, $sql);
 
 					/*Выпадающий список*/
 
-					echo "<select  name = CodePost>";
+					echo "<select  name = CodeRank>";
 
 					while($arr = mysqli_fetch_array($result_select)){
 						echo "<option value = '$arr[0]' > $arr[1]</option>";

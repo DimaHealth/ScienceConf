@@ -9,7 +9,7 @@
 	
 </head>
 <body>
-	<form name="addform" action="?action=add>" method="POST"> 
+	<form name="addform" action="?action=add" method="POST"> 
 	<table class="table" > 
 		<tr> 
 			<td>ФИО</td>

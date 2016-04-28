@@ -115,12 +115,14 @@ require_once("dbconnect.php");
   $FIO = mysqli_escape_string($connect, $_POST['FIO'] ); 
   $CodePost = mysqli_escape_string($connect, $_POST['CodePost'] ); 
   $CodeDegree = mysqli_escape_string($connect, $_POST['CodeDegree'] ); 
-  $CodePost = mysqli_escape_string($connect, $_POST['CodePost'] ); 
+  $CodeRank = mysqli_escape_string($connect, $_POST['CodeRank'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
-  $query = " INSERT INTO 'employees'('FIO', 'CodePost', 'CodeDegree', 'CodeRank', 'Phone', 'Email') 
+ $query = " INSERT INTO `employees`(`FIO`, `CodePost`, `CodeDegree`,`CodeRank`,`Phone`,`Email`) 
             VALUES ('$FIO', '$CodePost', '$CodeDegree', '$CodeRank', '$Phone', '$Email')";
   mysqli_query ($connect, $query ); 
+ // die(var_dump($_POST, $_GET, $FIO));
+ error_reporting(E_ALL);
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 }
@@ -148,7 +150,7 @@ function update_item()
   $FIO = mysqli_escape_string($connect, $_POST['FIO'] ); 
   $CodePost = mysqli_escape_string($connect, $_POST['CodePost'] ); 
   $CodeDegree = mysqli_escape_string($connect, $_POST['CodeDegree'] ); 
-  $CodePost = mysqli_escape_string($connect, $_POST['CodePost'] ); 
+  $CodeRank = mysqli_escape_string($connect, $_POST['CodeRank'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $query = "UPDATE employees SET FIO='".$FIO."', Phone ='".$Phone
