@@ -73,14 +73,14 @@ $res = mysqli_query($connect, $sql);
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
-	echo '<td>'.$item['IDDeparment'].'</td>'; 
+	echo '<td>'.$item['IDDepartment'].'</td>'; 
     echo '<td>'.$item['Department'].'</td>'; 
     
 	$sql2 = "SELECT `University` FROM `universities` WHERE IDUniversity = ".$item['CodeUniversity'];
 	$res2 =  mysqli_query($connect, $sql2);
 	 echo '<td>'.mysqli_fetch_array( $res2 )['University'].'</td>';
-    echo '<td><a href="?action=editform&id='.$item['IDDeparment'].'">Ред.</a></td>'; 
-    echo '<td><a href="?action=delete&id='.$item['IDDeparment'].'">Удл.</a></td>'; 
+    echo '<td><a href="?action=editform&id='.$item['IDDepartment'].'">Ред.</a></td>'; 
+    echo '<td><a href="?action=delete&id='.$item['IDDepartment'].'">Удл.</a></td>'; 
     echo '</tr>'; 
   } 
   echo '</table>';
@@ -115,7 +115,7 @@ function get_edit_item_form()
   require_once("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = 'select * from departments WHERE IDDeparment='.$id; 
+  $query = 'select * from departments WHERE IDDepartment='.$id; 
   
   $res = mysqli_query($connect ,$query ); 
   $item = mysqli_fetch_array( $res ); 
@@ -128,13 +128,13 @@ function get_edit_item_form()
 function update_item() 
 { 
   require_once("dbconnect.php");
-  $id = mysqli_escape_string($connect, $_GET['IDDeparment'] );
+  $id = mysqli_escape_string($connect, $_GET['IDDepartment'] );
   $Department = mysqli_escape_string($connect, $_POST['Department'] ); 
   $CodeUniversity = mysqli_escape_string($connect, $_POST['CodeUniversity'] ); 
-  $query = "UPDATE departments SET Department='".$Department."', CodeUniversity ='".$CodeUniversity."' WHERE IDDeparment=".$id;
+  $query = "UPDATE departments SET Department='".$Department."', CodeUniversity ='".$CodeUniversity."' WHERE IDDepartment=".$id;
    
   mysqli_query ($connect, $query ); 
-   // die(var_dump($_POST, $_GET, $id));
+    //die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 
@@ -144,7 +144,7 @@ function delete_item()
 { 
   require_once("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = "DELETE FROM departments WHERE IDDeparment=".$id; 
+  $query = "DELETE FROM departments WHERE IDDepartment=".$id; 
   mysqli_query ($connect, $query ); 
  // die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );

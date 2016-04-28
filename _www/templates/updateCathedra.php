@@ -12,17 +12,12 @@
 	<table class="table"> 
 		<tr> 
 			<td>Кафедра</td> 
-			<td><input type="text" name="Faculty" value="<?= htmlspecialchars($item["Cathedra"]) ?>" /></td> 
+			<td><input type="text" name="Cathedra" value="<?= htmlspecialchars($item["Cathedra"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
 			<td>Телефон</td> 
 			<td><input type="text" name="Phone" value="<?= htmlspecialchars($item["Phone"]) ?>" /></td> 
-		</tr> 
-
-		<tr> 
-			<td>Веб-сайт</td> 
-			<td><input type="text" name="Website" value="<?= htmlspecialchars($item["Website"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 

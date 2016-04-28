@@ -138,7 +138,7 @@ function update_item()
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeFaculty = mysqli_escape_string($connect, $_POST['CodeFaculty'] ); 
-  $query = "UPDATE cathedrae SET Cathedra='".$City."', Phone ='".$Phone
+  $query = "UPDATE cathedrae SET Cathedra='".$Cathedra."', Phone ='".$Phone
   ."', Email = '".$Email."', CodeFaculty = '".$CodeFaculty."' WHERE IDCathedra=".$id;
    
   mysqli_query ($connect, $query ); 
