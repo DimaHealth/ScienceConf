@@ -22,11 +22,6 @@
 		</tr>
 
 		<tr> 
-			<td>Веб-сайт</td>
-			<td><input type="text" name="Website" value="" required=" " /></td>
-		</tr>
-
-		<tr> 
 			<td>E-mail</td>
 			<td><input type="text" name="Email" value="" required=" " /></td>
 		</tr>

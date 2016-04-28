@@ -20,8 +20,8 @@
         <ul>
           <li><a href="mainform.html">Main</a></li>
           <li><a href="addnewuser.html">Пользователи</a></li>
-          <li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-          <li><a href="addnewdictionary.html">Справочники</a></li>
+          <li><a href="tableofevents.php">Мероприятия</a></li>
+          <li class="active"><a href="addnewdictionary.html">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
         </ul>
@@ -59,29 +59,26 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
- 
-$sql = "SELECT * FROM faculties";
 require_once("dbconnect.php");
+$sql = "SELECT * FROM faculties";
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Факультеты</h2>'; 
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDFaculty</th><th>Факультет</th><th>Телефон</th>
-  <th>E-mail</th><th>Университет</th>
-  <th>Ред.</th><th>Удл.</th></tr>'; 
+  echo '<tr><th>ID</th><th>Факультет</th><th>Телефон</th><th>E-mail</th><th>Университет</th>
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
-    echo '<td>'.$item['IDFaculty'].'</td>'; 
+    echo '<td>'.$item['IDFaculty'].'</td>';
     echo '<td>'.$item['Faculty'].'</td>'; 
-    echo '<td>'.$item['Phone'].'</td>'; 
+	echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
-    
-	$sql2 = "SELECT 'University' FROM 'universities' WHERE IDUniversity = ".$item['CodeUniversity'];
+   	$sql2 = "SELECT `University` FROM `universities` WHERE IDUniversity = ".$item['CodeUniversity'];
 	$res2 =  mysqli_query($connect, $sql2);
-	 echo '<td>'.mysqli_fetch_array( $res2 )['University'].'</td>';
+	 echo '<td>'.mysqli_fetch_array( $res2 )['University'].'</td>'; 
     echo '<td><a href="?action=editform&id='.$item['IDFaculty'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDFaculty'].'">Удл.</a></td>'; 
     echo '</tr>'; 
@@ -107,8 +104,8 @@ require_once("dbconnect.php");
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeUniversity = mysqli_escape_string($connect, $_POST['CodeUniversity'] ); 
-  $query = " INSERT INTO 'faculties'('Faculty', 'Phone', 'Email', 'CodeUniversity') 
-            VALUES ('$Faculty', '$Phone', '$Email', '$CodeUniversity')";
+  $query = " INSERT INTO `faculties`(`Faculty`, `Phone`, `Email`, `CodeUniversity`) 
+ VALUES ('$Faculty','$Phone', '$Email', '$CodeUniversity')"; 
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
@@ -120,7 +117,7 @@ function get_edit_item_form()
   require_once("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = 'select * from faculties WHERE IDFaculty ='.$id; 
+  $query = 'select * from faculties WHERE IDFaculty='.$id; 
   
   $res = mysqli_query($connect ,$query ); 
   $item = mysqli_fetch_array( $res ); 
@@ -132,14 +129,14 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-  require_once("dbconnect.php");
-  $id = mysqli_escape_string($connect, $_GET['IDFaculty'] );
-  $Faculty = mysqli_escape_string($connect, $_GET['Faculty'] ); 
-  $Phone = mysqli_escape_string($connect, $_GET['Phone'] ); 
-  $Email = mysqli_escape_string($connect, $_GET['Email'] ); 
-  $CodeUniversity = mysqli_escape_string($connect, $_GET['CodeUniversity'] ); 
-  $query = "UPDATE faculties SET Faculty='".$City."', Phone ='".$Phone
-  ."', Email = '".$Email."', CodeUniversity = '".$CodeUniversity."' WHERE IDFaculty=".$id;
+require_once("dbconnect.php");
+$id = mysqli_escape_string($connect, $_GET['IDFaculty'] );
+  $Faculty = mysqli_escape_string($connect, $_POST['Faculty'] ); 
+  $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
+  $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
+  $CodeUniversity = mysqli_escape_string($connect, $_POST['CodeUniversity'] ); 
+  $query = "UPDATE faculties SET Faculty='".$Faculty."', Phone ='".$Phone."', Email ='".$Email."', CodeUniversity ='".$CodeUniversity."' 
+   WHERE IDFaculty=".$id;
    
   mysqli_query ($connect, $query ); 
    // die(var_dump($_POST, $_GET, $id));

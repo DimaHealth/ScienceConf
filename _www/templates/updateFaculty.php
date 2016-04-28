@@ -21,11 +21,6 @@
 		</tr> 
 
 		<tr> 
-			<td>Веб-сайт</td> 
-			<td><input type="text" name="Website" value="<?= htmlspecialchars($item["Website"]) ?>" /></td> 
-		</tr> 
-
-		<tr> 
 			<td>E-mail</td> 
 			<td><input type="text" name="Email" value="<?= htmlspecialchars($item["Email"]) ?>" /></td> 
 		</tr> 
