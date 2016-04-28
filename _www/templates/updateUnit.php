@@ -11,11 +11,6 @@
 
 	<table class="table"> 
 		<tr> 
-			<td>Распределение</td> 
-			<td><input type="text" name="Unit" value="<?= htmlspecialchars($item["Unit"]) ?>" /></td> 
-		</tr> 
-
-		<tr> 
 			<td>Отдел</td> 
 			<td> 
 				<?php

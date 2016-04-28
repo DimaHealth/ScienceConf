@@ -9,13 +9,8 @@
 	
 </head>
 <body>
-	<form name="addform" action="?action=add&IDUnit=<?= htmlspecialchars($id) ?>" method="POST"> 
+	<form name="addform" action="?action=add" method="POST"> 
 	<table class="table" > 
-		<tr> 
-			<td>Распределение</td>
-			<td><input type="text" name="Unit" value="" required=" " /></td>
-		</tr>
-
 		<tr>
 			<td>Отдел</td>
 			<td>
