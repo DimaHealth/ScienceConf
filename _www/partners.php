@@ -1,3 +1,4 @@
+
 <html>
 <head>
   
@@ -18,12 +19,13 @@
 
       <nav class="menu_main">
         <ul>
-          <li><a href="mainform.html">Main</a></li>
-          <li><a href="addnewuser.html">Пользователи</a></li>
+          <li><a href="mainform.php">Main</a></li>
+          <li><a href="addnewuser.php">Пользователи</a></li>
           <li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-          <li><a href="addnewdictionary.html">Справочники</a></li>
+          <li><a href="addnewdictionary.php">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
+		  <li><a href="exit.php">Выйти</a></li>
         </ul>
       </nav>
     </header>

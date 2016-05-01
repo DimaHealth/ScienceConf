@@ -18,10 +18,10 @@
 
       <nav class="menu_main">
         <ul>
-          <li><a href="mainform.html">Main</a></li>
-          <li><a href="addnewuser.html">Пользователи</a></li>
+          <li><a href="mainform.php">Main</a></li>
+          <li><a href="addnewuser.php">Пользователи</a></li>
           <li><a href="tableofevents.php">Мероприятия</a></li>
-          <li class="active"><a href="addnewdictionary.html">Справочники</a></li>
+          <li class="active"><a href="addnewdictionary.php">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.html">Другие таблицы</a></li>
         </ul>
@@ -32,7 +32,8 @@
 </body>
 </html>
 <?php
-
+//session_start();
+//require_once("dbconnect.php");
 
 
 if ( !isset( $_GET["action"] ) ) $_GET["action"] = "showlist";  
@@ -60,6 +61,7 @@ function show_list()
 { 
 
 require_once("dbconnect.php");
+
 $sql = "SELECT * FROM universities";
 $res = mysqli_query($connect, $sql);
 
