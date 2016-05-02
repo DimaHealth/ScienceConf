@@ -26,7 +26,7 @@
         </li>
         <li class="active" ><a href="addnewdictionary.php">Справочники</a></li>
         <li><a href="addnewreport.html">Отчеты</a></li>
-        <li><a href="addnewtables.html">Другие таблицы</a></li>
+        <li><a href="addnewtables.php">Другие таблицы</a></li>
       </ul>
     </nav>
   </header>
