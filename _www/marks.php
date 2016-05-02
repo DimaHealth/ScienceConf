@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="favicon.ico" rel="shortcut icon">
   <link rel="stylesheet" href="css/style.css">
-  <title>Типы мероприятий</title>  
+  <title>Оценки</title>  
   
 </head>
 <body>
@@ -20,10 +20,10 @@
         <ul>
           <li><a href="mainform.php">Main</a></li>
           <li><a href="addnewuser.php">Пользователи</a></li>
-          <li ><a href="tableofevents.php">Мероприятия</a></li>
-          <li class="active"><a href="addnewdictionary.php">Справочники</a></li>
+          <li><a href="tableofevents.php">Мероприятия</a></li>
+          <li><a href="addnewdictionary.php">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
-          <li><a href="addnewtables.php">Другие таблицы</a></li>
+          <li class="active"><a href="addnewtables.php">Другие таблицы</a></li>
         </ul>
       </nav>
     </header>
@@ -59,24 +59,26 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
- 
-$sql = "SELECT * FROM eventtypes";
 require_once("dbconnect.php");
+$sql = "SELECT * FROM marks";
 $res = mysqli_query($connect, $sql);
 
-  echo '<h2>Типы мероприятий</h2>'; 
+  echo '<h2>Оценки</h2>'; 
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>ID</th><th>Тип мероприятия</th>
-   <th>Ред.</th><th>Удл.</th></tr>'; 
+  echo '<tr><th>ID</th><th>Оценка</th><th>Мероприятие</th>
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr>'; 
-	echo '<td>'.$item['IDEventType'].'</td>'; 
-    echo '<td>'.$item['EventType'].'</td>'; 
-    echo '<td><a href="?action=editform&id='.$item['IDEventType'].'">Ред.</a></td>'; 
-    echo '<td><a href="?action=delete&id='.$item['IDEventType'].'">Удл.</a></td>'; 
+    echo '<td>'.$item['IDMark'].'</td>';
+    echo '<td>'.$item['Mark'].'</td>'; 
+   	$sql2 = "SELECT `EventName` FROM `events` WHERE IDEvent = ".$item['CodeEvent'];
+	$res2 =  mysqli_query($connect, $sql2);
+	 echo '<td>'.mysqli_fetch_array( $res2 )['EventName'].'</td>'; 
+    echo '<td><a href="?action=editform&id='.$item['IDMark'].'">Ред.</a></td>'; 
+    echo '<td><a href="?action=delete&id='.$item['IDMark'].'">Удл.</a></td>'; 
     echo '</tr>'; 
   } 
   echo '</table>';
@@ -87,7 +89,7 @@ $res = mysqli_query($connect, $sql);
 // Функция формирует форму для добавления записи в таблице БД 
 function get_add_item_form() 
 { 
-include("templates/addEventTypes.php");
+include("templates/addMark.php");
  
 }
 
@@ -96,9 +98,10 @@ include("templates/addEventTypes.php");
 function add_item() 
 { 
 require_once("dbconnect.php");
-  $EventType = mysqli_escape_string($connect, $_POST['EventType'] ); 
-   $query = " INSERT INTO `eventtypes`(`EventType`) 
- VALUES (' $EventType')"; 
+  $Mark = mysqli_escape_string($connect, $_POST['Mark'] ); 
+  $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
+  $query = " INSERT INTO `marks`(`Mark`, `CodeEvent`) 
+ VALUES ('$Mark',' $CodeEvent')"; 
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
@@ -110,11 +113,11 @@ function get_edit_item_form()
   require_once("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = 'select * from eventtypes WHERE IDEventType='.$id; 
+  $query = 'select * from marks WHERE IDMark='.$id; 
   
   $res = mysqli_query($connect ,$query ); 
   $item = mysqli_fetch_array( $res ); 
-  include("templates/updateEventTypes.php");
+  include("templates/updateMark.php");
 } 
 
 // Функция обновляет запись в таблице БД  
@@ -123,9 +126,11 @@ function get_edit_item_form()
 function update_item() 
 { 
 require_once("dbconnect.php");
-$id = mysqli_escape_string($connect, $_GET['IDEventType'] );
-  $EventType = mysqli_escape_string($connect, $_POST['EventType'] ); 
-  $query = "UPDATE eventtypes SET EventType='".$EventType."' WHERE IDEventType=".$id;
+$id = mysqli_escape_string($connect, $_GET['IDMark'] );
+  $Mark = mysqli_escape_string($connect, $_POST['Mark'] ); 
+  $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
+  $query = "UPDATE marks SET Mark='".$Mark."', CodeEvent ='".$CodeEvent."' 
+   WHERE IDMark=".$id;
    
   mysqli_query ($connect, $query ); 
    // die(var_dump($_POST, $_GET, $id));
@@ -138,7 +143,7 @@ function delete_item()
 { 
   require_once("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
-  $query = "DELETE FROM eventtypes WHERE IDEventType=".$id; 
+  $query = "DELETE FROM marks WHERE IDMark=".$id; 
   mysqli_query ($connect, $query ); 
  // die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );

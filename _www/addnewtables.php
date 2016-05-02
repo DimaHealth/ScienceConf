@@ -50,9 +50,9 @@ die();
           <li ><a href="mainform.php">Main</a></li>
           <li><a href="addnewuser.php">Пользователи</a></li>
           <li><a href="tableofevents.php">Мероприятия</a></li>
-		  <li class="active"><a href="addnewdictionary.php">Справочники</a></li>
+		  <li><a href="addnewdictionary.php">Справочники</a></li>
 		  <li><a href="addnewreport.html">Отчеты</a></li>
-		  <li><a href="addnewtables.php">Другие таблицы</a></li>
+		  <li class="active"><a href="addnewtables.php">Другие таблицы</a></li>
         </ul>
       </nav>
     </header>
@@ -63,22 +63,11 @@ die();
 
       <nav class="menu_main">
         <ul>
-          <li><a href="countries.php">Страны</a></li>
-          <li><a href="cities.php">Города</a></li>
-          <li><a href="universities.php">Университеты</a></li>
-          <li><a href="faculties.php">Факультеты</a></li>
-          <li><a href="cathedrae.php">Кафедры</a></li>
-          <li><a href="departments.php">Отделы</a></li>
-          <li><a href="units.php">Распределения</a></li>
-          <li><a href="employees.php">Сотрудники</a></li>
-          <li><a href="posts.php">Должности</a></li>
-          <li><a href="degrees.php">Ученые степени</a></li>
-          <li><a href="ranks.php">Ученые звания</a></li>
-          <li><a href="partners.php">Партнеры</a></li>
-          <li><a href="eventtypes.php">Виды мероприятий</a></li>
-          <li><a href="status.php">Статусы</a></li>
-          <li><a href="levels.php">Уровни</a></li>
-		  <li><a href="groups.php">Группы</a></li>
+          <li><a href="marks.php">Оценки</a></li>
+          <li><a href="plans.php">Планы</a></li>
+          <li><a href="publications.php">Публикации</a></li>
+          <li><a href="publicators.php">Публикующиеся</a></li>
+          <li><a href="sections.php">Секции</a></li>
         </ul>
       </nav>
     </header>
