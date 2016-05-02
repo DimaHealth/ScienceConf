@@ -24,6 +24,7 @@
           <li><a href="addnewdictionary.php">Справочники</a></li>
           <li><a href="addnewreport.html">Отчеты</a></li>
           <li><a href="addnewtables.php">Другие таблицы</a></li>
+		  <li><a href="exit.php">Выйти</a></li>
         </ul>
       </nav>
     </header>
