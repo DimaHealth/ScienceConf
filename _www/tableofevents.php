@@ -72,7 +72,7 @@ $res = mysqli_query($connect, $sql);
    
   echo '<tr><th>IDEvent</th><th>Название</th><th>Дата начала</th>
   <th>Дата окончания</th><th>Кафедра</th><th>Тип мероприятия</th>
-  <th>Ссылка на пресс-релиз</th><th>Ссылка на пост-релиз-релиз</th>
+  <th>Ссылка на пресс-релиз</th><th>Ссылка на пост-релиз</th>
   <th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
