@@ -69,7 +69,7 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDEmployee</th><th>ФИО</th><th>Должность</th><th>Степень</th><th>Звание</th><th>Телефон</th>
+  echo '<tr><th>ID</th><th>ФИО</th><th>Должность</th><th>Степень</th><th>Звание</th><th>Телефон</th>
   <th>E-mail</th><th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
@@ -119,11 +119,11 @@ require_once("dbconnect.php");
   $CodeRank = mysqli_escape_string($connect, $_POST['CodeRank'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
- $query = " INSERT INTO `employees`(`FIO`, `CodePost`, `CodeDegree`,`CodeRank`,`Phone`,`Email`) 
-            VALUES ('$FIO', '$CodePost', '$CodeDegree', '$CodeRank', '$Phone', '$Email')";
+   $query = "INSERT INTO `employees`(`FIO`, `CodePost`, `CodeDegree`, `CodeRank`,`Email`,`Phone`) 
+   VALUES ('$FIO','$CodePost','$CodeDegree','$CodeRank','$Email','$Phone')";
   mysqli_query ($connect, $query ); 
- // die(var_dump($_POST, $_GET, $FIO));
- error_reporting(E_ALL);
+  //die(var_dump($_POST, $_GET, $Email));
+ //error_reporting(E_ALL);
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 }
