@@ -17,7 +17,12 @@
 		
 		<tr>
 			<td>Очное (0) или заочное (1) отделение</td>
-			<td><input type="text" name="TypeOfStudy" required=" " value="<?= htmlspecialchars($item["TypeOfStudy"]) ?>"/></td>
+			<td><input type="boolean" name="TypeOfStudy" required=" " value="<?= htmlspecialchars($item["TypeOfStudy"]) ?>"/></td>
+		</tr>
+		
+		<tr>
+			<td>ФИО</td>
+			<td><input type="text" name="FIO" required=" " value="<?= htmlspecialchars($item["FIO"]) ?>"/></td>
 		</tr>
 		
 		<tr> 
@@ -68,7 +73,7 @@
 		
 		<tr>
 			<td>Заработанные баллы</td>
-			<td><input type="text" name="ScoredPoints" required=" " value="<?= htmlspecialchars($item["ScoredPoints"]) ?>"/></td>
+			<td><input type="number" name="ScoredPoints" required=" " value="<?= htmlspecialchars($item["ScoredPoints"]) ?>"/></td>
 		</tr>
 		
 	

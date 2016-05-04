@@ -67,7 +67,7 @@ die();
 		  <li><a href="collections.php">Сборники</a></li>
           <li><a href="orders.php">Приказы</a></li>
           <li><a href="orderformations.php">Формирование приказов</a></li>
-          <li><a href="mailing.php">Рассылки</a></li>
+          <li><a href="mailings.php">Рассылки</a></li>
           <li><a href="marks.php">Оценки</a></li>
           <li><a href="plans.php">Планы</a></li>
           <li><a href="publications.php">Публикации</a></li>

@@ -21,7 +21,7 @@
 					/*Выпадающий список*/
 					echo "<select  name = CodeStudent>";
 					while($arr = mysqli_fetch_array($result_select)) {
-						echo "<option value = '$arr[0]' > $arr['FIO']</option>";
+						echo "<option value = '$arr[0]' > $arr[3]</option>";
 					}
 					echo "</select>";
 				?>

@@ -70,7 +70,9 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>ID</th><th>Является ли школьником</th><th>Очное(0) или заочное(1) отделение</th><th>ФИО</th><th>Группа</th><th>Кафедра</th><th>Телефон</th><th>E-mail</th><th>Полученные баллы</th>
+  echo '<tr><th>ID</th><th>Является ли школьником</th><th>Очное(0) или заочное(1) отделение</th>
+  <th>ФИО</th><th>Группа</th><th>Кафедра</th><th>Телефон</th>
+  <th>E-mail</th><th>Полученные баллы</th>
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
@@ -81,12 +83,28 @@ $res = mysqli_query($connect, $sql);
 	echo '<td>'.$item['FIO'].'</td>'; 
     
   	$sql2 = "SELECT `Group` FROM `groups` WHERE IDGroup = ".$item['CodeGroup'];
-  	$res2 =  mysqli_query($connect, $sql2);
-    echo '<td>'.mysqli_fetch_array( $res2 )['Group'].'</td>';
+	$res2 =  mysqli_query($connect, $sql2);
+	if($res2 == NULL)
+	{
+		echo '<td>'.$item['CodeGroup'].'</td>'; 
+	}
+	else
+	{
+		echo '<td>'.mysqli_fetch_array( $res2 )['Group'].'</td>';
+	}
+  	
 
     $sql3 = "SELECT `Cathedra` FROM `cathedrae` WHERE IDCathedra = ".$item['CodeCathedra'];
-    $res3 =  mysqli_query($connect, $sql3);
-    echo '<td>'.mysqli_fetch_array( $res3 )['Cathedra'].'</td>';
+	$res3 =  mysqli_query($connect, $sql3);
+	if($res3 == NULL)
+	{
+		echo '<td>'.$item['CodeCathedra'].'</td>'; 
+	}
+	else
+	{
+		
+		echo '<td>'.mysqli_fetch_array( $res3 )['Cathedra'].'</td>';
+	}
 	
 	echo '<td>'.$item['Phone'].'</td>'; 
 	echo '<td>'.$item['Email'].'</td>'; 
@@ -115,15 +133,35 @@ function add_item()
 require_once("dbconnect.php");
   $IsSchoolChild = mysqli_escape_string($connect, $_POST['IsSchoolChild'] ); 
   $TypeOfStudy = mysqli_escape_string($connect, $_POST['TypeOfStudy'] ); 
+  $FIO = mysqli_escape_string($connect, $_POST['FIO'] ); 
   $CodeGroup = mysqli_escape_string($connect, $_POST['CodeGroup'] ); 
   $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $ScoredPoints = mysqli_escape_string($connect, $_POST['ScoredPoints'] ); 
+   
+  if($IsSchoolChild=='1')
+  {
+	$query = " INSERT INTO `publicators`(`IsSchoolChild`, 
+    `FIO`,`Phone`,`Email`,`ScoredPoints`) 
+     VALUES ('$IsSchoolChild', '$FIO',
+    '$Phone', '$Email','$ScoredPoints')";
+	 mysqli_query ($connect, $query ); 
+	 //die(var_dump($_POST, $_GET, $IsSchoolChild));
+  }	
+  else
+  { 
+	  $query = " INSERT INTO `publicators`(`IsSchoolChild`, `TypeOfStudy`,
+	  `FIO`,`CodeGroup`,`CodeCathedra`,`Phone`,`Email`,`ScoredPoints`) 
+	  VALUES ('$IsSchoolChild', '$TypeOfStudy','$FIO',
+	 '$CodeGroup','$CodeCathedra','$Phone',
+	 '$Email','$ScoredPoints')";
+	 mysqli_query ($connect, $query ); 
+	 //die(var_dump($_POST, $_GET, $IsSchoolChild));
+	  
+  }
+
   
-$query = " INSERT INTO `publicators`(`IsSchoolChild`, `TypeOfStudy`,`CodeGroup`,`CodeCathedra`,`Phone`,`Email`,`ScoredPoints`) 
- VALUES ('$IsSchoolChild', '$TypeOfStudy','$CodeGroup','$CodeCathedra','$Phone','$Email','$ScoredPoints')";
-  mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 }
@@ -152,14 +190,36 @@ function update_item()
   $TypeOfStudy = mysqli_escape_string($connect, $_POST['TypeOfStudy'] ); 
   $CodeGroup = mysqli_escape_string($connect, $_POST['CodeGroup'] ); 
   $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
+  $FIO = mysqli_escape_string($connect, $_POST['FIO'] );
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
-  $ScoredPoints = mysqli_escape_string($connect, $_POST['ScoredPoints'] );  
-  $query = "UPDATE publicators SET IsSchoolChild ='".$IsSchoolChild
-  ."', TypeOfStudy ='".$TypeOfStudy."', CodeGroup ='".$CodeGroup."', CodeCathedra ='".$CodeCathedra."', Phone ='".$Phone."', Email ='".$Email."', ScoredPoints ='".$ScoredPoints"' WHERE IDPublicator=".$id;
+  $ScoredPoints = mysqli_escape_string($connect, $_POST['ScoredPoints'] ); 
+  
+  
+/*   if($IsSchoolChild==='1')
+  {
+	$query = "UPDATE publicators SET IsSchoolChild ='".$IsSchoolChild."', TypeOfStudy ='".$ForSchool."'
+	FIO ='".$FIO."', CodeGroup ='".$ForSchool."', CodeCathedra ='".$ForSchool."',
+     Phone ='".$Phone."', Email ='".$Email."',
+    ScoredPoints ='".$ScoredPoints."' WHERE IDPublicator=".$id;
+	mysqli_query ($connect, $query );
+	//die(var_dump($_POST, $_GET, $id));
+  }	
+  else
+  { */
+	  
+	  $query = "UPDATE publicators SET IsSchoolChild ='".$IsSchoolChild."',
+	  TypeOfStudy ='".$TypeOfStudy."', FIO ='".$FIO."', CodeGroup ='".$CodeGroup."',
+      CodeCathedra ='".$CodeCathedra."',
+      Phone ='".$Phone."', Email ='".$Email."',
+      ScoredPoints ='".$ScoredPoints."' WHERE IDPublicator=".$id;
+	  mysqli_query ($connect, $query );
+ // }
+  
    
-  mysqli_query ($connect, $query ); 
-   // die(var_dump($_POST, $_GET, $id));
+   
+  
+   // 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 

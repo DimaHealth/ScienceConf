@@ -10,7 +10,7 @@
 </head>
 <body>
  
-  <form name="addform" action="?action=add&IDPublicator=<?= htmlspecialchars($id) ?>" method="POST"> 
+  <form name="addform" action="?action=add" method="POST"> 
 
   <table class="table" > 
 		<tr>
@@ -20,7 +20,12 @@
 		
 		<tr>
 			<td>Очное (0) или заочное (1) отделение</td>
-			<td><input type="text" name="TypeOfStudy" required=" "/></td>
+			<td><input type="boolean" name="TypeOfStudy" /></td>
+		</tr>
+		
+		<tr>
+			<td>ФИО</td>
+			<td><input type="text" name="FIO" required=" "/></td>
 		</tr>
 		
 		<tr> 
@@ -71,7 +76,7 @@
 		
 		<tr>
 			<td>Заработанные баллы</td>
-			<td><input type="text" name="ScoredPoints" required=" "/></td>
+			<td><input type="number" name="ScoredPoints" required=" "/></td>
 		</tr>
 		
 		<tr>

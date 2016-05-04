@@ -53,7 +53,7 @@
 					echo "<select  name = CodeZamDec>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr['FIO']</option>";
+						echo "<option value = '$arr[0]' > $arr[1]</option>";
 					}
 
 					echo "</select>";
