@@ -46,7 +46,7 @@ die();
 <div class="container">
 
     <header class="header clearfix">
-      <div class="logo">.Simpliste</div>
+      <div class="logo">НИЧ ДонНТУ</div>
 
       <nav class="menu_main">
         <ul>
