@@ -9,9 +9,9 @@
 <body>
 <form name="editform" action="?action=update&IDCountry=<?= htmlspecialchars($id) ?>" method="POST"> 
 
-<table class="table"> 
-  <tr> 
-  <td>Страна</td> 
+<table class="table" > 
+  <tr > 
+  <td style="background: #888; color: #fff;" >Страна</td> 
   <td><input type="text" name="Country" value="<?= htmlspecialchars($item["Country"]) ?>" /></td> 
   </tr> 
   <tr> 

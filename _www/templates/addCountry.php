@@ -14,7 +14,7 @@
 
   <table class="table" > 
 <tr> 
-  <td>Страна</td>
+  <td style="background: #888; color: #fff;">Страна</td>
   <td><input type="text" name="Country" value="" required=" " /></td>
   </tr>
   
