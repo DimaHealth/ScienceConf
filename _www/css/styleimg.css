@@ -1,0 +1,33 @@
+body {
+  /* Путь к изображению относительно данного файла */
+  background-image: url(../images/background-photo.jpg);
+  
+  /* Центрирование изображения по вертикали и горизонтали всегда */
+  background-position: center center;
+  
+  /* Запрещаем повтор изображения */
+  background-repeat: no-repeat;
+  
+  /* Фиксируем изображение - оно остается на месте при прокрутке окна */
+  background-attachment: fixed;
+  
+  /* Изображение будет масштабироваться в зависимости от размеров контейнера */
+  background-size: cover;
+  
+  /* Цвет фона изображения, который будет показываться пока изображение не загрузится */
+  background-color:#464646;
+  
+  /* Эквивалентная сокращенная запись
+   * background: url(background-photo.jpg) center center cover no-repeat fixed;
+   */
+}
+
+/* Для мобильных устройств */
+@media only screen and (max-width: 767px) {
+  body {
+    /* Если размер экрана меньше 767px показываем уменьшенное изображение,
+     * которое на 77% меньше чем оригинальное для обеспечения быстрой загрузки 
+	 * на мобильных устройствах */
+    background-image: url(../images/background-photo-mobile-devices.jpg);
+  }
+}

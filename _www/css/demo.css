@@ -1,0 +1,75 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300&subset=latin,cyrillic);
+
+html, body, .container {
+  height: 100%;
+}
+
+html, body, h1, p, a, div, section {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+/* Основные стили */
+body { 
+  font: 18px/23px "Roboto", sans-serif;
+  color: #ffffff;
+}
+
+h1 {
+  color: #efecec;
+  text-transform: uppercase;
+  font-size: 40px;
+  line-height: 50px;
+  font-weight: 400;
+  margin-top: 20px;
+}
+
+a {
+  color: #ffffff;
+}
+
+p {
+  margin: 0 0 15px 0;
+}
+
+strong {
+  font-weight: 700;
+}
+
+.inner {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container {
+  display: table;
+  padding-top: 80px;
+  width: 100%;
+}
+
+.content {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.sub-title {
+  margin: 50px auto;
+  font-size: 18px;
+  line-height: 23px;
+  text-transform: uppercase;
+}
+
+#more-content {
+  background: #fff;
+  padding:20px 0;
+}
+
+#more-content p {
+  width: 70%;
+  margin:10px auto;
+  color:#B5B4BA;
+}
