@@ -45,7 +45,6 @@
 
   <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
     	<div class="container">
-
      <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
                         <ul class="nav navbar-nav navbar-right">
 								<li><a href="mainform.php">Main</a></li>
