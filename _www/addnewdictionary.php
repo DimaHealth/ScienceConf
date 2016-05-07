@@ -67,7 +67,7 @@ die();
   <title>Таблицы-справочники для мероприятий</title>
  </head>
 <body>
- <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
+   <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
     	<div class="container">
 
      <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
@@ -77,7 +77,27 @@ die();
 										<li><a href="tableofevents.php">Мероприятия</a></li>
 										<li class="active"><a href="addnewdictionary.php">Справочники</a></li>
 										<li><a href="addnewreport.html">Отчеты</a></li>
-										<li ><a href="addnewtables.php">Другие таблицы</a></li>
+										<li><a href="addnewtables.php">Другие таблицы</a></li>
+										<li></li>
+										<li><a href="exit.php">Выйти</a></li>
+                        </ul>
+     </nav>
+	   </div>
+	   
+    </header>
+
+<center><h1>Справочники</h1></center>
+ <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
+    	<div class="container">
+
+     <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
+                        <ul class="nav navbar-nav navbar-right">
+								<li><a href="mainform.php">Main</a></li>
+										<li><a href="addnewuser.php">Пользователи</a></li>
+										<li><a href="tableofevents.php">Мероприятия</a></li>
+										<li ><a href="addnewdictionary.php">Справочники</a></li>
+										<li><a href="addnewreport.html">Отчеты</a></li>
+										<li class="active"><a href="addnewtables.php">Другие таблицы</a></li>
 										<li></li>
 										<li><a href="exit.php">Выйти</a></li>
                         </ul>
@@ -85,20 +105,27 @@ die();
 	   </div>
 	     <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
          <ul class="nav navbar-nav navbar-right">
-	      <li><a href="collections.php">Сборники</a></li>
-          <li><a href="orders.php">Приказы</a></li>
-          <li><a href="orderformations.php">Формирование приказов</a></li>
-          <li><a href="mailings.php">Рассылки</a></li>
-		  <li><a href="involvedemployees.php">Сотрудники по мероприятиям</a></li>
-          <li><a href="marks.php">Оценки</a></li>
-          <li><a href="plans.php">Планы</a></li>
-          <li><a href="publications.php">Публикации</a></li>
-          <li><a href="publicators.php">Публикующиеся</a></li>
-          <li><a href="sections.php">Секции</a></li>
+          <li><a href="countries.php">Страны</a></li>
+          <li><a href="cities.php">Города</a></li>
+          <li><a href="universities.php">Университеты</a></li>
+          <li><a href="faculties.php">Факультеты</a></li>
+          <li><a href="cathedrae.php">Кафедры</a></li>
+          <li><a href="departments.php">Отделы</a></li>
+          <li><a href="units.php">Распределения</a></li>
+          <li><a href="employees.php">Сотрудники</a></li>
+          <li><a href="posts.php">Должности</a></li>
+          <li><a href="degrees.php">Ученые степени</a></li>
+          <li><a href="ranks.php">Ученые звания</a></li>
+          <li><a href="partners.php">Партнеры</a></li>
+          <li><a href="eventtypes.php">Виды мероприятий</a></li>
+          <li><a href="status.php">Статусы</a></li>
+          <li><a href="levels.php">Уровни</a></li>
+		  <li><a href="groups.php">Группы</a></li>
         </ul>
       </nav>
     </header>
-	
+
+
  
 
 </body>

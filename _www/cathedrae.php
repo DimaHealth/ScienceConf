@@ -47,10 +47,10 @@
 
      <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
                         <ul class="nav navbar-nav navbar-right">
-								<li class="active"><a href="mainform.php">Main</a></li>
+								<li ><a href="mainform.php">Main</a></li>
 										<li><a href="addnewuser.php">Пользователи</a></li>
 										<li><a href="tableofevents.php">Мероприятия</a></li>
-										<li><a href="addnewdictionary.php">Справочники</a></li>
+										<li class="active"><a href="addnewdictionary.php">Справочники</a></li>
 										<li><a href="addnewreport.html">Отчеты</a></li>
 										<li><a href="addnewtables.php">Другие таблицы</a></li>
 										<li></li>
