@@ -7,7 +7,7 @@
          <meta name="description" content="">
         <!-- Mobile Specific Metas
     ================================================== -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
          <!-- CSS
@@ -30,6 +30,10 @@
         <!-- Responsive -->
         <link rel="stylesheet" href="css/responsive.css" />
         <link rel="stylesheet" href="css/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+		  <link rel="stylesheet" href="css/demo.css">
+
+  <!-- Стили для адаптивного фонового изображения -->
+  <link rel="stylesheet" href="css/styleimg.css">
 	
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
@@ -41,26 +45,32 @@
 <body>
 
 <form action="" method="post" name="r_form2" >
-
-
-   <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
+  <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
     	<div class="container">
-
      <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
                         <ul class="nav navbar-nav navbar-right">
-								<li class="active"><a href="mainform.php">Main</a></li>
+								<li><a href="mainform.php">Main</a></li>
 										<li><a href="addnewuser.php">Пользователи</a></li>
 										<li><a href="tableofevents.php">Мероприятия</a></li>
-										<li><a href="addnewdictionary.php">Справочники</a></li>
+										<li  class="active"><a href="addnewdictionary.php">Справочники</a></li>
 										<li><a href="addnewreport.html">Отчеты</a></li>
 										<li><a href="addnewtables.php">Другие таблицы</a></li>
-										<li></li>
 										<li><a href="exit.php">Выйти</a></li>
                         </ul>
      </nav>
 	   </div>
+	   
     </header>
 
+
+<div class="container">
+<header class="container">
+    <section class="content">
+      <h1></h1>
+      <p class="sub-title"><strong></strong> <br /></p>
+    </section>
+ </header>
+ </div>
 </form>
 </body>
 </html>
@@ -104,7 +114,7 @@ $res = mysqli_query($connect, $sql);
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    echo '<tr>'; 
+    echo '<tr style="background: #888; color: #fff;">'; 
     echo '<td>'.$item['IDFaculty'].'</td>';
     echo '<td>'.$item['Faculty'].'</td>'; 
 	echo '<td>'.$item['Phone'].'</td>'; 
@@ -124,6 +134,7 @@ $res = mysqli_query($connect, $sql);
 // Функция формирует форму для добавления записи в таблице БД 
 function get_add_item_form() 
 { 
+echo '<h2>Добавить</h2>'; 
 include("templates/addFaculty.php");
  
 }

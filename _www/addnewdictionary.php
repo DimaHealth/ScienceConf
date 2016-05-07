@@ -67,24 +67,7 @@ die();
   <title>Таблицы-справочники для мероприятий</title>
  </head>
 <body>
-   <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
-    	<div class="container">
 
-     <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
-                        <ul class="nav navbar-nav navbar-right">
-								<li><a href="mainform.php">Main</a></li>
-										<li><a href="addnewuser.php">Пользователи</a></li>
-										<li><a href="tableofevents.php">Мероприятия</a></li>
-										<li class="active"><a href="addnewdictionary.php">Справочники</a></li>
-										<li><a href="addnewreport.html">Отчеты</a></li>
-										<li><a href="addnewtables.php">Другие таблицы</a></li>
-										<li></li>
-										<li><a href="exit.php">Выйти</a></li>
-                        </ul>
-     </nav>
-	   </div>
-	   
-    </header>
 
 <center><h1>Справочники</h1></center>
  <header id="section_header" class="navbar-fixed-top main-nav" role="banner">
@@ -95,14 +78,14 @@ die();
 								<li><a href="mainform.php">Main</a></li>
 										<li><a href="addnewuser.php">Пользователи</a></li>
 										<li><a href="tableofevents.php">Мероприятия</a></li>
-										<li ><a href="addnewdictionary.php">Справочники</a></li>
+										<li class="active"><a href="addnewdictionary.php">Справочники</a></li>
 										<li><a href="addnewreport.html">Отчеты</a></li>
-										<li class="active"><a href="addnewtables.php">Другие таблицы</a></li>
+										<li> <a href="addnewtables.php">Другие таблицы</a></li>
 										<li></li>
 										<li><a href="exit.php">Выйти</a></li>
                         </ul>
      </nav>
-	   </div>
+	   
 	     <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
          <ul class="nav navbar-nav navbar-right">
           <li><a href="countries.php">Страны</a></li>
@@ -123,6 +106,7 @@ die();
 		  <li><a href="groups.php">Группы</a></li>
         </ul>
       </nav>
+	  </div>
     </header>
 
 
