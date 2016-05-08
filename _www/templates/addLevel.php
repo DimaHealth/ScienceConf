@@ -11,10 +11,10 @@
 <body>
  
   <form name="addform" action="?action=add&IDLevel=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
   <table class="table" > 
 <tr> 
-  <td>Уровень</td>
+  <td style="color: #fff;">Уровень</td>
   <td><input type="text" name="Level" value="" required=" " /></td>
   </tr>
   <tr>

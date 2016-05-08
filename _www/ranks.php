@@ -114,7 +114,7 @@ $res = mysqli_query($connect, $sql);
    <th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    echo '<tr style="background: #888; color: #fff;">'; 
+    echo '<tr style=" color: #fff;">'; 
 	echo '<td>'.$item['IDRank'].'</td>'; 
     echo '<td>'.$item['Rank'].'</td>'; 
     echo '<td><a href="?action=editform&id='.$item['IDRank'].'">Ред.</a></td>'; 

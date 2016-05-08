@@ -9,15 +9,16 @@
 
     <body>
         <form name="addform" action="?action=add" method="POST"> 
+			<div class="col_66">
             <table class="table" > 
                 <tr> 
-                    <td>Календарный год</td>
+                    <td style="color: #fff;">Календарный год</td>
                     <td><input type="text" name="CalendarYear" value="" required="" /></td>
                 </tr>
 
                 <tr> 
-                    <td>Факультет</td>
-                    <td>
+                    <td style="color: #fff;">Факультет</td>
+                    <td style="color: #000;">
                         <?php
                             require_once("dbconnect.php");
                             $sql = "SELECT * FROM faculties";
@@ -34,8 +35,8 @@
                 </tr>
 				
 				<tr> 
-                    <td>Зам. декана</td>
-                    <td>
+                    <td style="color: #fff;">Зам. декана</td>
+                    <td style="color: #000;">
                         <?php
                             require_once("dbconnect.php");
                             $sql = "SELECT * FROM employees";

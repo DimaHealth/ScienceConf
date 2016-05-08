@@ -39,25 +39,26 @@
 </head>
 <body>
 	<form name="addform" action="?action=add&IDCathedra=<?= htmlspecialchars($id) ?>" method="POST"> 
+	<div class="col_66">
 	<table class="table" > 
 		<tr> 
-			<td>Кафедра</td>
+			<td style="color: #fff;">Кафедра</td>
 			<td><input type="text" name="Cathedra" value="" required=" " /></td>
 		</tr>
 
 		<tr> 
-			<td>Телефон</td>
+			<td style="color: #fff;">Телефон</td>
 			<td><input type="text" name="Phone" value="" required=" " /></td>
 		</tr>
 
 		<tr> 
-			<td>E-mail</td>
+			<td style="color: #fff;">E-mail</td>
 			<td><input type="text" name="Email" value="" required=" " /></td>
 		</tr>
 
 		<tr>
-			<td>Факультет</td>
-			<td>
+			<td style="color: #fff;">Факультет</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 

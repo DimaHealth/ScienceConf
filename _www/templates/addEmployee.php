@@ -10,15 +10,16 @@
 </head>
 <body>
 	<form name="addform" action="?action=add" method="POST"> 
+	<div class="col_66">
 	<table class="table" > 
 		<tr> 
-			<td>ФИО</td>
+			<td style="color: #fff;">ФИО</td>
 			<td><input type="text" name="FIO" value="" required=" " /></td>
 		</tr>
 
 		<tr>
-			<td>Должность</td>
-			<td>
+			<td style="color: #fff;">Должность</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 
@@ -39,8 +40,8 @@
 		</tr>
 
 		<tr>
-			<td>Степень</td>
-			<td>
+			<td style="color: #fff;">Степень</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 
@@ -61,8 +62,8 @@
 		</tr>
 
 		<tr>
-			<td>Звание</td>
-			<td>
+			<td style="color: #fff;">Звание</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 
@@ -83,12 +84,12 @@
 		</tr>
 
 		<tr> 
-			<td>Телефон</td>
+			<td style="color: #fff;">Телефон</td>
 			<td><input type="text" name="Phone" value="" required=" " /></td>
 		</tr>
 
 		<tr> 
-			<td>Email</td>
+			<td style="color: #fff;">Email</td>
 			<td><input type="text" name="Email" value="" required=" " /></td>
 		</tr>
 

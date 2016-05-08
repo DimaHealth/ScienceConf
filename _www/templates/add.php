@@ -11,47 +11,47 @@
 <body>
  
   <form name="addform" action="?action=add&IDEvent=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
   <table class="table" > 
 <tr> 
-  <td>Название</td>
+  <td style="color: #fff;">Название</td>
   <td><input type="text" name="EventName" value="" required=" " /></td>
   </tr>
   <tr>
-  <td>Дата начала</td>
+  <td style="color: #fff;">Дата начала</td>
   <td><input type="date" name="StartDate" required=" "/></td>
   </tr>
     <tr>
-  <td>Дата окончания</td>
+  <td style="color: #fff;">Дата окончания</td>
   <td><input type="date" name="ExpirationDate" value="" required=" "/></td>
   </tr>
     <tr>
-  <td>Ссылка на пресс-релиз</td>
+  <td style="color: #fff;">Ссылка на пресс-релиз</td>
   <td><input type="text" name="PressReleaseRef" value="" required=" "/></td>
   </tr>
     <tr>
-  <td>Осылка на пост-релиз</td>
+  <td style="color: #fff;">Осылка на пост-релиз</td>
   <td><input type="text" name="PostReleaseRef" value="" required=" "/> </td>
   </tr>
     <tr>
-  <td>Количество преподавателей ДонНТУ</td>
+  <td style="color: #fff;">Количество преподавателей ДонНТУ</td>
   <td><input type="number_format" name="NumberOfTeachersDonNTU" value="" required=" "/></td>
   </tr>
    <tr>
-  <td>Вэб-сайт</td>
+  <td style="color: #fff;">Вэб-сайт</td>
   <td><input type="link" name="Website" value="" /></td>
   </tr>
    <tr>
-  <td>Ссылка на программу</td>
+  <td style="color: #fff;">Ссылка на программу</td>
   <td><input type="link" name="ReferenceToProgram" value="" /></td>
   </tr>
    <tr>
-  <td>Страны</td>
+  <td style="color: #fff;">Страны</td>
   <td><input type="text" name="ExpectedCountries" value="" /></td>
   </tr>
     <tr>
-  <td>Кафедра</td>
-  <td>
+  <td style="color: #fff;">Кафедра</td>
+  <td style="color: #000;">
   <?php
 require_once("dbconnect.php");
 
@@ -76,8 +76,8 @@ echo "</select>";
 </td>
   </tr>
     <tr>
-  <td>Тип мероприятия</td>
-  <td>
+  <td style="color: #fff;">Тип мероприятия</td>
+  <td style="color: #000;">
   <?php
 require_once("dbconnect.php");
 

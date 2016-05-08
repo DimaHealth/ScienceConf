@@ -8,27 +8,27 @@
 </head>
 <body>
 <form name="editform" action="?action=update&IDMailing=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table">
 
 		<tr>
-			<td>Дата</td>
+			<td style="color: #fff;">Дата</td>
 			<td><input type="date" name="Date" required=" " value="<?= htmlspecialchars($item["Date"]) ?>" /></td>
 		</tr>
 		
 		<tr>
-			<td>Тема</td>
+			<td style="color: #fff;">Тема</td>
 			<td><input type="text" name="Title" required=" " value="<?= htmlspecialchars($item["Title"]) ?>" /></td>
 		</tr>
 		
 		<tr>
-			<td>Текст</td>
+			<td style="color: #fff;">Текст</td>
 			<td><input type="text" name="Text" required=" " value="<?= htmlspecialchars($item["Text"]) ?>" /></td>
 		</tr>
 		
 	<tr> 
-			<td>Сотрудник</td>
-			<td>
+			<td style="color: #fff;">Сотрудник</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 					$sql = "SELECT * FROM employees";

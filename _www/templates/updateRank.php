@@ -8,10 +8,10 @@
 </head>
 <body>
 <form name="editform" action="?action=update&IDRank=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table"> 
   <tr> 
-  <td>Ученое звание</td> 
+  <td style="color: #fff;">Ученое звание</td> 
   <td><input type="text" name="Rank" value="<?= htmlspecialchars($item["Rank"]) ?>" /></td> 
   </tr> 
   <tr> 
@@ -19,6 +19,7 @@
   <td><button type="button" onClick="history.back();">Отменить</button></td> 
   </tr> 
   </table> 
+  </div>
   </form> 
   </body>
   </html>

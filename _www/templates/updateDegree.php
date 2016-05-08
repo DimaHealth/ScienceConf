@@ -8,10 +8,10 @@
 </head>
 <body>
 <form name="editform" action="?action=update&IDDegree=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table"> 
   <tr> 
-  <td>Ученая степень</td> 
+  <td style="color: #fff;">Ученая степень</td> 
   <td><input type="text" name="Degree" value="<?= htmlspecialchars($item["Degree"]) ?>" /></td> 
   </tr> 
   <tr> 

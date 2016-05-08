@@ -8,16 +8,16 @@
 </head>
 <body>
 	<form name="editform" action="?action=update&IDSection=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 	<table class="table"> 
 		<tr> 
-			<td>Секция</td> 
+			<td style="color: #fff;">Секция</td> 
 			<td><input type="text" name="Section" value="<?= htmlspecialchars($item["Section"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Мероприятие</td> 
-			<td> 
+			<td style="color: #fff;">Мероприятие</td> 
+			<td style="color: #000;"> 
 				<?php
 					require_once("dbconnect.php");
 
@@ -43,6 +43,7 @@
 			<td><button type="button" onClick="history.back();">Отменить</button></td> 
 		</tr> 
 	</table> 
+	</div>
 	</form> 
 </body>
 </html>

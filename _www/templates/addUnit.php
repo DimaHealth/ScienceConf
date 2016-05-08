@@ -10,10 +10,11 @@
 </head>
 <body>
 	<form name="addform" action="?action=add" method="POST"> 
+	<div class="col_66">
 	<table class="table" > 
 		<tr>
-			<td>Отдел</td>
-			<td>
+			<td style="color: #fff;">Отдел</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 
@@ -34,8 +35,8 @@
 		</tr>
 
 		<tr>
-			<td>Сотрудник</td>
-			<td>
+			<td style="color: #fff;">Сотрудник</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 

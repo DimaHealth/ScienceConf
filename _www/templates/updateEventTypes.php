@@ -8,10 +8,10 @@
 </head>
 <body>
 <form name="editform" action="?action=update&IDEventType=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table"> 
   <tr> 
-  <td>Тип мероприятия</td> 
+  <td style="color: #fff;">Тип мероприятия</td> 
   <td><input type="text" name="EventType" value="<?= htmlspecialchars($item["EventType"]) ?>" /></td> 
   </tr> 
   <tr> 

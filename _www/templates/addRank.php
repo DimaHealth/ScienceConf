@@ -11,10 +11,10 @@
 <body>
  
   <form name="addform" action="?action=add&IDRank=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
   <table class="table" > 
 <tr> 
-  <td>Ученое звание</td>
+  <td style="color: #fff;">Ученое звание</td>
   <td><input type="text" name="Rank" value="" required=" " /></td>
   </tr>
   <tr>

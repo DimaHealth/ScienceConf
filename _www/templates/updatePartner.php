@@ -9,27 +9,27 @@
 <body>
 
 <form name="editform" action="?action=update&IDPartner=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table"> 
   <tr> 
-  <td>Партнер</td> 
+  <td style="color: #fff;">Партнер</td> 
   <td><input type="text" name="Partner" value="<?= htmlspecialchars($item["Partner"]) ?>" /></td> 
   </tr> 
   <tr> 
-  <td>Телефон</td> 
+  <td style="color: #fff;">Телефон</td> 
   <td><input type="phone" name="Phone" value="<?= htmlspecialchars($item["Phone"]) ?>"/></td> 
   </tr> 
     <tr> 
-  <td>Website</td> 
+  <td style="color: #fff;">Website</td> 
   <td><input type="text" name="Website" value="<?= htmlspecialchars($item["Website"]) ?>" /></td> 
   </tr> 
     <tr> 
-  <td>Email</td> 
+  <td style="color: #fff;">Email</td> 
   <td><input type="text" name="E-mail" value="<?= htmlspecialchars($item["E-mail"]) ?>" /></td> 
   </tr> 
     <tr> 
-  <td>Мероприятие</td> 
-  <td> 
+  <td style="color: #fff;">Мероприятие</td> 
+  <td style="color: #000;"> 
   <?php
 require_once("dbconnect.php");
 
@@ -54,7 +54,7 @@ echo "</select>";
 </td> 
   </tr> 
   <tr> 
-  <td>Кол-во участников</td> 
+  <td style="color: #fff;">Кол-во участников</td> 
   <td><input type="number" name="NumberOfParticipants" value="<?= htmlspecialchars($item["NumberOfParticipants"]) ?>" /></td> 
   </tr> 
   

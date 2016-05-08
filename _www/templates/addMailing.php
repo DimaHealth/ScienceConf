@@ -11,26 +11,26 @@
 <body>
  
   <form name="addform" action="?action=add&IDMailing=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+	<div class="col_66">
   <table class="table" > 
   		<tr>
-			<td>Дата</td>
+			<td style="color: #fff;">Дата</td>
 			<td><input type="date" name="Date" required=" "/></td>
 		</tr>
 		
 		<tr>
-			<td>Тема</td>
+			<td style="color: #fff;">Тема</td>
 			<td><input type="text" name="Title" required=" "/></td>
 		</tr>
 		
 		<tr>
-			<td>Текст</td>
+			<td style="color: #fff;">Текст</td>
 			<td><input type="text" name="Text" required=" "/></td>
 		</tr>
 		
 		<tr> 
-			<td>Сотрудник</td>
-			<td>
+			<td style="color: #fff;">Сотрудник</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 

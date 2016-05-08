@@ -8,20 +8,20 @@
 </head>
 <body>
 	<form name="editform" action="?action=update&IDOrder=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 	<table class="table"> 
 		<tr> 
-			<td>Тема приказа</td> 
+			<td style="color: #fff;">Тема приказа</td> 
 			<td><input type="text" name="OrderTheme" value="<?= htmlspecialchars($item["OrderTheme"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Номер приказа</td> 
+			<td style="color: #fff;">Номер приказа</td> 
 			<td><input type="number" name="OrderNumber" value="<?= htmlspecialchars($item["OrderNumber"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Дата приказа</td> 
+			<td style="color: #fff;">Дата приказа</td> 
 			<td><input type="date" name="OrderDate" value="<?= htmlspecialchars($item["OrderDate"]) ?>" /></td> 
 		</tr> 
 

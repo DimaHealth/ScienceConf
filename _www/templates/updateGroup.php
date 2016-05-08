@@ -8,10 +8,10 @@
 </head>
 <body>
 	<form name="editform" action="?action=update&IDGroup=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+	<div class="col_66">
 	<table class="table"> 
 		<tr> 
-			<td>Группа</td> 
+			<td style="color: #fff;">Группа</td> 
 			<td><input type="text" name="Group" value="<?= htmlspecialchars($item["Group"]) ?>" /></td> 
 		</tr> 
 		<tr> 

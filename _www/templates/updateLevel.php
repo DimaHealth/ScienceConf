@@ -8,10 +8,10 @@
 </head>
 <body>
 <form name="editform" action="?action=update&IDLevel=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table"> 
   <tr> 
-  <td>Уровень</td> 
+  <td style="color: #fff;">Уровень</td> 
   <td><input type="text" name="Level" value="<?= htmlspecialchars($item["Level"]) ?>" /></td> 
   </tr> 
   <tr> 

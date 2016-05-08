@@ -8,31 +8,31 @@
 </head>
 <body>
 	<form name="editform" action="?action=update&IDUniversity=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+	<div class="col_66">
 	<table class="table"> 
 		<tr> 
-			<td>Университет</td> 
+			<td style="color: #fff;">Университет</td> 
 			<td><input type="text" name="University" value="<?= htmlspecialchars($item["University"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Телефон</td> 
+			<td style="color: #fff;">Телефон</td> 
 			<td><input type="text" name="Phone" value="<?= htmlspecialchars($item["Phone"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Веб-сайт</td> 
+			<td style="color: #fff;">Веб-сайт</td> 
 			<td><input type="text" name="Website" value="<?= htmlspecialchars($item["Website"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>E-mail</td> 
+			<td style="color: #fff;">E-mail</td> 
 			<td><input type="text" name="Email" value="<?= htmlspecialchars($item["Email"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Город</td> 
-			<td> 
+			<td style="color: #fff;">Город</td> 
+			<td style="color: #000;"> 
 				<?php
 					require_once("dbconnect.php");
 

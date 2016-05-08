@@ -11,11 +11,11 @@
 <body>
  
   <form name="addform" action="?action=add&IDPublication=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+	<div class="col_66">
   <table class="table" > 
 		<tr> 
-			<td>Студент</td>
-			<td>
+			<td style="color: #fff;">Студент</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 					$sql = "SELECT * FROM publicators";
@@ -32,8 +32,8 @@
 		</tr>
 		
 		<tr> 
-			<td>Секция</td>
-			<td>
+			<td style="color: #fff;">Секция</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 					$sql = "SELECT * FROM sections";
@@ -50,13 +50,13 @@
 		</tr>
 		
 		<tr>
-			<td>Есть ли доклад</td>
+			<td style="color: #fff;">Есть ли доклад</td>
 			<td><input type="boolean" name="HasReport" required=" "/></td>
 		</tr>
 		
 		<tr> 
-			<td>Руководитель</td>
-			<td>
+			<td style="color: #fff;">Руководитель</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 					$sql = "SELECT * FROM employees";

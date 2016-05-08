@@ -9,9 +9,10 @@
 
     <body>
         <form name="addform" action="?action=add" method="POST"> 
+		<div class="col_66">
             <table class="table" > 
                 <tr> 
-                    <td>Группа</td>
+                    <td style="color: #fff;">Группа</td>
                     <td><input type="text" name="Group" value="" required="" /></td>
                 </tr>
                 <tr>

@@ -8,14 +8,14 @@
 </head>
 <body>
 <form name="editform" action="?action=update&IDPost=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table"> 
   <tr> 
-  <td>Должность</td> 
+  <td style="color: #fff;">Должность</td> 
   <td><input type="text" name="Post" value="<?= htmlspecialchars($item["Post"]) ?>" /></td> 
   </tr> 
   <tr> 
-  <td>Для мероприятия</td> 
+  <td style="color: #fff;">Для мероприятия</td> 
   <td><input type="boolean" name="ForEvent" value="<?= htmlspecialchars($item["ForEvent"]) ?>"/></td> 
   </tr> 
   <tr> 

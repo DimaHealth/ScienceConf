@@ -9,11 +9,11 @@
 <body>
 
 <form name="editform" action="?action=update&IDFormation=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 <table class="table"> 
       <tr> 
-  <td>Сотрудник</td> 
-  <td> 
+  <td style="color: #fff;">Сотрудник</td> 
+  <td style="color: #000;"> 
  <?php
 		require_once("dbconnect.php");
 
@@ -38,8 +38,8 @@
 </td> 
   </tr> 
         <tr> 
-  <td>Приказ</td> 
-  <td> 
+  <td style="color: #fff;">Приказ</td> 
+  <td style="color: #000;"> 
  <?php
 		require_once("dbconnect.php");
 

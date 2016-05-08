@@ -12,13 +12,13 @@
 	<form name="addform" action="?action=add&IDDepartment=<?= htmlspecialchars($id) ?>" method="POST"> 
 	<table class="table" > 
 		<tr> 
-			<td>Отдел</td>
+			<td style="color: #fff;">Отдел</td>
 			<td><input type="text" name="Department" value="" required=" " /></td>
 		</tr>
 
 		<tr>
-			<td>Университет</td>
-			<td>
+			<td style="color: #fff;">Университет</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 

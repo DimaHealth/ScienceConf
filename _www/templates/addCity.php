@@ -9,15 +9,16 @@
 
     <body>
         <form name="addform" action="?action=add" method="POST"> 
+		<div class="col_66">
             <table class="table" > 
                 <tr> 
-                    <td>Город</td>
+                    <td style="color: #fff;">Город</td>
                     <td><input type="text" name="City" value="" required="" /></td>
                 </tr>
 
                 <tr> 
-                    <td>Страна</td>
-                    <td>
+                    <td style="color: #fff;">Страна</td>
+                    <td style="color: #000;">
                         <?php
                             require_once("dbconnect.php");
                             $sql = "SELECT * FROM countries";

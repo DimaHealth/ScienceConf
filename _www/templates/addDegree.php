@@ -11,10 +11,10 @@
 <body>
  
   <form name="addform" action="?action=add&IDPost=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
   <table class="table" > 
 <tr> 
-  <td>Ученая степень</td>
+  <td style="color: #fff;">Ученая степень</td>
   <td><input type="text" name="Degree" value="" required=" " /></td>
   </tr>
   <tr>

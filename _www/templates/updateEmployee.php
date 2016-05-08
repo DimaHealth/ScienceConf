@@ -8,16 +8,16 @@
 </head>
 <body>
 	<form name="editform" action="?action=update&IDEmployee=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+	<div class="col_66">
 	<table class="table"> 
 		<tr> 
-			<td>ФИО</td> 
+			<td style="color: #fff;">ФИО</td> 
 			<td><input type="text" name="FIO" value="<?= htmlspecialchars($item["FIO"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Должность</td> 
-			<td> 
+			<td style="color: #fff;">Должность</td> 
+			<td style="color: #000;"> 
 				<?php
 					require_once("dbconnect.php");
 
@@ -39,8 +39,8 @@
 		</tr> 
 
 		<tr> 
-			<td>Степень</td> 
-			<td> 
+			<td style="color: #fff;">Степень</td> 
+			<td style="color: #000;"> 
 				<?php
 					require_once("dbconnect.php");
 
@@ -62,8 +62,8 @@
 		</tr> 
 
 		<tr> 
-			<td>Звание</td> 
-			<td> 
+			<td style="color: #fff;">Звание</td> 
+			<td style="color: #000;"> 
 				<?php
 					require_once("dbconnect.php");
 
@@ -85,12 +85,12 @@
 		</tr> 
 
 		<tr> 
-			<td>Телефон</td> 
+			<td style="color: #fff;">Телефон</td> 
 			<td><input type="text" name="Phone" value="<?= htmlspecialchars($item["Phone"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>E-mail</td> 
+			<td style="color: #fff;">E-mail</td> 
 			<td><input type="text" name="Email" value="<?= htmlspecialchars($item["Email"]) ?>" /></td> 
 		</tr> 
 

@@ -10,31 +10,28 @@
   
 </head>
 <body>
- <?php
- $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
- ?>
-  <form name="addform" action="?action=add&IDPartner=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+  <form name="addform" action="?action=add" method="POST"> 
+<div class="col_66">
   <table class="table" > 
 <tr> 
-  <td>Партнер</td>
+  <td style="color: #fff;">Партнер</td>
   <td><input type="text" name="Partner" value="" required=" " /></td>
   </tr>
   <tr>
-  <td>Телефон</td>
+  <td style="color: #fff;">Телефон</td>
   <td><input type="phone" name="Phone" required=" "/></td>
   </tr>
     <tr>
-  <td>Website</td>
+  <td style="color: #fff;">Website</td>
   <td><input type="text" name="Website" value="" required=" "/></td>
   </tr>
     <tr>
-  <td>E-mail</td>
+  <td style="color: #fff;">E-mail</td>
   <td><input type="text" name="E-mail" value="" required=" "/></td>
   </tr>
   <tr>
-  <td>Мероприятие</td>
-  <td>
+  <td style="color: #fff;">Мероприятие</td>
+  <td style="color: #000;">
   <?php
 require_once("dbconnect.php");
 
@@ -59,7 +56,7 @@ echo "</select>";
 </td>
   </tr>
     <tr>
-  <td>Кол-во участников</td>
+  <td style="color: #fff;">Кол-во участников</td>
   <td><input type="number" name="NumberOfParticipants" required=" "/></td>
   </tr>
   <tr>

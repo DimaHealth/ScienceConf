@@ -8,16 +8,16 @@
 </head>
 <body>
 	<form name="editform" action="?action=update&IDMark=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
 	<table class="table"> 
 		<tr> 
-			<td>Оценка</td> 
+			<td style="color: #fff;">Оценка</td> 
 			<td><input type="text" name="Mark" value="<?= htmlspecialchars($item["Mark"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Мероприятие</td> 
-			<td> 
+			<td style="color: #fff;">Мероприятие</td> 
+			<td style="color: #000;"> 
 				<?php
 					require_once("dbconnect.php");
 

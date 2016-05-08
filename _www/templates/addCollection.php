@@ -9,25 +9,26 @@
 
     <body>
         <form name="addform" action="?action=add" method="POST"> 
+		<div class="col_66">
             <table class="table" > 
 			
                 <tr> 
-                    <td>Ссылка на сборник</td>
+                    <td style="color: #fff;">Ссылка на сборник</td>
                     <td><input type="url" name="ReferenceToCollection" value="" /></td>
                 </tr>
 				
                 <tr> 
-                    <td>Эл. закрытый вид</td>
+                    <td style="color: #fff;">Эл. закрытый вид</td>
                     <td><input type="boolean" name="ElectronicCloseView" value="" required="" /></td>
                 </tr>
 				
                 <tr> 
-                    <td>Эл. открытый вид</td>
+                    <td style="color: #fff;">Эл. открытый вид</td>
                     <td><input type="boolean" name="ElectronicOpenView" value="" required="" /></td>
                 </tr>
 				
                 <tr> 
-                    <td>Печатный вид</td>
+                    <td style="color: #fff;">Печатный вид</td>
                     <td><input type="boolean" name="PrintView" value="" required="" /></td>
                 </tr>
 

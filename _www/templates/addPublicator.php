@@ -11,26 +11,26 @@
 <body>
  
   <form name="addform" action="?action=add" method="POST"> 
-
+	<div class="col_66">
   <table class="table" > 
 		<tr>
-			<td>Является ли школьником</td>
+			<td style="color: #fff;">Является ли школьником</td>
 			<td><input type="boolean" name="IsSchoolChild" required=" "/></td>
 		</tr>
 		
 		<tr>
-			<td>Очное (0) или заочное (1) отделение</td>
+			<td style="color: #fff;">Очное (0) или заочное (1) отделение</td>
 			<td><input type="boolean" name="TypeOfStudy" /></td>
 		</tr>
 		
 		<tr>
-			<td>ФИО</td>
+			<td style="color: #fff;">ФИО</td>
 			<td><input type="text" name="FIO" required=" "/></td>
 		</tr>
 		
 		<tr> 
-			<td>Группа</td>
-			<td>
+			<td style="color: #fff;">Группа</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 					$sql = "SELECT * FROM groups";
@@ -47,8 +47,8 @@
 		</tr>
 		
 		<tr> 
-			<td>Кафедра</td>
-			<td>
+			<td style="color: #fff;">Кафедра</td>
+			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
 					$sql = "SELECT * FROM cathedrae";
@@ -65,17 +65,17 @@
 		</tr>
 		
 		<tr>
-			<td>Телефон</td>
+			<td style="color: #fff;">Телефон</td>
 			<td><input type="text" name="Phone" required=" "/></td>
 		</tr>
 		
 		<tr>
-			<td>E-mail</td>
+			<td style="color: #fff;">E-mail</td>
 			<td><input type="text" name="Email" required=" "/></td>
 		</tr>
 		
 		<tr>
-			<td>Заработанные баллы</td>
+			<td style="color: #fff;">Заработанные баллы</td>
 			<td><input type="number" name="ScoredPoints" required=" "/></td>
 		</tr>
 		

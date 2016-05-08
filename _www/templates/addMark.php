@@ -9,15 +9,16 @@
 
     <body>
         <form name="addform" action="?action=add" method="POST"> 
+		<div class="col_66">
             <table class="table" > 
                 <tr> 
-                    <td>Оценки</td>
+                    <td style="color: #fff;">Оценки</td>
                     <td><input type="text" name="Mark" value="" required="" /></td>
                 </tr>
 
                 <tr> 
-                    <td>Мероприятие</td>
-                    <td>
+                    <td style="color: #fff;">Мероприятие</td>
+                    <td style="color: #000;">
                         <?php
                             require_once("dbconnect.php");
                             $sql = "SELECT * FROM events";

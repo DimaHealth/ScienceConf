@@ -11,14 +11,14 @@
 <body>
  
   <form name="addform" action="?action=add&IDPost=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
   <table class="table" > 
 <tr> 
-  <td>Должность</td>
+  <td style="color: #fff;">Должность</td>
   <td><input type="text" name="Post" value="" required=" " /></td>
   </tr>
   <tr>
-  <td>Для мероприятия</td>
+  <td style="color: #fff;">Для мероприятия</td>
   <td><input type="boolean" name="ForEvent" required=" "/></td>
   </tr>
   <td><input type="submit" value="Добавить"></td>

@@ -8,25 +8,25 @@
 </head>
 <body>
 	<form name="editform" action="?action=update&IDCollection=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+	<div class="col_66">
 	<table class="table"> 
 		<tr> 
-			<td>Ссылка на сборник</td> 
+			<td style="color: #fff;">Ссылка на сборник</td> 
 			<td><input type="text" name="ReferenceToCollection" value="<?= htmlspecialchars($item["ReferenceToCollection"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Эл. закрытый вид</td> 
+			<td style="color: #fff;">Эл. закрытый вид</td> 
 			<td><input type="boolean" name="ElectronicCloseView" value="<?= htmlspecialchars($item["ElectronicCloseView"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Эл. открытый вид</td> 
+			<td style="color: #fff;">Эл. открытый вид</td> 
 			<td><input type="boolean" name="ElectronicOpenView" value="<?= htmlspecialchars($item["ElectronicOpenView"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 
-			<td>Печатный вид</td> 
+			<td style="color: #fff;">Печатный вид</td> 
 			<td><input type="boolean" name="PrintView" value="<?= htmlspecialchars($item["PrintView"]) ?>" /></td> 
 		</tr> 
 

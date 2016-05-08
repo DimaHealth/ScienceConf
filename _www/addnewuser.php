@@ -87,7 +87,7 @@ die();
 								<li ><a href="mainform.php">Main</a></li>
 										<li class="active"><a href="addnewuser.php">Пользователи</a></li>
 										<li><a href="tableofevents.php">Мероприятия</a></li>
-										<li class="active"><a href="addnewdictionary.php">Справочники</a></li>
+										<li ><a href="addnewdictionary.php">Справочники</a></li>
 										<li><a href="addnewreport.html">Отчеты</a></li>
 										<li><a href="addnewtables.php">Другие таблицы</a></li>
 										<li></li>
@@ -107,7 +107,7 @@ die();
             <tr>
               <td>
 			  <p class="col_50">
-              <label for="email" style="background: #888; color: #fff;">Логин:</label><br/>
+              <label for="email" style="color: #fff;">Логин:</label><br/>
               <input type="text" name="r_username" id="email" value="" />
             </p>
 			</td>
@@ -116,7 +116,7 @@ die();
             <tr>
               <td>
 			  <p class="col_50">
-              <label for="name" style="background: #888; color: #fff;">Пароль</label><br/>
+              <label for="name" style="color: #fff;">Пароль</label><br/>
               <input type="password" name="r_password" id="name" value="" required=" "/>
               </p>
 			</td>
@@ -124,7 +124,7 @@ die();
 			<p class="col_50">
 					  <p class="col_50">
               <label for="type"></label></td>
-		  <td style="background: #888; color: #000;">Тип профиля:<br/>
+		  <td style=" color: #000;">Тип профиля:<br/>
 		  
        <?php
       require_once("dbconnect.php");

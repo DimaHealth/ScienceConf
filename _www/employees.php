@@ -112,7 +112,7 @@ $res = mysqli_query($connect, $sql);
   <th>E-mail</th><th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    echo '<tr style="background: #888; color: #fff;">'; 
+    echo '<tr style=" color: #fff;">'; 
     echo '<td>'.$item['IDEmployee'].'</td>'; 
     echo '<td>'.$item['FIO'].'</td>'; 
     

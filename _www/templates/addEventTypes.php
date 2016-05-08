@@ -11,10 +11,10 @@
 <body>
  
   <form name="addform" action="?action=add&IDEventType=<?= htmlspecialchars($id) ?>" method="POST"> 
-
+<div class="col_66">
   <table class="table" > 
 <tr> 
-  <td>Тип мероприятия</td>
+  <td style="color: #fff;">Тип мероприятия</td>
   <td><input type="text" name="EventType" value="" required=" " /></td>
   </tr>
   <td><input type="submit" value="Добавить"></td>
