@@ -146,6 +146,7 @@ a.button { color:auto; }
 .my-bold-font {
     color: black;
     font-weight: 700; 
+    background-color: #fff;
  }
 
 @media print { /* Printer */
