@@ -104,13 +104,13 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDPartner</th><th>Партнер</th><th>Телефон</th>
+  echo '<tr class="my-bold-font"><th>IDPartner</th><th>Партнер</th><th>Телефон</th>
   <th>Web-сайт</th><th>Email</th><th>Мероприятие</th>
   <th>Кол-во участников</th>
   <th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    echo '<tr style=" color: #fff;">'; 
+    echo '<tr class="my-bold-font">'; 
 	echo '<td>'.$item['IDPartner'].'</td>'; 
     echo '<td>'.$item['Partner'].'</td>'; 
     echo '<td>'.$item['Phone'].'</td>'; 

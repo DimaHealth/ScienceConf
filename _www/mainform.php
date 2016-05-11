@@ -119,7 +119,9 @@ die();
            	 		<div class="carousel-caption">
                	 		<div class="col-md-12 col-xs-12 text-center">
                       <h2>НИЧ</h2>
-               	 			<h3 class="animated2"> <b> НИЧ ДонНТУ </b>Сайт мероприятий</h3>
+               	 			<h3 class="animated2"> <font size="5"><b> Донецкий национальный технический университет </b>
+							</br>Научно-исследовательская часть</br> Система учета мероприятий </font></h3>
+
                	 			<div class="line"></div>
                	 			<p class="animated3">Донецк 2016 </p>
                	 		</div>

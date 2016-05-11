@@ -108,7 +108,7 @@ $res = mysqli_query($connect, $sql);
    <th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    echo '<tr style=" color: #fff;">'; 
+    echo '<tr class="my-bold-font">';  
 	echo '<td>'.$item['IDPost'].'</td>'; 
     echo '<td>'.$item['Post'].'</td>'; 
     echo '<td>'.$item['ForEvent'].'</td>'; 

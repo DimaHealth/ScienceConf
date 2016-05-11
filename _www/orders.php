@@ -107,7 +107,7 @@ $res = mysqli_query($connect, $sql);
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    echo '<tr style=" color: #fff;">'; 
+    echo '<tr class="my-bold-font">';  
     echo '<td>'.$item['IDOrder'].'</td>';
     echo '<td>'.$item['OrderTheme'].'</td>'; 
 	echo '<td>'.$item['OrderNumber'].'</td>';

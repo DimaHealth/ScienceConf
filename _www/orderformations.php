@@ -97,7 +97,7 @@ function show_list()
 		<th></th><th></th></tr>'; 
 		while ( $item = mysqli_fetch_array( $res ) ) 
 		{ 
-			echo '<tr style=" color: #fff;">'; 
+			echo '<tr class="my-bold-font">';  
 			echo '<td>'.$item['IDFormation'].'</td>'; 
 			$sql3 = "SELECT `FIO` FROM `employees` WHERE  IDEmployee = ".$item['CodeEmployee'];
 			$res3 =  mysqli_query($connect, $sql3);
