@@ -113,7 +113,7 @@ $res = mysqli_query($connect, $sql);
   echo '<tr><th>ID</th><th>Страна</th><th>Ред.</th><th>Удл.</th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    echo '<tr style="color: #000; my-bold-font;" >'; 
+    echo '<tr class="my-bold-font" >'; 
     echo '<td>'.$item['IDCountry'].'</td>'; 
     echo '<td>'.$item['Country'].'</td>'; 
     echo '<td><a href="?action=editform&id='.$item['IDCountry'].'">Ред.</a></td>'; 
