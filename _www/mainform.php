@@ -91,7 +91,7 @@ die();
                         <ul class="nav navbar-nav navbar-right">
 										<li class="active"><a href="mainform.php">Main</a></li>
 										<li><a href="addnewuser.php">Пользователи</a></li>
-										<li><a href="tableofevents.php">Мероприятия</a></li>
+										<li><a href="tableofevents.php">Мероприятия</a></li><li><a href="tableofeventsFull.php">Мероприятия для Админа</a></li>
 										<li><a href="addnewdictionary.php">Справочники</a></li>
 										<li><a href="addnewreport.html">Отчеты</a></li>
 										<li><a href="addnewtables.php">Другие таблицы</a></li>
