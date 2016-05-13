@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="favicon.ico" rel="shortcut icon">
   <link rel="stylesheet" href="css/style.css">
-  <title>Добавление записи</title>  
+  <title>Обновление записи</title>  
   
 </head>
 	<body>
@@ -20,12 +20,12 @@
 				
                 <tr> 
                     <td style="color: #fff;">Дата начала</td>
-                    <td><input type="text" name="StartDate" value="<?= htmlspecialchars($item["StartDate"]) ?>" required="" /></td>
+                    <td><input type="date" name="StartDate" value="<?= htmlspecialchars($item["StartDate"]) ?>" required="" /></td>
                 </tr>
 				
                 <tr> 
                     <td style="color: #fff;">Дата окончания</td>
-                    <td><input type="text" name="ExpirationDate" value="<?= htmlspecialchars($item["ExpirationDate"]) ?>" required="" /></td>
+                    <td><input type="date" name="ExpirationDate" value="<?= htmlspecialchars($item["ExpirationDate"]) ?>" required="" /></td>
                 </tr>
 				
 				<tr> 
@@ -130,7 +130,7 @@
 				
 				<tr> 
                     <td style="color: #fff;">Количество преподавателей ДонНТУ</td>
-                    <td><input type="text" name="NumOfTeachersDonNTU" value="<?= htmlspecialchars($item["NumOfTeachersDonNTU"]) ?>" /></td>
+                    <td><input type="number" name="NumberOfTeachersDonNTU" value="<?= htmlspecialchars($item["NumberOfTeachersDonNTU"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
@@ -138,13 +138,13 @@
                     <td style="color: #000;">
                         <?php
                             require_once("dbconnect.php");
-                            $sql = "SELECT * FROM statuses";
+                            $sql = "SELECT * FROM status";
                             $result_select = mysqli_query($connect, $sql);
 
                             /*Выпадающий список*/
                             echo "<select  name = CodeStatus>";
                             while($arr = mysqli_fetch_array($result_select)) {
-                                echo "<option value = '$arr[0]' > $arr[2]</option>";
+                                echo "<option value = '$arr[0]' > $arr[1]</option>";
                             }
                             echo "</select>";
                         ?>
@@ -162,7 +162,7 @@
                             /*Выпадающий список*/
                             echo "<select  name = CodeLevel>";
                             while($arr = mysqli_fetch_array($result_select)) {
-                                echo "<option value = '$arr[0]' > $arr[2]</option>";
+                                echo "<option value = '$arr[0]' > $arr[1]</option>";
                             }
                             echo "</select>";
                         ?>
@@ -176,17 +176,17 @@
 				
 				<tr> 
                     <td style="color: #fff;">Проведено ли</td>
-                    <td><input type="text" name="isCarried" value="<?= htmlspecialchars($item["isCarried"]) ?>" /></td>
+                    <td><input type="boolean" name="isCarried" value="<?= htmlspecialchars($item["isCarried"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
                     <td style="color: #fff;">Отменено ли</td>
-                    <td><input type="text" name="isCancelled" value="<?= htmlspecialchars($item["isCancelled"]) ?>" /></td>
+                    <td><input type="boolean" name="isCancelled" value="<?= htmlspecialchars($item["isCancelled"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
                     <td style="color: #fff;">Отложено ли</td>
-                    <td><input type="text" name="isPostponed" value="<?= htmlspecialchars($item["isPostponed"]) ?>" /></td>
+                    <td><input type="boolean" name="isPostponed" value="<?= htmlspecialchars($item["isPostponed"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
@@ -201,22 +201,22 @@
 				
 				<tr> 
                     <td style="color: #fff;">Подтверждены ли статус и вид</td>
-                    <td><input type="text" name="areStatusAndTypeConfirmed" value="<?= htmlspecialchars($item["areStatusAndTypeConfirmed"]) ?>" /></td>
+                    <td><input type="boolean" name="areStatusAndTypeConfirmed" value="<?= htmlspecialchars($item["areStatusAndTypeConfirmed"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
                     <td style="color: #fff;">Изменена ли дата</td>
-                    <td><input type="text" name="isDateChanged" value="<?= htmlspecialchars($item["isDateChanged"]) ?>" /></td>
+                    <td><input type="boolean" name="isDateChanged" value="<?= htmlspecialchars($item["isDateChanged"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
                     <td style="color: #fff;">Изменены ли вид и статус</td>
-                    <td><input type="text" name="areViewAndStatusChanged" value="<?= htmlspecialchars($item["areViewAndStatusChanged"]) ?>" /></td>
+                    <td><input type="boolean" name="areViewAndStatusChanged" value="<?= htmlspecialchars($item["areViewAndStatusChanged"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
                     <td style="color: #fff;">Изменено ли имя</td>
-                    <td><input type="text" name="isNameChanged" value="<?= htmlspecialchars($item["isNameChanged"]) ?>" /></td>
+                    <td><input type="boolean" name="isNameChanged" value="<?= htmlspecialchars($item["isNameChanged"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
@@ -228,9 +228,9 @@
                             $result_select = mysqli_query($connect, $sql);
 
                             /*Выпадающий список*/
-                            echo "<select  name = CodePreviousEvent>";
+                            echo "<select  name = CodePreviosEvent>";
                             while($arr = mysqli_fetch_array($result_select)) {
-                                echo "<option value = '$arr[0]' > $arr[2]</option>";
+                                echo "<option value = '$arr[0]' > $arr[1]</option>";
                             }
                             echo "</select>";
                         ?>
@@ -239,7 +239,7 @@
 				
 				<tr> 
                     <td style="color: #fff;">Вынесено ли за план</td>
-                    <td><input type="text" name="isCarriedOutsidePlan" value="<?= htmlspecialchars($item["isCarriedOutsidePlan"]) ?>" /></td>
+                    <td><input type="boolean" name="isCarriedOutsidePlan" value="<?= htmlspecialchars($item["isCarriedOutsidePlan"]) ?>" /></td>
                 </tr>
 				
 				<tr> 
@@ -253,7 +253,7 @@
                             /*Выпадающий список*/
                             echo "<select  name = CodeCollection>";
                             while($arr = mysqli_fetch_array($result_select)) {
-                                echo "<option value = '$arr[0]' > $arr[2]</option>";
+                                echo "<option value = '$arr[0]' > $arr[1]</option>";
                             }
                             echo "</select>";
                         ?>
