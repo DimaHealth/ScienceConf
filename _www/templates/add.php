@@ -15,27 +15,27 @@
   <table class="table" > 
 <tr> 
   <td style="color: #fff;">Название</td>
-  <td><input type="text" name="EventName" value="" required=" " /></td>
+  <td><input type="text" name="EventName" value=""  /></td>
   </tr>
   <tr>
   <td style="color: #fff;">Дата начала</td>
-  <td><input type="date" name="StartDate" required=" "/></td>
+  <td><input type="date" name="StartDate" /></td>
   </tr>
     <tr>
   <td style="color: #fff;">Дата окончания</td>
-  <td><input type="date" name="ExpirationDate" value="" required=" "/></td>
+  <td><input type="date" name="ExpirationDate" value="" /></td>
   </tr>
     <tr>
   <td style="color: #fff;">Ссылка на пресс-релиз</td>
-  <td><input type="text" name="PressReleaseRef" value="" required=" "/></td>
+  <td><input type="text" name="PressReleaseRef" value="" /></td>
   </tr>
     <tr>
   <td style="color: #fff;">Осылка на пост-релиз</td>
-  <td><input type="text" name="PostReleaseRef" value="" required=" "/> </td>
+  <td><input type="text" name="PostReleaseRef" value="" /> </td>
   </tr>
     <tr>
   <td style="color: #fff;">Количество преподавателей ДонНТУ</td>
-  <td><input type="number_format" name="NumberOfTeachersDonNTU" value="" required=" "/></td>
+  <td><input type="number_format" name="NumberOfTeachersDonNTU" value="" /></td>
   </tr>
    <tr>
   <td style="color: #fff;">Вэб-сайт</td>

@@ -75,7 +75,7 @@
                 </tr>
 
                 <tr> 
-                    <td style="color: #fff;">Код ответственного секретаря</td>
+                    <td style="color: #fff;">Ответственный секретарь</td>
                     <td style="color: #000;">
                         <?php
                             require_once("dbconnect.php");

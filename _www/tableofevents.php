@@ -49,7 +49,7 @@
 						<li class="active"><a href="tableofevents.php">Мероприятия</a></li>
 						<li><a href="tableofeventsFull.php">Мероприятия для Админа</a></li>
 						<li  ><a href="addnewdictionary.php">Справочники</a></li>
-						<li><a href="addnewreport.html">Отчеты</a></li>
+						<li><a href="addnewreport.php">Генерация отчетности</a></li>
 						<li ><a href="addnewtables.php">Другие таблицы</a></li>
 						<li></li>
 						<li><a href="exit.php">Выйти</a></li>
