@@ -23,7 +23,7 @@
 				<?php
 					require_once("dbconnect.php");
 
-					$sql = "SELECT * FROM posts";
+					$sql = "SELECT * FROM posts WHERE ForEvent = 0";
 					$result_select = mysqli_query($connect, $sql);
 
 					/*Выпадающий список*/
@@ -91,6 +91,28 @@
 		<tr> 
 			<td style="color: #fff;">Email</td>
 			<td><input type="text" name="Email" value="" required=" " /></td>
+		</tr>
+		
+		<tr>
+			<td style="color: #fff;">Кафедра</td>
+			<td style="color: #000;">
+				<?php
+					require_once("dbconnect.php");
+
+					$sql = "SELECT * FROM cathedrae";
+					$result_select = mysqli_query($connect, $sql);
+
+					/*Выпадающий список*/
+
+					echo "<select  name = CodeCathedra>";
+
+					while($arr = mysqli_fetch_array($result_select)){
+						echo "<option value = '$arr[0]'> $arr[1] </option>";
+					}
+
+					echo "</select>";
+				?>
+			</td>
 		</tr>
 
 		<tr>

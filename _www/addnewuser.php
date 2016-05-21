@@ -1,33 +1,40 @@
 ﻿<?php
-session_start();
-require_once("dbconnect.php");
 
-// Проверяем если существуют данные в сессий.
-if(isset($_SESSION['email']) && isset($_SESSION['password']) ){
+	session_start();
+	require("dbconnect.php");
 
-// Вставляем данные из сессий в обычные переменные
-$email = $_SESSION['email'];
-$password = $_SESSION['password'];
+	// Проверяем если существуют данные в сессий.
+	if(isset($_SESSION['email']) && isset($_SESSION['password']) ){
 
-// Делаем запрос к БД для выбора данных.
-$query = " SELECT * FROM profiles WHERE Email = '$email' AND Password = '$password'";
-$result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($connect) ); 
+	// Вставляем данные из сессий в обычные переменные
+	$email = $_SESSION['email'];
+	$password = $_SESSION['password'];
 
-/* Проверяем, если в базе нет пользователей с такими данными, то выводим сообщение об ошибке */
-if(mysqli_num_rows($result) < 1)
-{
-	echo "Вход доступен только авторизированным пользователям! Перейти на <a href='index.php'>главную страницу</a>";
-}
-else
-{
+	// Делаем запрос к БД для выбора данных.
+	$query = " SELECT ProfileType FROM profiles INNER JOIN `profiletypes`
+	 ON `CodeProfileType` = `IDProfileType` WHERE Email = '$email' AND Password = '$password'";
+	$result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($connect) ); 
+	$item = mysqli_fetch_array( $result );
+	
+	/* Проверяем, если в базе нет пользователей с такими данными, то выводим сообщение об ошибке */
+	if($item['ProfileType']  != "admin")
+	{
+		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на <a href='mainform.php'>главную страницу</h2>"; 
+		die();
+	}
+	else
+	{
+		//show_list();
 
+	}
 
-}
+	}
+	else
+	{
+		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на <a href='mainform.php'>главную страницу</h2>"; 
+		die();
+	}
 
-}else{
-echo "Вход доступен только авторизированным пользователям! Перейти на <a href='index.html'>главную страницу</a>";
-die();
-}
 ?>
 <form action="addnewuserscr.php" method="post" name="r_form" >
 

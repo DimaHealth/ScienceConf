@@ -70,7 +70,7 @@
                 </tr>
 				
                 <tr> 
-                    <td style="color: #fff;">Ссылка на пресс-релиз</td>
+                    <td style="color: #fff;">Ссылка на пост-релиз</td>
                     <td><input type="text" name="PostReleaseRef" value=""  /></td>
                 </tr>
 

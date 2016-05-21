@@ -47,7 +47,7 @@
 						<li><a href="mainform.php">Main</a></li>
 						<li><a href="addnewuser.php">Пользователи</a></li>
 						<li class="active"><a href="tableofevents.php">Мероприятия</a></li>
-						<li><a href="tableofeventsFull.php">Мероприятия для Админа</a></li>
+						<li ><a href="tableofeventsFull.php">Мероприятия для Админа</a></li>
 						<li  ><a href="addnewdictionary.php">Справочники</a></li>
 						<li><a href="addnewreport.php">Генерация отчетности</a></li>
 						<li ><a href="addnewtables.php">Другие таблицы</a></li>
@@ -151,22 +151,45 @@ require_once("dbconnect.php");
   $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
   $ExpirationDate = mysqli_escape_string($connect, $_POST['ExpirationDate'] ); 
+  $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
+  $CodeEventType = mysqli_escape_string($connect, $_POST['CodeEventType'] ); 
   $PressReleaseRef = mysqli_escape_string($connect, $_POST['PressReleaseRef'] ); 
   $PostReleaseRef = mysqli_escape_string($connect, $_POST['PostReleaseRef'] ); 
+  $CodeExecutiveSecretary = mysqli_escape_string($connect, $_POST['CodeExecutiveSecretary'] );
+  $CodePlan = mysqli_escape_string($connect, $_POST['CodePlan'] ); 
+  $CodeOrder = mysqli_escape_string($connect, $_POST['CodeOrder'] );  
   $NumberOfTeachersDonNTU = mysqli_escape_string($connect, $_POST['NumberOfTeachersDonNTU'] ); 
+  $CodeStatus = mysqli_escape_string($connect, $_POST['CodeStatus'] ); 
+  $CodeLevel = mysqli_escape_string($connect, $_POST['CodeLevel'] ); 
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
   $ReferenceToProgram = mysqli_escape_string($connect, $_POST['ReferenceToProgram'] ); 
+  $Comments = mysqli_escape_string($connect, $_POST['Comments'] ); 
+  $CodePreviosEvent = mysqli_escape_string($connect, $_POST['CodePreviosEvent'] );
+  $CodeCollection = mysqli_escape_string($connect, $_POST['CodeCollection'] ); 
   $ExpectedCountries = mysqli_escape_string($connect, $_POST['ExpectedCountries'] ); 
-  $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
-   $CodeEventType = mysqli_escape_string($connect, $_POST['CodeEventType'] ); 
-  $query = " INSERT INTO `events`(`EventName`, `StartDate`,`ExpirationDate`, `PressReleaseRef`,
- `PostReleaseRef`, `NumberOfTeachersDonNTU`,  `Website`, 
-`ReferenceToProgram`, `ExpectedCountries`,
-`CodeCathedra`,`CodeEventType`) 
- VALUES ('$EventName',' $StartDate','$ExpirationDate',
- ' $PressReleaseRef','$PostReleaseRef','$NumberOfTeachersDonNTU','$Website',
- '$ReferenceToProgram',' $ExpectedCountries','$CodeCathedra',
-'$CodeEventType')"; 
+  
+   // `RatingMark`, посчитать рейтинговую оценку в контексте полученных данных
+  // '$RatingMark',
+  
+  $query = " INSERT INTO `events`(`EventName`, `StartDate`,
+  `ExpirationDate`, `CodeCathedra`,
+  `CodeEventType`, `PressReleaseRef`,
+  `PostReleaseRef`, `CodeExecutiveSecretary`,
+  `CodePlan`, `CodeOrder`,
+  `NumberOfTeachersDonNTU`, `CodeStatus`,
+  `CodeLevel`, `Website`, `ReferenceToProgram`,
+  `Comments`, `CodePreviosEvent`,
+  `CodeCollection`,
+  `ExpectedCountries`)
+  VALUES ('$EventName','$StartDate',
+  '$ExpirationDate','$CodeCathedra',
+  '$CodeEventType','$PressReleaseRef',
+  '$PostReleaseRef','$CodeExecutiveSecretary',
+  '$CodePlan','$CodeOrder',
+  '$NumberOfTeachersDonNTU','$CodeStatus',
+  '$CodeLevel', '$Website','$ReferenceToProgram','$Comments',
+  '$CodePreviosEvent','$CodeCollection','$ExpectedCountries')"; 
+ //die(var_dump($_POST, $_GET, $EventName));
   mysqli_query ($connect, $query ); 
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
@@ -192,26 +215,42 @@ function update_item()
 { 
 require_once("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDEvent'] );
-  $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
+   $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
   $ExpirationDate = mysqli_escape_string($connect, $_POST['ExpirationDate'] ); 
+  $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
+  $CodeEventType = mysqli_escape_string($connect, $_POST['CodeEventType'] ); 
   $PressReleaseRef = mysqli_escape_string($connect, $_POST['PressReleaseRef'] ); 
   $PostReleaseRef = mysqli_escape_string($connect, $_POST['PostReleaseRef'] ); 
+  $CodeExecutiveSecretary = mysqli_escape_string($connect, $_POST['CodeExecutiveSecretary'] );
+  $CodePlan = mysqli_escape_string($connect, $_POST['CodePlan'] ); 
+  $CodeOrder = mysqli_escape_string($connect, $_POST['CodeOrder'] );  
   $NumberOfTeachersDonNTU = mysqli_escape_string($connect, $_POST['NumberOfTeachersDonNTU'] ); 
+  $CodeStatus = mysqli_escape_string($connect, $_POST['CodeStatus'] ); 
+  $CodeLevel = mysqli_escape_string($connect, $_POST['CodeLevel'] ); 
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
   $ReferenceToProgram = mysqli_escape_string($connect, $_POST['ReferenceToProgram'] ); 
+  $Comments = mysqli_escape_string($connect, $_POST['Comments'] ); 
+  $CodePreviosEvent = mysqli_escape_string($connect, $_POST['CodePreviosEvent'] );
+  $CodeCollection = mysqli_escape_string($connect, $_POST['CodeCollection'] ); 
   $ExpectedCountries = mysqli_escape_string($connect, $_POST['ExpectedCountries'] ); 
-  $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
-   $CodeEventType = mysqli_escape_string($connect, $_POST['CodeEventType'] ); 
-   $query = "UPDATE events SET EventName='".$EventName."', StartDate ='".$StartDate."' ,ExpirationDate = '".$ExpirationDate."',
-  PressReleaseRef ='".$PressReleaseRef."', 
- PostReleaseRef = '".$PostReleaseRef."', NumberOfTeachersDonNTU = '".$NumberOfTeachersDonNTU."',  Website = '".$Website."', 
+  
+   $query = "UPDATE events SET EventName='".$EventName."', StartDate ='".$StartDate."'
+   ,ExpirationDate = '".$ExpirationDate."',  PressReleaseRef ='".$PressReleaseRef."', 
+    PostReleaseRef = '".$PostReleaseRef."', NumberOfTeachersDonNTU = '".$NumberOfTeachersDonNTU."',
+	Website = '".$Website."', 
 ReferenceToProgram = '".$ReferenceToProgram."', ExpectedCountries = '".$ExpectedCountries."',
-CodeCathedra = '".$CodeCathedra."',CodeEventType = '".$CodeEventType."'
+CodeCathedra = '".$CodeCathedra."',CodeEventType = '".$CodeEventType."',
+CodePlan = '".$CodePlan."',CodeOrder = '".$CodeOrder."',
+CodeStatus = '".$CodeStatus."',CodeLevel = '".$CodeLevel."',
+Comments = '".$Comments."',
+CodePreviosEvent = '".$CodePreviosEvent."',
+CodeCollection = '".$CodeCollection."',
+CodeExecutiveSecretary = '".$CodeExecutiveSecretary."'
    WHERE IDEvent=".$id;
    
   mysqli_query ($connect, $query ); 
-   // die(var_dump($_POST, $_GET, $id));
+  // die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 

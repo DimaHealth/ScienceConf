@@ -78,6 +78,8 @@ switch ( $_GET["action"] )
 { 
   case "showlist":    // Список всех записей в таблице БД
     show_list(); break; 
+	 // case "avtor":    // Список всех записей в таблице БД
+    // avtorization(); break; 
   case "addform":     // Форма для добавления новой записи 
     get_add_item_form(); break; 
   case "add":         // Добавить новую запись в таблицу БД
@@ -95,10 +97,10 @@ switch ( $_GET["action"] )
 // Функция выводит список всех записей в таблице БД
 function show_list() 
 { 
-
+ avtorization();
  
 $sql = "SELECT * FROM events";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Мероприятия</h2>'; 
@@ -142,12 +144,49 @@ function get_add_item_form()
 include("templates/addEventFull.php");
  
 }
+function avtorization() 
+{ 
+	session_start();
+	require("dbconnect.php");
+
+	// Проверяем если существуют данные в сессий.
+	if(isset($_SESSION['email']) && isset($_SESSION['password']) ){
+
+	// Вставляем данные из сессий в обычные переменные
+	$email = $_SESSION['email'];
+	$password = $_SESSION['password'];
+
+	// Делаем запрос к БД для выбора данных.
+	$query = " SELECT ProfileType FROM profiles INNER JOIN `profiletypes`
+	 ON `CodeProfileType` = `IDProfileType` WHERE Email = '$email' AND Password = '$password'";
+	$result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($connect) ); 
+	$item = mysqli_fetch_array( $result );
+	
+	/* Проверяем, если в базе нет пользователей с такими данными, то выводим сообщение об ошибке */
+	if($item['ProfileType']  != "admin")
+	{
+		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на <a href='mainform.php'>главную страницу</h2>"; 
+		die();
+	}
+	else
+	{
+		//show_list();
+
+	}
+
+	}
+	else
+	{
+		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на <a href='mainform.php'>";
+		die();
+	}
+}
 
 
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
   $ExpirationDate = mysqli_escape_string($connect, $_POST['ExpirationDate'] ); 
@@ -210,7 +249,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from events WHERE IDEvent='.$id; 
@@ -225,7 +264,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDEvent'] );
    $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
@@ -281,7 +320,7 @@ CodeExecutiveSecretary = '".$CodeExecutiveSecretary."'
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM events WHERE IDEvent=".$id; 
   mysqli_query ($connect, $query ); 

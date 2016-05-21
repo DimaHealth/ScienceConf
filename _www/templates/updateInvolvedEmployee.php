@@ -52,7 +52,7 @@
 			<td style="color: #000;">
 				<?php
 					require_once("dbconnect.php");
-					$sql = "SELECT * FROM posts";
+					$sql = "SELECT * FROM posts WHERE ForEvent = 1";
 					$result_select = mysqli_query($connect, $sql);
 
 					/*Выпадающий список*/

@@ -109,7 +109,7 @@ $res = mysqli_query($connect, $sql);
     echo '<table border="1" class="table">';      
    
   echo '<tr><th>ID</th><th>ФИО</th><th>Должность</th><th>Степень</th><th>Звание</th><th>Телефон</th>
-  <th>E-mail</th><th></th><th></th></tr>'; 
+  <th>E-mail</th><th>Кафедра</th><th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr class="my-bold-font">';  
@@ -130,7 +130,19 @@ $res = mysqli_query($connect, $sql);
 
     echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
-
+	
+	$sql5 = "SELECT `Cathedra` FROM `cathedrae` WHERE IDCathedra = ".$item['CodeCathedra'];
+    $res5 =  mysqli_query($connect, $sql5);
+	if ($res5 != NULL)
+	{
+		 echo '<td>'.mysqli_fetch_array( $res5 )['Cathedra'].'</td>';
+	}
+	else
+	{
+		echo '<td></td>';
+	}
+   
+	
     echo '<td><a href="?action=editform&id='.$item['IDEmployee'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDEmployee'].'">Удл.</a></td>'; 
     echo '</tr>'; 
@@ -158,8 +170,9 @@ require_once("dbconnect.php");
   $CodeRank = mysqli_escape_string($connect, $_POST['CodeRank'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
-   $query = "INSERT INTO `employees`(`FIO`, `CodePost`, `CodeDegree`, `CodeRank`,`Email`,`Phone`) 
-   VALUES ('$FIO','$CodePost','$CodeDegree','$CodeRank','$Email','$Phone')";
+  $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
+   $query = "INSERT INTO `employees`(`FIO`, `CodePost`, `CodeDegree`, `CodeRank`,`Email`,`Phone`,`CodeCathedra`) 
+   VALUES ('$FIO','$CodePost','$CodeDegree','$CodeRank','$Email','$Phone','$CodeCathedra')";
   mysqli_query ($connect, $query ); 
   //die(var_dump($_POST, $_GET, $Email));
  //error_reporting(E_ALL);
@@ -193,9 +206,10 @@ function update_item()
   $CodeRank = mysqli_escape_string($connect, $_POST['CodeRank'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
+  $CodeCathedra = mysqli_escape_string($connect, $_POST['CodeCathedra'] ); 
   $query = "UPDATE employees SET FIO='".$FIO."', Phone ='".$Phone
   ."', Email = '".$Email."', CodePost = '".$CodePost."', CodeDegree = '"
-  .$CodeDegree."', CodeRank = '".$CodeRank."' WHERE IDEmployee=".$id;
+  .$CodeDegree."', CodeRank = '".$CodeRank."', CodeCathedra = '".$CodeCathedra."' WHERE IDEmployee=".$id;
    
   mysqli_query ($connect, $query ); 
    // die(var_dump($_POST, $_GET, $id));

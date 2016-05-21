@@ -75,6 +75,8 @@
 </html>
 <?php
 
+
+
 if ( !isset( $_GET["action"] ) ) $_GET["action"] = "addform";  
 //die(var_dump($_GET['action'], $_GET, $_POST));
 switch ( $_GET["action"] ) 
@@ -99,8 +101,8 @@ switch ( $_GET["action"] )
 // Функция формирует форму для добавления записи в таблице БД 
 function get_add_item_form() 
 { 
- echo '<h2>Генерация планов</h2>'; 
-include("templates/addGenPlan.php");
+ echo '<h2>Генерация приказов на проведение мероприятий</h2>'; 
+include("templates/addGenOrderForPlan.php");
  
 }
 
@@ -112,22 +114,21 @@ require_once("dbconnect.php");
 include_once 'Header.php';
 
 
-// New Word Document
-echo date('H:i:s'), ' Create new PhpWord object', EOL;
-$phpWord = new \PhpOffice\PhpWord\PhpWord();
-$section = $phpWord->addSection();
-$header = array('size' => 16, 'bold' => true, 'halign' => 'center');
 
+
+// New Word Document
+echo date('H:i:s') , ' Create new PhpWord object' , EOL;
+$phpWord = new \PhpOffice\PhpWord\PhpWord();
+$phpWord->addFontStyle('rStyle', array('bold' => true, 'italic' => true, 'size' => 16, 'allCaps' => true, 'doubleStrikethrough' => true));
+$phpWord->addParagraphStyle('pStyle', array('align' => 'center', 'spaceAfter' => 100));
+$phpWord->addTitleStyle(1, array('bold' => true), array('spaceAfter' => 240));
 
 
 $CodePlan = mysqli_escape_string($connect, $_POST['CodePlan'] ); 
 
-	$sql2 = "SELECT `CalendarYear` FROM `plans` WHERE IDPlan = ".$CodePlan;
-	$res2 =  mysqli_query($connect, $sql2);
-	
- $sql = "SELECT  `EventName`, `StartDate`, `ExpirationDate`,
- `Cathedra`, `EventType`, `FIO`, `employees`.`Phone`, `employees`.`Email`, `Post`,
- `Status`, `Level`, `Website`, `CodePreviosEvent` FROM (`events` INNER JOIN `cathedrae`
+$sql = "SELECT `IDEvent`, `EventName`, `StartDate`,
+ `Cathedra`, `EventType`, `FIO`, `Post`,
+ `Status`, `Level` FROM (`events` INNER JOIN `cathedrae`
  ON `CodeCathedra` = `IdCathedra` INNER JOIN `eventtypes`
  ON `CodeEventType` = `IdEventType` INNER JOIN `status`
  ON `CodeStatus` = `IdStatus` INNER JOIN `levels`
@@ -136,78 +137,48 @@ $CodePlan = mysqli_escape_string($connect, $_POST['CodePlan'] );
  ON `CodePost` = `IdPost`) WHERE `CodePlan`=".$CodePlan;
 $res = mysqli_query($connect, $sql);
 
-// 2. Advanced table
-$section->addTextBreak(1);
-$TableName = "План мероприятий на ".mysqli_fetch_array( $res2 )['CalendarYear']." год";
-$section->addText(htmlspecialchars("{$TableName}"), $header);
-
-$styleTable = array('borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80);
-$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
-$styleCell = array('valign' => 'center');
-$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
-$fontStyle = array('bold' => true, 'align' => 'center');
-$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
-$table = $section->addTable($TableName);
-
-$table->addRow(900);
-	$table->addCell(2000, $styleCell)->addText(htmlspecialchars('Мероприятие'), $fontStyle);
-	$table->addCell(2000, $styleCell)->addText(htmlspecialchars('Дата проведения'), $fontStyle);
-	$table->addCell(2000, $styleCell)->addText(htmlspecialchars('Ответственный секретарь'), $fontStyle);
-	$table->addCell(2000, $styleCell)->addText(htmlspecialchars('Сайт'), $fontStyle);
-	$table->addCell(2000, $styleCell)->addText(htmlspecialchars('Предыдущее мероприятие'), $fontStyle);
-
-  while ( $item = mysqli_fetch_array( $res ) ) 
+	// New portrait section
+	$section = $phpWord->addSection();
+	
+ while ( $item = mysqli_fetch_array( $res ) ) 
   { 
-    
-		$table->addRow();
-		$table->addCell(2000)->addText(htmlspecialchars("{$item['Level']}"." \n "
-														."{$item['Status']}"." \n "
-														."{$item['EventType']}"." \n "
-														."\"{$item['EventName']}\""));
-		$table->addCell(2000)->addText(htmlspecialchars("{$item['StartDate']}"." - \n"
-														."{$item['ExpirationDate']}"));
-		$table->addCell(2000)->addText(htmlspecialchars("{$item['FIO']}"." \n"
-														."{$item['Post']}"." \n"
-														."кафедры {$item['Cathedra']}"." \n"
-														."тел.: {$item['Phone']}"." \n"
-														."эл. почта: {$item['Email']}"));
-		$table->addCell(2000)->addText(htmlspecialchars("{$item['Website']}"));
-		$sql3 = "SELECT  `EventName`, `EventType`, 
-		 `Status`, `Level` FROM (`events` INNER JOIN `eventtypes`
-		 ON `CodeEventType` = `IdEventType` INNER JOIN `status`
-		 ON `CodeStatus` = `IdStatus` INNER JOIN `levels`
-		 ON `CodeLevel` = `IdLevel`)  WHERE `IDEvent`=".$item['CodePreviosEvent'];
-		$res3 = mysqli_query($connect, $sql3);
-		$item3 = mysqli_fetch_array( $res3 );
-		if ( $item3['EventName'] != NULL)
-		{
-			$table->addCell(2000)->addText(htmlspecialchars("{$item3['Level']}"." \n "
-														."{$item3['Status']}"." \n "
-														."{$item3['EventType']}"." \n "
-														."\"{$item3['EventName']}\""));
-		}
-		else
-		{
-			$table->addCell(2000)->addText(htmlspecialchars(""));
-		}
-  } 
 
+	
+	// Simple text
+    $section->addText(htmlspecialchars('Донецкий национальный технический университет '.$item['StartDate'].' проводит '.$item['Level'].' '
+	.$item['Status'].' '.$item['EventType'].' "'
+	.$item['EventName'].'".'));
+	$section->addTextBreak(1);
+	
+	$section->addText(htmlspecialchars('На основании вышеизложенного'));
+	$section->addTextBreak(1);
+	
+	$section->addText(htmlspecialchars('ПРИКАЗЫВАЮ:'), null, 'pStyle');
+	$section->addTextBreak(1);
+	
+	$section->addText(htmlspecialchars('1. Создать оргкомитет по организации и проведению '.$item['EventType'].' в составе.'));
+	$section->addTextBreak(1);
+	
+	$section->addText(htmlspecialchars('1.1 Председатель оргкомитета:'));
+	$section->addTextBreak(1);
+	
+	//'SELECT FIO, Post, '
+	$section->addText(htmlspecialchars('- '));
+	
+	// Two text break
 
-
-
+	$section->addPageBreak();
+  }
 
 
 
 
 // Save file
 echo write($phpWord, basename(__FILE__, '.php'), $writers);
-if (!CLI)
-{
+if (!CLI) {
     include_once 'Sample_Footer.php';
 }
-
-  
-  die();
+die();
 }
 
   
