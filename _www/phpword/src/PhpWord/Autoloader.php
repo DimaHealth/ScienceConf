@@ -51,7 +51,7 @@ class Autoloader
             $file = realpath(__DIR__ . (empty($file) ? '' : DIRECTORY_SEPARATOR) . $file . '.php');
             if (file_exists($file)) {
                 /** @noinspection PhpIncludeInspection Dynamic includes */
-                require_once $file;
+                require $file;
             }
         }
     }

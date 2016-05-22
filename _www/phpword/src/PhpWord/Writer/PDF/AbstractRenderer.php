@@ -85,7 +85,7 @@ abstract class AbstractRenderer extends HTML
         $includeFile = Settings::getPdfRendererPath() . '/' . $this->includeFile;
         if (file_exists($includeFile)) {
             /** @noinspection PhpIncludeInspection Dynamic includes */
-            require_once $includeFile;
+            require $includeFile;
         } else {
             // @codeCoverageIgnoreStart
             // Can't find any test case. Uncomment when found.

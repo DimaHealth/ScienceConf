@@ -94,7 +94,7 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $sql = "SELECT * FROM orders";
 $res = mysqli_query($connect, $sql);
 
@@ -133,7 +133,7 @@ include("templates/addOrder.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $OrderTheme = mysqli_escape_string($connect, $_POST['OrderTheme'] ); 
   $OrderNumber = mysqli_escape_string($connect, $_POST['OrderNumber'] ); 
   $OrderDate = mysqli_escape_string($connect, $_POST['OrderDate'] ); 
@@ -148,7 +148,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from orders WHERE IDOrder='.$id; 
@@ -163,7 +163,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDOrder'] );
   $OrderTheme = mysqli_escape_string($connect, $_POST['OrderTheme'] ); 
   $OrderNumber = mysqli_escape_string($connect, $_POST['OrderNumber'] ); 
@@ -182,7 +182,7 @@ OrderDate='".$OrderDate."'
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM orders WHERE IDOrder=".$id; 
   mysqli_query ($connect, $query ); 

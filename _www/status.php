@@ -97,7 +97,7 @@ function show_list()
 
  
 $sql = "SELECT * FROM status";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Статусы</h2>'; 
@@ -132,7 +132,7 @@ include("templates/addStatus.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $Status = mysqli_escape_string($connect, $_POST['Status'] ); 
    $query = " INSERT INTO `status`(`Status`) 
  VALUES ('$Status')"; 
@@ -144,7 +144,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from status WHERE IDStatus='.$id; 
@@ -159,7 +159,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDStatus'] );
   $Status = mysqli_escape_string($connect, $_POST['Status'] ); 
   $query = "UPDATE status SET Status='".$Status."' WHERE IDStatus=".$id;
@@ -173,7 +173,7 @@ $id = mysqli_escape_string($connect, $_GET['IDStatus'] );
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM status WHERE IDStatus=".$id; 
   mysqli_query ($connect, $query ); 

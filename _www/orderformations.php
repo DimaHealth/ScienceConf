@@ -86,7 +86,7 @@
 function show_list() 
 { 
 		$sql = "SELECT * FROM orderformations";
-		require_once("dbconnect.php");
+		require("dbconnect.php");
 		$res = mysqli_query($connect, $sql);
 
 		echo '<h2>Формирование приказов</h2>'; 
@@ -124,7 +124,7 @@ function show_list()
 	// Функция добавляет новую запись в таблицу БД  
 	function add_item() 
 	{ 
-		require_once("dbconnect.php");
+		require("dbconnect.php");
 		$CodeEmployee = mysqli_escape_string($connect, $_POST['CodeEmployee'] ); 
 		$CodeOrder = mysqli_escape_string($connect, $_POST['CodeOrder'] ); 
 		$query = " INSERT INTO `orderformations`(`CodeEmployee`, `CodeOrder`) 
@@ -138,7 +138,7 @@ function show_list()
 	// Функция формирует форму для редактирования записи в таблице БД 
 	function get_edit_item_form() 
 	{ 
-	  require_once("dbconnect.php");
+	  require("dbconnect.php");
 	  echo '<h2>Редактировать</h2>'; 
 	  $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
 	  $query = 'select * from orderformations WHERE IDFormation='.$id; 
@@ -153,7 +153,7 @@ function show_list()
 
 	function update_item() 
 	{ 
-	require_once("dbconnect.php");
+	require("dbconnect.php");
 	$id = mysqli_escape_string($connect, $_GET['IDFormation'] );
 	  $CodeEmployee = mysqli_escape_string($connect, $_POST['CodeEmployee'] ); 
 	  $CodeOrder = mysqli_escape_string($connect, $_POST['CodeOrder'] ); 
@@ -170,7 +170,7 @@ function show_list()
 	// Функция удаляет запись в таблице БД 
 	function delete_item() 
 	{ 
-	  require_once("dbconnect.php");
+	  require("dbconnect.php");
 	  $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
 	  $query = "DELETE FROM orderformations WHERE IDFormation=".$id; 
 	  mysqli_query ($connect, $query ); 

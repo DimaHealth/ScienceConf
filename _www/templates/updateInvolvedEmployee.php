@@ -14,7 +14,7 @@
 			<td style="color: #fff;">Мероприятие</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM events";
 					$result_select = mysqli_query($connect, $sql);
 
@@ -33,7 +33,7 @@
 			<td style="color: #fff;">Сотрудник</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM employees";
 					$result_select = mysqli_query($connect, $sql);
 
@@ -51,7 +51,7 @@
 			<td style="color: #fff;">Должность</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM posts WHERE ForEvent = 1";
 					$result_select = mysqli_query($connect, $sql);
 

@@ -94,7 +94,7 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $sql = "SELECT * FROM plans";
 $res = mysqli_query($connect, $sql);
 
@@ -140,7 +140,7 @@ include("templates/addPlan.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $CalendarYear = mysqli_escape_string($connect, $_POST['CalendarYear'] ); 
   $CodeFaculty = mysqli_escape_string($connect, $_POST['CodeFaculty'] ); 
   $CodeZamDec = mysqli_escape_string($connect, $_POST['CodeZamDec'] ); 
@@ -154,7 +154,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from plans WHERE IDPlan='.$id; 
@@ -169,7 +169,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDPlan'] );
   $CalendarYear = mysqli_escape_string($connect, $_POST['CalendarYear'] ); 
   $CodeFaculty = mysqli_escape_string($connect, $_POST['CodeFaculty'] ); 
@@ -186,7 +186,7 @@ require_once("dbconnect.php");
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM plans WHERE IDPlan=".$id; 
   mysqli_query ($connect, $query ); 

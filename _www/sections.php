@@ -94,7 +94,7 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $sql = "SELECT * FROM sections";
 $res = mysqli_query($connect, $sql);
 
@@ -133,7 +133,7 @@ include("templates/addSection.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $Section = mysqli_escape_string($connect, $_POST['Section'] ); 
   $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
   $query = " INSERT INTO `sections`(`Section`, `CodeEvent`) 
@@ -146,7 +146,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from sections WHERE IDSection='.$id; 
@@ -161,7 +161,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDSection'] );
   $Section = mysqli_escape_string($connect, $_POST['Section'] ); 
   $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
@@ -177,7 +177,7 @@ $id = mysqli_escape_string($connect, $_GET['IDSection'] );
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM sections WHERE IDSection=".$id; 
   mysqli_query ($connect, $query ); 

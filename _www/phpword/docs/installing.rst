@@ -71,7 +71,7 @@ invoke ``Autoloader::register``.
 
 .. code-block:: php
 
-    require_once '/path/to/src/PhpWord/Autoloader.php';
+    require '/path/to/src/PhpWord/Autoloader.php';
     \PhpOffice\PhpWord\Autoloader::register();
 
 

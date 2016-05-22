@@ -1,5 +1,5 @@
 <?php
-require_once '\phpword\src\PhpWord\Autoloader.php';
+require '\phpword\src\PhpWord\Autoloader.php';
 \PhpOffice\PhpWord\Autoloader::register();
 
 date_default_timezone_set('UTC');

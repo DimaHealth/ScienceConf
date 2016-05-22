@@ -19,7 +19,7 @@
 			<td style="color: #fff;">Должность</td> 
 			<td style="color: #000;"> 
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 
 					$sql = "SELECT * FROM posts WHERE ForEvent = 0";
 
@@ -42,7 +42,7 @@
 			<td style="color: #fff;">Степень</td> 
 			<td style="color: #000;"> 
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 
 					$sql = "SELECT * FROM degrees";
 
@@ -65,7 +65,7 @@
 			<td style="color: #fff;">Звание</td> 
 			<td style="color: #000;"> 
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 
 					$sql = "SELECT * FROM ranks";
 
@@ -98,7 +98,7 @@
 			<td style="color: #fff;">Кафедра</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 
 					$sql = "SELECT * FROM cathedrae";
 					$result_select = mysqli_query($connect, $sql);

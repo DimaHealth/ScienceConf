@@ -98,7 +98,7 @@ function show_list()
 
  
 $sql = "SELECT * FROM events";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Мероприятия</h2>'; 
@@ -147,7 +147,7 @@ include("templates/add.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
   $ExpirationDate = mysqli_escape_string($connect, $_POST['ExpirationDate'] ); 
@@ -198,7 +198,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from events WHERE IDEvent='.$id; 
@@ -213,7 +213,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDEvent'] );
    $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
@@ -258,7 +258,7 @@ CodeExecutiveSecretary = '".$CodeExecutiveSecretary."'
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM events WHERE IDEvent=".$id; 
   mysqli_query ($connect, $query ); 

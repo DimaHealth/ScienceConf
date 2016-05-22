@@ -20,7 +20,7 @@
                     <td style="color: #fff;">Страна</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM countries";
                             $result_select = mysqli_query($connect, $sql);
 

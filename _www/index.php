@@ -15,7 +15,7 @@ if (is_dir('install/') && is_file('install/index.php'))
 	exit();
 }
 
-require_once('bootstrap.php');
+require('bootstrap.php');
 
 // Observers
 Core_Event::attach('Core_DataBase.onBeforeQuery', array('Core_Database_Observer', 'onBeforeQuery'));

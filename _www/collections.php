@@ -100,7 +100,7 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $sql = "SELECT * FROM collections";
 $res = mysqli_query($connect, $sql);
 
@@ -140,7 +140,7 @@ include("templates/addCollection.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $ReferenceToCollection = mysqli_escape_string($connect, $_POST['ReferenceToCollection'] ); 
   $ElectronicCloseView = mysqli_escape_string($connect, $_POST['ElectronicCloseView'] ); 
   $ElectronicOpenView = mysqli_escape_string($connect, $_POST['ElectronicOpenView'] ); 
@@ -156,7 +156,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from collections WHERE IDCollection='.$id; 
@@ -171,7 +171,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDCollection'] );
   $ReferenceToCollection = mysqli_escape_string($connect, $_POST['ReferenceToCollection'] ); 
   $ElectronicCloseView = mysqli_escape_string($connect, $_POST['ElectronicCloseView'] ); 
@@ -191,7 +191,7 @@ ElectronicOpenView='".$ElectronicOpenView."',PrintView='".$PrintView."'
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM collections WHERE IDCollection=".$id; 
   mysqli_query ($connect, $query ); 

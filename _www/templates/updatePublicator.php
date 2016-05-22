@@ -29,7 +29,7 @@
 			<td style="color: #fff;">Группа</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM groups";
 					$result_select = mysqli_query($connect, $sql);
 
@@ -47,7 +47,7 @@
 			<td style="color: #fff;">Кафедра</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM cathedrae";
 					$result_select = mysqli_query($connect, $sql);
 

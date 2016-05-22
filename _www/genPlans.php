@@ -108,7 +108,7 @@ include("templates/addGenPlan.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 include_once 'Header.php';
 
 

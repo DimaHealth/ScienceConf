@@ -97,7 +97,7 @@ function show_list()
 
  
 $sql = "SELECT * FROM partners";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Партнеры</h2>'; 
@@ -140,7 +140,7 @@ include("templates/addPartner.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $Partner = mysqli_escape_string($connect, $_POST['Partner'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
@@ -160,7 +160,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from partners WHERE IDPartner='.$id; 
@@ -175,7 +175,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDPartner'] );
   $Partner = mysqli_escape_string($connect, $_POST['Partner'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
@@ -200,7 +200,7 @@ $id = mysqli_escape_string($connect, $_GET['IDPartner'] );
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM partners WHERE IDPartner=".$id; 
   mysqli_query ($connect, $query ); 

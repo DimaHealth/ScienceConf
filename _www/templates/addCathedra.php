@@ -60,7 +60,7 @@
 			<td style="color: #fff;">Факультет</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 
 					$sql = "SELECT * FROM faculties";
 					$result_select = mysqli_query($connect, $sql);

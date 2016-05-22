@@ -100,7 +100,7 @@ switch ( $_GET["action"] )
 function show_list() 
 { 
 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $sql = "SELECT * FROM groups";
 $res = mysqli_query($connect, $sql);
 
@@ -135,7 +135,7 @@ include("templates/addGroup.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $Group = mysqli_escape_string($connect, $_POST['Group'] ); 
     $query = " INSERT INTO `groups`(`Group`) 
  VALUES ('$Group')";
@@ -148,7 +148,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from groups WHERE IDGroup='.$id; 
@@ -163,7 +163,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDGroup'] );
   $Group = mysqli_escape_string($connect, $_POST['Group'] ); 
   //UPDATE `groups` SET `Group`='aqa' WHERE IDGroup = '3'
@@ -177,7 +177,7 @@ $id = mysqli_escape_string($connect, $_GET['IDGroup'] );
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM groups WHERE IDGroup=".$id; 
   mysqli_query ($connect, $query ); 

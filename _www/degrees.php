@@ -103,7 +103,7 @@ function show_list()
 
  
 $sql = "SELECT * FROM degrees";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Ученые степени</h2>'; 
@@ -137,7 +137,7 @@ include("templates/addDegree.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $Degree = mysqli_escape_string($connect, $_POST['Degree'] ); 
    $query = " INSERT INTO `degrees`(`Degree`) 
  VALUES ('$Degree')"; 
@@ -149,7 +149,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from degrees WHERE IDDegree='.$id; 
@@ -164,7 +164,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDDegree'] );
   $Degree = mysqli_escape_string($connect, $_POST['Degree'] ); 
   $query = "UPDATE degrees SET Degree='".$Degree."' WHERE IDDegree=".$id;
@@ -178,7 +178,7 @@ $id = mysqli_escape_string($connect, $_GET['IDDegree'] );
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM degrees WHERE IDDegree=".$id; 
   mysqli_query ($connect, $query ); 

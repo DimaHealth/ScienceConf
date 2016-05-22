@@ -197,7 +197,7 @@ To install via Composer, add the following lines to your `composer.json`:
 To install manually, [download PHPWord package from github](https://github.com/PHPOffice/PHPWord/archive/master.zip). Extract the package and put the contents to your machine. To use the library, include `src/PhpWord/Autoloader.php` in your script and invoke `Autoloader::register`.
 
 ```php
-require_once '/path/to/src/PhpWord/Autoloader.php';
+require '/path/to/src/PhpWord/Autoloader.php';
 \PhpOffice\PhpWord\Autoloader::register();
 ```
 
@@ -213,7 +213,7 @@ The following is a basic example of the PHPWord library. More examples are provi
 
 ```php
 <?php
-require_once 'src/PhpWord/Autoloader.php';
+require 'src/PhpWord/Autoloader.php';
 \PhpOffice\PhpWord\Autoloader::register();
 
 // Creating the new document...

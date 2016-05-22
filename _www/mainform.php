@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("dbconnect.php");
+require("dbconnect.php");
 
 // Проверяем если существуют данные в сессий.
 if(isset($_SESSION['email']) && isset($_SESSION['password']) ){

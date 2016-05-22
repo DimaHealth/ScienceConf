@@ -97,7 +97,7 @@ function show_list()
 
  
 $sql = "SELECT * FROM posts";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Должности</h2>'; 
@@ -133,7 +133,7 @@ include("templates/addPost.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $Post = mysqli_escape_string($connect, $_POST['Post'] ); 
   $ForEvent = mysqli_escape_string($connect, $_POST['ForEvent'] ); 
   $query = " INSERT INTO `posts`(`Post`, `ForEvent`) 
@@ -146,7 +146,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from posts WHERE IDPost='.$id; 
@@ -161,7 +161,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDPost'] );
   $Post = mysqli_escape_string($connect, $_POST['Post'] ); 
   $ForEvent = mysqli_escape_string($connect, $_POST['ForEvent'] ); 
@@ -176,7 +176,7 @@ $id = mysqli_escape_string($connect, $_GET['IDPost'] );
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM posts WHERE IDPost=".$id; 
   mysqli_query ($connect, $query ); 

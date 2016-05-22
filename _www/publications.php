@@ -97,7 +97,7 @@ function show_list()
 
  
 $sql = "SELECT * FROM publications";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Публикации</h2>'; 
@@ -146,7 +146,7 @@ include("templates/addPublication.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $CodeStudent = mysqli_escape_string($connect, $_POST['CodeStudent'] ); 
   $CodeSection = mysqli_escape_string($connect, $_POST['CodeSection'] ); 
   $HasReport = mysqli_escape_string($connect, $_POST['HasReport'] ); 
@@ -161,7 +161,7 @@ $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`,
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from publications WHERE IDPublication='.$id; 
@@ -176,7 +176,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = mysqli_escape_string($connect, $_GET['IDPublication'] );
   $CodeStudent = mysqli_escape_string($connect, $_POST['CodeStudent'] ); 
   $CodeSection = mysqli_escape_string($connect, $_POST['CodeSection'] ); 
@@ -194,7 +194,7 @@ function update_item()
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM publications WHERE IDPublication=".$id; 
   mysqli_query ($connect, $query ); 

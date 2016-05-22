@@ -1,6 +1,6 @@
 
 <?php
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   session_start();
 //  echo 'Мыло, '.$_SESSION['email'];
 //  echo 'Пароль, '.$_SESSION['password'];
