@@ -1,4 +1,29 @@
+<?php
+session_start();
+require("dbconnect.php");
 
+// Проверяем если существуют данные в сессий.
+if(isset($_SESSION['email']) && isset($_SESSION['password']) ){
+
+// Вставляем данные из сессий в обычные переменные
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
+
+// Делаем запрос к БД для выбора данных.
+$query = " SELECT * FROM profiles WHERE Email = '$email' AND Password = '$password'";
+$result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($connect) ); 
+
+/* Проверяем, если в базе нет пользователей с такими данными, то выводим сообщение об ошибке */
+	if(mysqli_num_rows($result) < 1)
+	{
+		echo "Вход доступен только авторизированным пользователям! Перейти на <a href='index.php'>главную страницу</a>";
+	}
+
+} else {
+	echo "Вход доступен только авторизированным пользователям! Перейти на <a href='index.html'>главную страницу</a>";
+	die();
+}
+?>
 <html>
 <head>
   
