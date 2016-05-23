@@ -19,7 +19,7 @@
 			<td style="color: #fff;">Мероприятие</td> 
 			<td style="color: #000;"> 
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 
 					$sql = "SELECT * FROM events";
 

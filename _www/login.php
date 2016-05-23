@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("dbconnect.php");
+require("dbconnect.php");
 
 if(isset($_POST["l_email"])){ $l_email = $_POST["l_email"]; }
 if(isset($_POST["l_password"])){ $l_password = md5($_POST["l_password"]); }

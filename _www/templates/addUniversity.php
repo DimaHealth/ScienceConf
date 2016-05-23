@@ -36,7 +36,7 @@
 			<td style="color: #fff;">Город</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 
 					$sql = "SELECT * FROM cities";
 					$result_select = mysqli_query($connect, $sql);

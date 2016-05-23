@@ -32,7 +32,7 @@
                     <td style="color: #fff;">Кафедра</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM cathedrae";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -50,7 +50,7 @@
                     <td style="color: #fff;">Тип мероприятия</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM eventtypes";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -78,7 +78,7 @@
                     <td style="color: #fff;">Ответственный секретарь</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM employees";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -96,7 +96,7 @@
                     <td style="color: #fff;">Год плана</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM plans";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -114,7 +114,7 @@
                     <td style="color: #fff;">Номер приказа</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM orders";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -137,7 +137,7 @@
                     <td style="color: #fff;">Статус</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM status";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -155,7 +155,7 @@
                     <td style="color: #fff;">Уровень</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM levels";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -188,7 +188,7 @@
                     <td style="color: #fff;">Предыдущее мероприятие</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM events";
                             $result_select = mysqli_query($connect, $sql);
 
@@ -206,7 +206,7 @@
                     <td style="color: #fff;">Сборник</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM collections";
                             $result_select = mysqli_query($connect, $sql);
 

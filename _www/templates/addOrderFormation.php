@@ -17,7 +17,7 @@
 	<td style="color: #fff;">Сотрудник</td>
 	<td style="color: #000;">
   <?php
-		require_once("dbconnect.php");
+		require("dbconnect.php");
 
 		$sql = "SELECT * FROM employees";
 
@@ -43,7 +43,7 @@
   <td style="color: #fff;">Приказ</td>
   <td style="color: #000;">
   <?php
-		require_once("dbconnect.php");
+		require("dbconnect.php");
 
 		$sql = "SELECT * FROM orders";
 

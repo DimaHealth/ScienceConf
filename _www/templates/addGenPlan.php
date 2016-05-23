@@ -17,7 +17,7 @@
                     <td style="color: #fff;">Год плана</td>
                     <td style="color: #000;">
                         <?php
-                            require_once("dbconnect.php");
+                            require("dbconnect.php");
                             $sql = "SELECT * FROM plans";
                             $result_select = mysqli_query($connect, $sql);
 

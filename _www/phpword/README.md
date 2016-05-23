@@ -76,7 +76,7 @@ Alternatively, you can download the latest release from the [releases page](http
 In this case, you will have to register the autoloader.
 
 ```php
-require_once 'path/to/PhpWord/src/PhpWord/Autoloader.php';
+require 'path/to/PhpWord/src/PhpWord/Autoloader.php';
 \PhpOffice\PhpWord\Autoloader::register();
 ```
 
@@ -86,7 +86,7 @@ The following is a basic usage example of the PHPWord library.
 
 ```php
 <?php
-require_once 'src/PhpWord/Autoloader.php';
+require 'src/PhpWord/Autoloader.php';
 \PhpOffice\PhpWord\Autoloader::register();
 
 // Creating the new document...

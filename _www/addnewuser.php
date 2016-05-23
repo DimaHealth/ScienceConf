@@ -134,7 +134,7 @@
 		  <td style=" color: #000;">Тип профиля:<br/>
 		  
        <?php
-      require_once("dbconnect.php");
+      require("dbconnect.php");
 
 $sql = "SELECT * FROM profiletypes";
 

@@ -1,4 +1,29 @@
+<?php
+session_start();
+require("dbconnect.php");
 
+// Проверяем если существуют данные в сессий.
+if(isset($_SESSION['email']) && isset($_SESSION['password']) ){
+
+// Вставляем данные из сессий в обычные переменные
+$email = $_SESSION['email'];
+$password = $_SESSION['password'];
+
+// Делаем запрос к БД для выбора данных.
+$query = " SELECT * FROM profiles WHERE Email = '$email' AND Password = '$password'";
+$result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($connect) ); 
+
+/* Проверяем, если в базе нет пользователей с такими данными, то выводим сообщение об ошибке */
+	if(mysqli_num_rows($result) < 1)
+	{
+		echo "Вход доступен только авторизированным пользователям! Перейти на <a href='index.php'>главную страницу</a>";
+	}
+
+} else {
+	echo "Вход доступен только авторизированным пользователям! Перейти на <a href='index.html'>главную страницу</a>";
+	die();
+}
+?>
 <html>
 <head>
   
@@ -98,7 +123,7 @@ function show_list()
 
  
 $sql = "SELECT * FROM events";
-require_once("dbconnect.php");
+require("dbconnect.php");
 $res = mysqli_query($connect, $sql);
 
   echo '<h2>Мероприятия</h2>'; 
@@ -147,7 +172,7 @@ include("templates/add.php");
 // Функция добавляет новую запись в таблицу БД  
 function add_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
   $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
   $ExpirationDate = mysqli_escape_string($connect, $_POST['ExpirationDate'] ); 
@@ -198,7 +223,7 @@ require_once("dbconnect.php");
 // Функция формирует форму для редактирования записи в таблице БД 
 function get_edit_item_form() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   echo '<h2>Редактировать</h2>'; 
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = 'select * from events WHERE IDEvent='.$id; 
@@ -213,7 +238,7 @@ function get_edit_item_form()
 
 function update_item() 
 { 
-require_once("dbconnect.php");
+require("dbconnect.php");
 $id = mysqli_escape_string($connect, $_GET['IDEvent'] );
    $EventName = mysqli_escape_string($connect, $_POST['EventName'] ); 
   $StartDate = mysqli_escape_string($connect, $_POST['StartDate'] ); 
@@ -258,7 +283,7 @@ CodeExecutiveSecretary = '".$CodeExecutiveSecretary."'
 // Функция удаляет запись в таблице БД 
 function delete_item() 
 { 
-  require_once("dbconnect.php");
+  require("dbconnect.php");
   $id = empty($_GET["id"]) ? 0 : intval($_GET["id"]);
   $query = "DELETE FROM events WHERE IDEvent=".$id; 
   mysqli_query ($connect, $query ); 

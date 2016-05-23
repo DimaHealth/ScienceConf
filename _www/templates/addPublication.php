@@ -17,7 +17,7 @@
 			<td style="color: #fff;">Студент</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM publicators";
 					$result_select = mysqli_query($connect, $sql);
 
@@ -35,7 +35,7 @@
 			<td style="color: #fff;">Секция</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM sections";
 					$result_select = mysqli_query($connect, $sql);
 
@@ -58,7 +58,7 @@
 			<td style="color: #fff;">Руководитель</td>
 			<td style="color: #000;">
 				<?php
-					require_once("dbconnect.php");
+					require("dbconnect.php");
 					$sql = "SELECT * FROM employees";
 					$result_select = mysqli_query($connect, $sql);
 

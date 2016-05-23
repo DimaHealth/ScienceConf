@@ -38,10 +38,10 @@ spl_autoload_register(function ($class) {
             substr($class, strlen($prefix));
         $file = __DIR__ . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($file)) {
-            require_once $file;
+            require $file;
         }
     }
 });
 
-require_once __DIR__ . '/../src/PhpWord/Autoloader.php';
+require __DIR__ . '/../src/PhpWord/Autoloader.php';
 \PhpOffice\PhpWord\Autoloader::register();
