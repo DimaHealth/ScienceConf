@@ -70,6 +70,8 @@
   <link rel="stylesheet" href="css/style.css">
   <title>Мероприятия</title>  
   
+  
+
 </head>
 <body>
 
@@ -93,7 +95,7 @@
 				</nav>
 			</div>
 	 </header>
-<div class="container">
+<div  class="container">
 <header class="container">
     <section class="content">
       <h1></h1>

@@ -57,7 +57,7 @@ $result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($conne
    <link href='http://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css">
-  <title>Планы</title>  
+  <title>Приказы</title>  
   
 </head>
 <body>
@@ -81,8 +81,8 @@ $result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($conne
 				</nav>
 				<nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
                    <ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="genPlans.php">Планы</a></li>
-						<li><a href="genOrders.php">Приказы</a></li>
+						<li ><a href="genPlans.php">Планы</a></li>
+						<li class="active"><a href="genOrders.php">Приказы</a></li>
 						<li><a href="genReports.php">Отчеты</a></li>
                   </ul>
 				</nav>
@@ -171,7 +171,7 @@ $res = mysqli_query($connect, $sql);
 
 	
 	// Simple text
-    $section->addText(htmlspecialchars('Донецкий национальный технический университет '.$item['StartDate'].' проводит '.$item['Level'].' '
+    $section->addText(htmlspecialchars('Донецкий национальный технический университет '.date('d.m.Y',(strtotime($item['StartDate']))).' проводит '.$item['Level'].' '
 	.$item['Status'].' '.$item['EventType'].' "'
 	.$item['EventName'].'".'));
 	$section->addTextBreak(1);
@@ -189,10 +189,38 @@ $res = mysqli_query($connect, $sql);
 	$section->addTextBreak(1);
 	
 	//'SELECT FIO, Post, '
-	$section->addText(htmlspecialchars('- '));
+	$post = "председатель оргкомитета";
+	$sql2 = "SELECT FIO, Post, Cathedra FROM employees INNER JOIN posts ON employees.CodePost = IDPost INNER JOIN cathedrae ON CodeCathedra = IDCathedra INNER JOIN involvedemployees ON CodeEmployee = IDEmployee  WHERE  involvedemployees.CodePost = (SELECT IDPost FROM posts WHERE Post = \"".$post."\") AND (CodeEvent = ".$item['IDEvent'].")";
+	$res2 = mysqli_query($connect, $sql2);
+	while ($item2 = mysqli_fetch_array( $res2 )) 
+	{
+		$section->addText(htmlspecialchars('- '.$item2['FIO'].", ".$item2['Post']." \"".$item2['Cathedra']."\";"));
+		$section->addTextBreak(1);
+		$section->addText(htmlspecialchars('1.2 Члены оргкомитета:'));
+		$section->addTextBreak(1);
+	}
+	$post = "член оргкомитета";
+	$sql3 = "SELECT FIO, Post, Cathedra FROM employees INNER JOIN posts ON employees.CodePost = IDPost INNER JOIN cathedrae ON CodeCathedra = IDCathedra INNER JOIN involvedemployees ON CodeEmployee = IDEmployee  WHERE  involvedemployees.CodePost = (SELECT IDPost FROM posts WHERE Post = \"".$post."\") AND (CodeEvent = ".$item['IDEvent'].")";
+	$res3 = mysqli_query($connect, $sql3);
+	while ($item3 = mysqli_fetch_array( $res3 ))
+	{
+		$section->addText(htmlspecialchars('- '.$item3['FIO'].", ".$item3['Post']." \"".$item3['Cathedra']."\";"));
+		$section->addTextBreak(1);
+		// Two text break
+	}
 	
-	// Two text break
-
+	$section->addText(htmlspecialchars('1.3 Ответственный секретарь оргкомитета:'));
+	$section->addTextBreak(1);
+	$section->addText(htmlspecialchars('- '.$item['FIO'].", ".$item['Post']." \"".$item['Cathedra']."\";"));
+	$section->addTextBreak(1);
+	$section->addText(htmlspecialchars('2. Подготовить и разослать участникам программу работы '.$item['EventType']."."));
+	$section->addTextBreak(1);
+	$section->addText(htmlspecialchars('3. Ответственному секретарю оргкомитета в 10-ти дневный срок после проведения конференции подготовить и сдать отчет в НИЧ о проведении '.$item['EventType']."."));
+	$section->addTextBreak(1);
+	$date = strtotime($item['StartDate']);
+	$section->addText(htmlspecialchars('4. Ответственному секретарю оргкомитета подготовить сборник докладов '.$item['Level'].' '
+	.$item['Status'].' '.$item['EventType'].' "'
+	.$item['EventName']." в электронном виде и выставить в электронном архиве и каталоге НТБ университета в срок до ".date('d.m.Y',($date+86400*10))));
 	$section->addPageBreak();
   }
 

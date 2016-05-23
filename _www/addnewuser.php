@@ -157,7 +157,7 @@ echo "</select>";
 		</td>
 		  </tr>
 			<tr>
-              <td><input type="submit" name="r_send" value="Зарегистрироватся!" /> </td>
+              <td><input type="submit" name="r_send" value="Зарегистрироваться!" /> </td>
             </tr>
           </table>
 
