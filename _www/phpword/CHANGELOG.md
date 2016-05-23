@@ -66,7 +66,7 @@ This release added form fields (textinput, checkbox, and dropdown), drawing shap
 - `PhpWord->loadTemplate($filename)`
 
 ### Miscellaneous
-- Docs: Add known issue on `README` about requirement for temporary folder to be writable and update `samples/index.php` for this requirement check - @ivanlanin #238
+- Docs: Add known issue on `README` about requirement for temporary folder to be writable and update `samples/index.html` for this requirement check - @ivanlanin #238
 - Docs: Correct elements.rst about Line - @chrissharkman #292
 - PclZip: Remove temporary file after used - @andrew-kzoo #265
 - Autoloader: Add the ability to set the autoloader options - @bskrtich #267

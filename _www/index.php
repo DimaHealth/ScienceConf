@@ -8,7 +8,7 @@
  * @copyright © 2005-2016 ООО "Хостмэйк" (Hostmake LLC), http://www.hostcms.ru
  */
 
-if (is_dir('install/') && is_file('install/index.php'))
+if (is_dir('install/') && is_file('install/index.html'))
 {
 	// Install location
 	header('Location: /install/');
