@@ -26,8 +26,8 @@
   <td><input type="text" name="Website" value="" required=" "/></td>
   </tr>
     <tr>
-  <td style="color: #fff;">E-mail</td>
-  <td><input type="text" name="E-mail" value="" required=" "/></td>
+  <td style="color: #fff;">Email</td>
+  <td><input type="text" name="Email" value="" required=" "/></td>
   </tr>
   <tr>
   <td style="color: #fff;">Мероприятие</td>

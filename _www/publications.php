@@ -148,7 +148,14 @@ $res = mysqli_query($connect, $sql);
 	
 	$sql4 = "SELECT `FIO` FROM `employees` WHERE IDEmployee = ".$item['CodeHead'];
     $res4 =  mysqli_query($connect, $sql4);
-    echo '<td>'.mysqli_fetch_array( $res4 )['FIO'].'</td>';
+	if ($res4 != NULL)
+	{
+		echo '<td>'.mysqli_fetch_array( $res4 )['FIO'].'</td>';
+	}
+    else
+	{
+		echo '<td></td>';
+	}
 	
     echo '<td><a href="?action=editform&id='.$item['IDPublication'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDPublication'].'">Удл.</a></td>'; 
@@ -176,9 +183,19 @@ require("dbconnect.php");
   $CodeSection = mysqli_escape_string($connect, $_POST['CodeSection'] ); 
   $HasReport = mysqli_escape_string($connect, $_POST['HasReport'] ); 
   $CodeHead = mysqli_escape_string($connect, $_POST['CodeHead'] ); 
-$query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`, `CodeHead`) 
- VALUES ('$CodeStudent', '$CodeSection', '$HasReport', '$CodeHead')";
-  mysqli_query ($connect, $query ); 
+  
+  if ($CodeHead == NULL)
+  {
+	  $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`) 
+	  VALUES ('$CodeStudent', '$CodeSection', '$HasReport')";
+	  mysqli_query ($connect, $query ); 
+  }
+else
+{
+		  $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`, `CodeHead`) 
+	  VALUES ('$CodeStudent', '$CodeSection', '$HasReport', '$CodeHead')";
+	  mysqli_query ($connect, $query ); 
+}
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 }

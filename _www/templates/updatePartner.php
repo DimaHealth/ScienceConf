@@ -25,7 +25,7 @@
   </tr> 
     <tr> 
   <td style="color: #fff;">Email</td> 
-  <td><input type="text" name="E-mail" value="<?= htmlspecialchars($item["E-mail"]) ?>" /></td> 
+  <td><input type="text" name="Email" value="<?= htmlspecialchars($item["Email"]) ?>" /></td> 
   </tr> 
     <tr> 
   <td style="color: #fff;">Мероприятие</td> 

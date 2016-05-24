@@ -140,7 +140,7 @@ $res = mysqli_query($connect, $sql);
     echo '<td>'.$item['Partner'].'</td>'; 
     echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Website'].'</td>'; 
-	echo '<td>'.$item['E-mail'].'</td>'; 
+	echo '<td>'.$item['Email'].'</td>'; 
 	 $sql3 = "SELECT `EventName` FROM `events` WHERE  IDEvent = ".$item['CodeEvent'];
 	$res3 =  mysqli_query($connect, $sql3);
 	 echo '<td>'.mysqli_fetch_array( $res3 )['EventName'].'</td>'; 
@@ -169,10 +169,10 @@ require("dbconnect.php");
   $Partner = mysqli_escape_string($connect, $_POST['Partner'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
-  $Email = mysqli_escape_string($connect, $_POST['E-mail'] ); 
+  $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
   $NumberOfParticipants = mysqli_escape_string($connect, $_POST['NumberOfParticipants'] ); 
-  $query = " INSERT INTO `partners`(`Partner`, `Phone`,`Website`, `E-mail`,
+  $query = " INSERT INTO `partners`(`Partner`, `Phone`,`Website`, `Email`,
  `CodeEvent`, `NumberOfParticipants`) 
  VALUES ('$Partner',' $Phone','$Website',
  ' $Email','$CodeEvent','$NumberOfParticipants')"; 
@@ -205,13 +205,11 @@ $id = mysqli_escape_string($connect, $_GET['IDPartner'] );
   $Partner = mysqli_escape_string($connect, $_POST['Partner'] ); 
   $Phone = mysqli_escape_string($connect, $_POST['Phone'] ); 
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
-  $Email = mysqli_escape_string($connect, $_POST['E-mail'] ); 
+  $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
   $NumberOfParticipants = mysqli_escape_string($connect, $_POST['NumberOfParticipants'] ); 
- //  , E-mail = '".$Email."',
-//E-mail = '".$Email."'
 
-   $query = "UPDATE partners SET Partner='".$Partner."', Phone ='".$Phone."', Website = '".$Website."',
+   $query = "UPDATE partners SET Email = '".$Email."', Partner='".$Partner."', Phone ='".$Phone."', Website = '".$Website."',
    CodeEvent = '".$CodeEvent."', NumberOfParticipants = '".$NumberOfParticipants."'
    WHERE IDPartner=".$id;
    mysqli_query ($connect, $query ); 
