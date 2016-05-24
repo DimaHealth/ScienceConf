@@ -33,7 +33,7 @@
 						echo "<option value = '$arr[0]' > $arr[1]</option>";
 					}
 
-					echo "</select>";
+					echo "<option value = '' > </option>";echo "</select>";
 				?>
 			</td> 
 		</tr> 

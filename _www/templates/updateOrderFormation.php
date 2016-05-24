@@ -32,7 +32,7 @@
 
 		}
 
-		echo "</select>";
+		echo "<option value = '' > </option>";echo "</select>";
 
 ?>
 </td> 
@@ -58,7 +58,7 @@
 
 		}
 
-		echo "</select>";
+		echo "<option value = '' > </option>";echo "</select>";
 
 ?>
 </td> 

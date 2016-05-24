@@ -110,7 +110,7 @@ $res = mysqli_query($connect, $sql);
    
   echo '<tr><th>IDEvent</th><th>Название</th><th>Дата начала</th>
   <th>Дата окончания</th><th>Кафедра</th><th>Тип мероприятия</th>
-  <th>Ссылка на пресс-релиз</th><th>Ссылка на пост-релиз</th><th>Рейтинг</th>
+  <th>Ссылка на пресс-релиз</th><th>Ссылка на пост-релиз</th><th>Рейтинг</th><th>Предшествующее мероприятие</th>
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
@@ -120,17 +120,32 @@ $res = mysqli_query($connect, $sql);
     echo '<td>'.$item['StartDate'].'</td>'; 
     echo '<td>'.$item['ExpirationDate'].'</td>'; 
 	
-	$sql2 = "SELECT `Cathedra` FROM `cathedrae` WHERE IDCathedra = ".$item['CodeCathedra'];
+	$sql2 = "SELECT `Cathedra` FROM `cathedrae` WHERE
+	IDCathedra = ".$item['CodeCathedra'];
 	$res2 =  mysqli_query($connect, $sql2);
 	 echo '<td>'.mysqli_fetch_array( $res2 )['Cathedra'].'</td>'; 
-	 $sql3 = "SELECT `EventType` FROM `eventtypes` WHERE  IDEventType = ".$item['CodeEventType'];
+	 $sql3 = "SELECT `EventType` FROM `eventtypes` WHERE 
+	 IDEventType = ".$item['CodeEventType'];
 	$res3 =  mysqli_query($connect, $sql3);
 	 echo '<td>'.mysqli_fetch_array( $res3 )['EventType'].'</td>'; 
 	echo '<td>'.$item['PressReleaseRef'].'</td>'; 
     echo '<td>'.$item['PostReleaseRef'].'</td>'; 
     echo '<td>'.$item['RatingMark'].'</td>';	
-    echo '<td><a href="?action=editform&id='.$item['IDEvent'].'">Ред.</a></td>'; 
-    echo '<td><a href="?action=delete&id='.$item['IDEvent'].'">Удл.</a></td>'; 
+	$sql4 = "SELECT `EventName` FROM `events` WHERE 
+	 IDEvent = ".$item['CodePreviosEvent'];
+	$res4 =  mysqli_query($connect, $sql4);
+	if ($res4 !=NULL)
+	{
+		echo '<td>'.mysqli_fetch_array( $res4 )['EventName'].'</td>'; 
+	}
+	else
+	{
+		echo '<td></td>'; 
+	}
+    echo '<td><a href="?action=editform&
+	id='.$item['IDEvent'].'">Ред.</a></td>'; 
+    echo '<td><a href="?action=delete&
+	id='.$item['IDEvent'].'">Удл.</a></td>'; 
     echo '</tr>'; 
   } 
   echo '</table>';
@@ -215,34 +230,83 @@ require("dbconnect.php");
   $isCarriedOutsidePlan = mysqli_escape_string($connect, $_POST['isCarriedOutsidePlan'] ); 
   $CodeCollection = mysqli_escape_string($connect, $_POST['CodeCollection'] ); 
   $ExpectedCountries = mysqli_escape_string($connect, $_POST['ExpectedCountries'] ); 
-  
-   // `RatingMark`, посчитать рейтинговую оценку в контексте полученных данных
-  // '$RatingMark',
-  
-  $query = " INSERT INTO `events`(`EventName`, `StartDate`,
-  `ExpirationDate`, `CodeCathedra`,
-  `CodeEventType`, `PressReleaseRef`,
-  `PostReleaseRef`, `CodeExecutiveSecretary`,
-  `CodePlan`, `CodeOrder`,
-  `NumberOfTeachersDonNTU`, `CodeStatus`,
-  `CodeLevel`, `Website`, `isCarried`,
-  `isCancelled`, `isPostponed`, `ReferenceToProgram`,
-  `Comments`, `areStatusAndTypeConfirmed`, `isDateChanged`,
-  `areViewAndStatusChanged`, `isNameChanged`, `CodePreviosEvent`,
-  `isCarriedOutsidePlan`, `CodeCollection`,
-  `ExpectedCountries`)
-  VALUES ('$EventName','$StartDate',
-  '$ExpirationDate','$CodeCathedra',
-  '$CodeEventType','$PressReleaseRef',
-  '$PostReleaseRef','$CodeExecutiveSecretary',
-  '$CodePlan','$CodeOrder',
-  '$NumberOfTeachersDonNTU','$CodeStatus',
-  '$CodeLevel', '$Website','$isCarried','$isCancelled',
-  '$isPostponed','$ReferenceToProgram','$Comments',
+if($CodePreviosEvent == NULL )
+{
+	if ($CodePlan!=NULL)
+	{
+				$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+		  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+		  `CodePlan`, `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+		  `isCarried`,  `isCancelled`, `isPostponed`, `ReferenceToProgram`,  `Comments`,
+		  `areStatusAndTypeConfirmed`, `isDateChanged`,  `areViewAndStatusChanged`, `isNameChanged`,
+		   `isCarriedOutsidePlan`, `CodeCollection`,  `ExpectedCountries`)
+		  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+		  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+		  '$CodePlan','$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+		  '$isCarried','$isCancelled',  '$isPostponed','$ReferenceToProgram','$Comments',
+		  '$areStatusAndTypeConfirmed','$isDateChanged','$areViewAndStatusChanged','$isNameChanged','$isCarriedOutsidePlan',
+		  '$CodeCollection','$ExpectedCountries')"; 
+		 //die(var_dump($_POST, $_GET, $CodePreviosEvent));
+		  mysqli_query ($connect, $query ); 
+	}
+	else
+	{
+			$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+			  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+			   `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+			  `isCarried`,  `isCancelled`, `isPostponed`, `ReferenceToProgram`,  `Comments`,
+			  `areStatusAndTypeConfirmed`, `isDateChanged`,  `areViewAndStatusChanged`, `isNameChanged`,
+			   `isCarriedOutsidePlan`, `CodeCollection`,  `ExpectedCountries`)
+			  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+			  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+			  '$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+			  '$isCarried','$isCancelled',  '$isPostponed','$ReferenceToProgram','$Comments',
+			  '$areStatusAndTypeConfirmed','$isDateChanged','$areViewAndStatusChanged','$isNameChanged','$isCarriedOutsidePlan',
+			  '$CodeCollection','$ExpectedCountries')"; 
+			 //die(var_dump($_POST, $_GET, $CodePreviosEvent));
+			  mysqli_query ($connect, $query ); 
+	}
+	
+		
+}
+	else if ($CodePlan == NULL)
+	{
+				$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+	  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+	   `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+	  `isCarried`,  `isCancelled`, `isPostponed`, `ReferenceToProgram`,  `Comments`,
+	  `areStatusAndTypeConfirmed`, `isDateChanged`,  `areViewAndStatusChanged`, `isNameChanged`,
+	  `CodePreviosEvent`,  `isCarriedOutsidePlan`, `CodeCollection`,  `ExpectedCountries`)
+	  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+	  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+	  '$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+	  '$isCarried','$isCancelled',  '$isPostponed','$ReferenceToProgram','$Comments',
+	  '$areStatusAndTypeConfirmed','$isDateChanged','$areViewAndStatusChanged','$isNameChanged',
+	  '$CodePreviosEvent','$isCarriedOutsidePlan','$CodeCollection','$ExpectedCountries')"; 
+	 //die(var_dump($_POST, $_GET, $CodePreviosEvent));
+	  mysqli_query ($connect, $query ); 
+	}
+	
+
+else if ($CodePlan!=NULL && $CodePreviosEvent!=NULL)
+{
+	$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+  `CodePlan`, `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+  `isCarried`,  `isCancelled`, `isPostponed`, `ReferenceToProgram`,  `Comments`,
+  `areStatusAndTypeConfirmed`, `isDateChanged`,  `areViewAndStatusChanged`, `isNameChanged`,
+  `CodePreviosEvent`,  `isCarriedOutsidePlan`, `CodeCollection`,  `ExpectedCountries`)
+  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+  '$CodePlan','$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+  '$isCarried','$isCancelled',  '$isPostponed','$ReferenceToProgram','$Comments',
   '$areStatusAndTypeConfirmed','$isDateChanged','$areViewAndStatusChanged','$isNameChanged',
   '$CodePreviosEvent','$isCarriedOutsidePlan','$CodeCollection','$ExpectedCountries')"; 
- //die(var_dump($_POST, $_GET, $EventName));
+ //die(var_dump($_POST, $_GET, $CodePreviosEvent));
   mysqli_query ($connect, $query ); 
+}
+
+  
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 }
@@ -294,26 +358,24 @@ $id = mysqli_escape_string($connect, $_GET['IDEvent'] );
   $isCarriedOutsidePlan = mysqli_escape_string($connect, $_POST['isCarriedOutsidePlan'] ); 
   $CodeCollection = mysqli_escape_string($connect, $_POST['CodeCollection'] ); 
   $ExpectedCountries = mysqli_escape_string($connect, $_POST['ExpectedCountries'] ); 
-  
-   $query = "UPDATE events SET EventName='".$EventName."', StartDate ='".$StartDate."'
+
+		 $query = "UPDATE events SET EventName='".$EventName."', StartDate ='".$StartDate."'
    ,ExpirationDate = '".$ExpirationDate."',  PressReleaseRef ='".$PressReleaseRef."', 
     PostReleaseRef = '".$PostReleaseRef."', NumberOfTeachersDonNTU = '".$NumberOfTeachersDonNTU."',
-	Website = '".$Website."', 
-ReferenceToProgram = '".$ReferenceToProgram."', ExpectedCountries = '".$ExpectedCountries."',
-CodeCathedra = '".$CodeCathedra."',CodeEventType = '".$CodeEventType."',
-CodePlan = '".$CodePlan."',CodeOrder = '".$CodeOrder."',
-CodeStatus = '".$CodeStatus."',CodeLevel = '".$CodeLevel."',
-isCarried = '".$isCarried."',isCancelled = '".$isCancelled."',
-isPostponed = '".$isPostponed."',Comments = '".$Comments."',
-areStatusAndTypeConfirmed = '".$areStatusAndTypeConfirmed."',
-isDateChanged = '".$isDateChanged."',areViewAndStatusChanged = '".$areViewAndStatusChanged."',
-isNameChanged = '".$isNameChanged."',CodePreviosEvent = '".$CodePreviosEvent."',
-isCarriedOutsidePlan = '".$isCarriedOutsidePlan."',CodeCollection = '".$CodeCollection."',
-CodeExecutiveSecretary = '".$CodeExecutiveSecretary."'
+	Website = '".$Website."', ReferenceToProgram = '".$ReferenceToProgram."',
+	ExpectedCountries = '".$ExpectedCountries."',CodeCathedra = '".$CodeCathedra."',
+	CodeEventType = '".$CodeEventType."',CodePlan = '".$CodePlan."',CodeOrder = '".$CodeOrder."',
+CodeStatus = '".$CodeStatus."',CodeLevel = '".$CodeLevel."',isCarried = '".$isCarried."',
+isCancelled = '".$isCancelled."',isPostponed = '".$isPostponed."',Comments = '".$Comments."',
+areStatusAndTypeConfirmed = '".$areStatusAndTypeConfirmed."',isDateChanged = '".$isDateChanged."',
+areViewAndStatusChanged = '".$areViewAndStatusChanged."',isNameChanged = '".$isNameChanged."',
+CodePreviosEvent = '".$CodePreviosEvent."',isCarriedOutsidePlan = '".$isCarriedOutsidePlan."',
+CodeCollection = '".$CodeCollection."',CodeExecutiveSecretary = '".$CodeExecutiveSecretary."'
    WHERE IDEvent=".$id;
-   
-  mysqli_query ($connect, $query ); 
+   //
+   mysqli_query ($connect, $query ); 
   // die(var_dump($_POST, $_GET, $id));
+  
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 

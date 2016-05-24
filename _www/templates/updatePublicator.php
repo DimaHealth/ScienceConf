@@ -17,7 +17,7 @@
 		
 		<tr>
 			<td style="color: #fff;">Очное (0) или заочное (1) отделение</td>
-			<td><input type="boolean" name="TypeOfStudy" required=" " value="<?= htmlspecialchars($item["TypeOfStudy"]) ?>"/></td>
+			<td><input type="boolean" name="TypeOfStudy"  value="<?= htmlspecialchars($item["TypeOfStudy"]) ?>"/></td>
 		</tr>
 		
 		<tr>
@@ -38,7 +38,7 @@
 					while($arr = mysqli_fetch_array($result_select)) {
 						echo "<option value = '$arr[0]' > $arr[1]</option>";
 					}
-					echo "</select>";
+					echo "<option value = '' > </option>";echo "</select>";
 				?>
 			</td>
 		</tr>
@@ -56,7 +56,7 @@
 					while($arr = mysqli_fetch_array($result_select)) {
 						echo "<option value = '$arr[0]' > $arr[1]</option>";
 					}
-					echo "</select>";
+					echo "<option value = '' > </option>";echo "</select>";
 				?>
 			</td>
 		</tr>

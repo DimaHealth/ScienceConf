@@ -24,7 +24,7 @@
 					{
 						echo "<option value = '$arr[0]' > $arr[1]</option>";
 					}
-					echo "</select>";
+					echo "<option value = '' > </option>";echo "</select>";
 				?>
 			</td>
 		</tr>
@@ -42,7 +42,7 @@
 					while($arr = mysqli_fetch_array($result_select)) {
 						echo "<option value = '$arr[0]' > $arr[1]</option>";
 					}
-					echo "</select>";
+					echo "<option value = '' > </option>";echo "</select>";
 				?>
 			</td>
 		</tr>
@@ -61,7 +61,7 @@
 					{
 						echo "<option value = '$arr[0]' > $arr[1]</option>";
 					}
-					echo "</select>";
+					echo "<option value = '' > </option>";echo "</select>";
 				?>
 			</td>
 		</tr>
