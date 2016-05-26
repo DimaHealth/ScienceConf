@@ -181,7 +181,7 @@ function avtorization()
 	/* Проверяем, если в базе нет пользователей с такими данными, то выводим сообщение об ошибке */
 	if($item['ProfileType']  != "admin")
 	{
-		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на <a href='mainform.php'>главную страницу</h2>"; 
+		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на <a href='mainform.php'>главную страницу</a></h2>"; 
 		die();
 	}
 	else
@@ -193,7 +193,7 @@ function avtorization()
 	}
 	else
 	{
-		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на <a href='mainform.php'>";
+		echo "<h2 class='my-bold-font' >Вход доступен только администратору! Перейти на Перейти на <a href='mainform.php'>главную страницу</a></h2>";
 		die();
 	}
 }

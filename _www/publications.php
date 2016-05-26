@@ -129,7 +129,7 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>ID</th><th>Студент</th><th>Секция</th><th>Имеется ли доклад</th><th>Руководитель</th>
+  echo '<tr><th>ID</th><th>Студент</th><th>Секция, Мероприятие</th><th>Имеется ли доклад</th><th>Руководитель</th><th>Тема доклада</th>
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
@@ -140,9 +140,10 @@ $res = mysqli_query($connect, $sql);
   	$res2 =  mysqli_query($connect, $sql2);
     echo '<td>'.mysqli_fetch_array( $res2 )['FIO'].'</td>';
 
-    $sql3 = "SELECT `Section` FROM `sections` WHERE IDSection = ".$item['CodeSection'];
+    $sql3 = "SELECT `Section`, `EventName` FROM `sections` INNER JOIN events ON CodeEvent = IDEvent WHERE IDSection = ".$item['CodeSection'];
     $res3 =  mysqli_query($connect, $sql3);
-    echo '<td>'.mysqli_fetch_array( $res3 )['Section'].'</td>';
+	$section = mysqli_fetch_array( $res3 );
+    echo '<td>'.$section['Section'].', '.$section['EventName'].'</td>';
 	
 	echo '<td>'.$item['HasReport'].'</td>';
 	
@@ -157,6 +158,14 @@ $res = mysqli_query($connect, $sql);
 		echo '<td></td>';
 	}
 	
+	if ($item['Theme'] != NULL)
+	{
+		echo '<td>'.$item['Theme'].'</td>';
+	}
+    else
+	{
+		echo '<td></td>';
+	}
     echo '<td><a href="?action=editform&id='.$item['IDPublication'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDPublication'].'">Удл.</a></td>'; 
     echo '</tr>'; 
@@ -183,19 +192,37 @@ require("dbconnect.php");
   $CodeSection = mysqli_escape_string($connect, $_POST['CodeSection'] ); 
   $HasReport = mysqli_escape_string($connect, $_POST['HasReport'] ); 
   $CodeHead = mysqli_escape_string($connect, $_POST['CodeHead'] ); 
+  $Theme = mysqli_escape_string($connect, $_POST['Theme'] ); 
   
   if ($CodeHead == NULL)
   {
-	  $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`) 
-	  VALUES ('$CodeStudent', '$CodeSection', '$HasReport')";
-	  mysqli_query ($connect, $query ); 
+	  if ($HasReport == 0)
+	  {
+		  $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`) 
+		  VALUES ('$CodeStudent', '$CodeSection', '$HasReport')";
+		  mysqli_query ($connect, $query ); 
+	  }
+	  else
+	  {
+		   $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`,`Theme`) 
+		  VALUES ('$CodeStudent', '$CodeSection', '$HasReport','$Theme')";
+		  mysqli_query ($connect, $query ); 
+	  }
   }
+else if ($HasReport == 0)
+	  {
+		  $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`, `CodeHead`) 
+		  VALUES ('$CodeStudent', '$CodeSection', '$HasReport','$CodeHead')";
+		  mysqli_query ($connect, $query ); 
+	  }
 else
 {
-		  $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`, `CodeHead`) 
-	  VALUES ('$CodeStudent', '$CodeSection', '$HasReport', '$CodeHead')";
+	  $query = " INSERT INTO `publications`(`CodeStudent`, `CodeSection`, `HasReport`, `CodeHead`,`Theme`) 
+	  VALUES ('$CodeStudent', '$CodeSection', '$HasReport', '$CodeHead','$Theme')";
 	  mysqli_query ($connect, $query ); 
+	
 }
+
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 }
@@ -224,8 +251,9 @@ function update_item()
   $CodeSection = mysqli_escape_string($connect, $_POST['CodeSection'] ); 
   $HasReport = mysqli_escape_string($connect, $_POST['HasReport'] ); 
   $CodeHead = mysqli_escape_string($connect, $_POST['CodeHead'] );   
+  $Theme = mysqli_escape_string($connect, $_POST['Theme'] );   
   $query = "UPDATE publications SET CodeStudent ='".$CodeStudent
-  ."', CodeSection ='".$CodeSection."', HasReport ='".$HasReport."', CodeHead ='".$CodeHead."' WHERE IDPublication=".$id;
+  ."', CodeSection ='".$CodeSection."', HasReport ='".$HasReport."', CodeHead ='".$CodeHead."', Theme ='".$Theme."' WHERE IDPublication=".$id;
    
   mysqli_query ($connect, $query ); 
    // die(var_dump($_POST, $_GET, $id));

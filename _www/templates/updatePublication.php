@@ -33,13 +33,13 @@
 			<td style="color: #000;">
 				<?php
 					require("dbconnect.php");
-					$sql = "SELECT * FROM sections";
+					$sql = "SELECT `IDSection`, `Section`, `EventName` FROM `sections` INNER JOIN events ON CodeEvent = IDEvent";
 					$result_select = mysqli_query($connect, $sql);
 
 					/*Выпадающий список*/
 					echo "<select  name = CodeSection>";
 					while($arr = mysqli_fetch_array($result_select)) {
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+						echo "<option value = '$arr[0]' > $arr[1], $arr[2]</option>";
 					}
 					echo "<option value = '' > </option>";echo "</select>";
 				?>
@@ -67,6 +67,11 @@
 					echo "<option value = '' > </option>";echo "</select>";
 				?>
 			</td>
+		</tr>
+		
+		<tr>
+			<td style="color: #fff;">Тема доклада</td>
+			<td><input type="text" name="Theme" value="<?= htmlspecialchars($item["Theme"]) ?>" /></td>
 		</tr>
 		
 		<tr>

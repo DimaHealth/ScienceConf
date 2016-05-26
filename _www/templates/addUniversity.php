@@ -38,7 +38,7 @@
 				<?php
 					require("dbconnect.php");
 
-					$sql = "SELECT * FROM cities";
+					$sql = "SELECT IDCity, City, Country FROM cities INNER JOIN countries ON CodeCountry = IDCountry";
 					$result_select = mysqli_query($connect, $sql);
 
 					/*Выпадающий список*/
@@ -46,7 +46,7 @@
 					echo "<select  name = CodeCity>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]'> $arr[1] </option>";
+						echo "<option value = '$arr[0]'> $arr[1], $arr[2]  </option>";
 					}
 
 					echo "<option value = '' > </option>";echo "</select>";

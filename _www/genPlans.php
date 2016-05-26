@@ -198,24 +198,29 @@ $table->addRow(900);
 														."тел.: {$item['Phone']}"." \n"
 														."эл. почта: {$item['Email']}"));
 		$table->addCell(2000)->addText(htmlspecialchars("{$item['Website']}"));
-		$sql3 = "SELECT  `EventName`, `EventType`, 
+		if ($item['CodePreviosEvent'] != NULL)
+		{
+			$sql3 = "SELECT  `EventName`, `EventType`, 
 		 `Status`, `Level` FROM (`events` INNER JOIN `eventtypes`
-		 ON `CodeEventType` = `IdEventType` INNER JOIN `status`
-		 ON `CodeStatus` = `IdStatus` INNER JOIN `levels`
-		 ON `CodeLevel` = `IdLevel`)  WHERE `IDEvent`=".$item['CodePreviosEvent'];
+		 ON `CodeEventType` = `IDEventType` INNER JOIN `status`
+		 ON `CodeStatus` = `IDStatus` INNER JOIN `levels`
+		 ON `CodeLevel` = `IDLevel`)  WHERE `IDEvent`=".$item['CodePreviosEvent'];
 		$res3 = mysqli_query($connect, $sql3);
 		$item3 = mysqli_fetch_array( $res3 );
-		if ( $item3['EventName'] != NULL)
-		{
+		
+		
 			$table->addCell(2000)->addText(htmlspecialchars("{$item3['Level']}"." \n "
 														."{$item3['Status']}"." \n "
 														."{$item3['EventType']}"." \n "
 														."\"{$item3['EventName']}\""));
+		
+		
 		}
 		else
 		{
 			$table->addCell(2000)->addText(htmlspecialchars(""));
 		}
+		
   } 
 
 

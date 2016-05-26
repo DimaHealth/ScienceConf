@@ -130,7 +130,7 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>ID</th><th>Университет</th><th>Телефон</th><th>Web-site</th><th>E-mail</th><th>Город</th>
+  echo '<tr><th>ID</th><th>Университет</th><th>Телефон</th><th>Web-site</th><th>E-mail</th><th>Город, Страна</th>
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
@@ -140,9 +140,10 @@ $res = mysqli_query($connect, $sql);
     echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Website'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
-   	$sql2 = "SELECT `City` FROM `cities` WHERE IDCity = ".$item['CodeCity'];
+   	$sql2 = "SELECT `City`, `Country` FROM `cities` INNER JOIN `countries` ON `CodeCountry` = `IDCountry` WHERE IDCity =".$item['CodeCity'];
 	$res2 =  mysqli_query($connect, $sql2);
-	 echo '<td>'.mysqli_fetch_array( $res2 )['City'].'</td>'; 
+	$countryandcity = mysqli_fetch_array( $res2 );
+	 echo '<td>'.$countryandcity['City'].', '.$countryandcity['Country'].'</td>'; 
     echo '<td><a href="?action=editform&id='.$item['IDUniversity'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDUniversity'].'">Удл.</a></td>'; 
     echo '</tr>'; 
