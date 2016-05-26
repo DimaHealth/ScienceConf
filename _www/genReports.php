@@ -151,6 +151,14 @@ $IDEvent = mysqli_escape_string($connect, $_POST['IDEvent'] );
  $sql = "SELECT `EventName`, `StartDate`, `ExpirationDate`, `EventType`, `Status`, `Level`, `Partner` FROM (`events` INNER JOIN `eventtypes` ON `CodeEventType` = `IDEventType` INNER JOIN `status` ON `CodeStatus` = `IDStatus` INNER JOIN `levels` ON `CodeLevel` = `IDLevel` INNER JOIN `partners` ON `IDEvent` = `CodeEvent`)  WHERE `IDEvent`= ".$IDEvent." GROUP BY `Partner` ";
  
 $res = mysqli_query($connect, $sql);
+$flag = 0;
+if (mysqli_num_rows($res) == 0)
+{
+	$flag = 1;
+	$sql = "SELECT `EventName`, `StartDate`, `ExpirationDate`, `EventType`, `Status`, `Level` FROM (`events` INNER JOIN `eventtypes` ON `CodeEventType` = `IDEventType` INNER JOIN `status` ON `CodeStatus` = `IDStatus` INNER JOIN `levels` ON `CodeLevel` = `IDLevel` )  WHERE `IDEvent`= ".$IDEvent;
+	$res = mysqli_query($connect, $sql);
+}
+ //die(var_dump($_POST, $_GET, $res));
  $item = mysqli_fetch_array( $res ); 
 // //3. colspan (gridSpan) and rowspan (vMerge)
 
@@ -241,10 +249,15 @@ switch ($item['EventType'])
 		$counter = 1;
 		
 		$res = mysqli_query($connect, $sql);
-		while($item = mysqli_fetch_array( $res )) {
-			$partnersStr .= $counter++.". ".$item['Partner']."\n";
-			
+		if ($flag!=1)
+		{
+			while($item = mysqli_fetch_array( $res ))
+			{
+				$partnersStr .= $counter++.". ".$item['Partner']."\n";
+				
+			}
 		}
+
 
 	$table->addRow();
 		$table->addCell(2000)->addText(htmlspecialchars('Соорганизаторы:'));

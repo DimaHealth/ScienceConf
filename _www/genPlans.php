@@ -153,12 +153,12 @@ $CodePlan = mysqli_escape_string($connect, $_POST['CodePlan'] );
 	
  $sql = "SELECT  `EventName`, `StartDate`, `ExpirationDate`,
  `Cathedra`, `EventType`, `FIO`, `employees`.`Phone`, `employees`.`Email`, `Post`,
- `Status`, `Level`, `Website`, `CodePreviosEvent` FROM (`events` INNER JOIN `cathedrae`
- ON `CodeCathedra` = `IdCathedra` INNER JOIN `eventtypes`
+ `Status`, `Level`, `Website`, `CodePreviosEvent` FROM (`events`  INNER JOIN `eventtypes`
  ON `CodeEventType` = `IdEventType` INNER JOIN `status`
  ON `CodeStatus` = `IdStatus` INNER JOIN `levels`
- ON `CodeLevel` = `IdLevel` INNER JOIN `employees`
- ON `CodeExecutiveSecretary` = `IdEmployee` INNER JOIN `posts`
+ ON `CodeLevel` = `IdLevel` INNER JOIN `employees` 
+ ON `CodeExecutiveSecretary` = `IdEmployee` INNER JOIN `cathedrae`
+ ON employees.CodeCathedra = `IdCathedra` INNER JOIN `posts`
  ON `CodePost` = `IdPost`) WHERE `CodePlan`=".$CodePlan;
 $res = mysqli_query($connect, $sql);
 

@@ -152,15 +152,7 @@ $phpWord->addTitleStyle(1, array('bold' => true), array('spaceAfter' => 240));
 
 $CodePlan = mysqli_escape_string($connect, $_POST['CodePlan'] ); 
 
-$sql = "SELECT `IDEvent`, `EventName`, `StartDate`,
- `Cathedra`, `EventType`, `FIO`, `Post`,
- `Status`, `Level` FROM (`events` INNER JOIN `cathedrae`
- ON `CodeCathedra` = `IdCathedra` INNER JOIN `eventtypes`
- ON `CodeEventType` = `IdEventType` INNER JOIN `status`
- ON `CodeStatus` = `IdStatus` INNER JOIN `levels`
- ON `CodeLevel` = `IdLevel` INNER JOIN `employees`
- ON `CodeExecutiveSecretary` = `IdEmployee` INNER JOIN `posts`
- ON `CodePost` = `IdPost`) WHERE `CodePlan`=".$CodePlan;
+$sql = "SELECT `IDEvent`, `EventName`, `StartDate`, `Cathedra`, `EventType`, `FIO`, `Post`, `Status`, `Level` FROM (`events` INNER JOIN `eventtypes` ON `CodeEventType` = `IDEventType` INNER JOIN `status` ON `CodeStatus` = `IDStatus` INNER JOIN `levels` ON `CodeLevel` = `IDLevel` INNER JOIN `employees` ON `CodeExecutiveSecretary` = `IDEmployee` INNER JOIN `cathedrae` ON employees.CodeCathedra = `IDCathedra` INNER JOIN `posts` ON `CodePost` = `IDPost`) WHERE `CodePlan`=".$CodePlan;
 $res = mysqli_query($connect, $sql);
 
 	// New portrait section
@@ -211,6 +203,7 @@ $res = mysqli_query($connect, $sql);
 	
 	$section->addText(htmlspecialchars('1.3 Ответственный секретарь оргкомитета:'));
 	$section->addTextBreak(1);
+
 	$section->addText(htmlspecialchars('- '.$item['FIO'].", ".$item['Post']." \"".$item['Cathedra']."\";"));
 	$section->addTextBreak(1);
 	$section->addText(htmlspecialchars('2. Подготовить и разослать участникам программу работы '.$item['EventType']."."));
