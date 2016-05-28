@@ -131,7 +131,7 @@
 			<p class="col_50">
 					  <p class="col_50">
               <label for="type"></label></td>
-		  <td style=" color: #000;">Тип профиля:<br/>
+		  <td style=" color: #fff;">Тип профиля:<br/>
 		  
        <?php
       require("dbconnect.php");
@@ -143,7 +143,7 @@ $result_select = mysqli_query($connect, $sql);
 
 /*Выпадающий список*/
 
-echo "<select  name = CodeProfileType >";
+echo "<select style= 'color: #000' name = CodeProfileType >";
 
 while($arr = mysqli_fetch_array($result_select)){
 
@@ -151,7 +151,7 @@ echo "<option  value = '$arr[0]' > $arr[1]</option>";
 
 }
 
-echo "<option value = '' > </option>";echo "</select>";
+echo "</select>";
 
 ?>
 		</td>

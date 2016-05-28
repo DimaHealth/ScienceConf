@@ -17,7 +17,7 @@
 
 		<tr> 
 			<td style="color: #fff;">Номер приказа</td> 
-			<td><input type="number" name="OrderNumber" value="<?= htmlspecialchars($item["OrderNumber"]) ?>" /></td> 
+			<td><input type="text" name="OrderNumber" value="<?= htmlspecialchars($item["OrderNumber"]) ?>" /></td> 
 		</tr> 
 
 		<tr> 

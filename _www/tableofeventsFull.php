@@ -111,6 +111,7 @@ $res = mysqli_query($connect, $sql);
   echo '<tr><th>IDEvent</th><th>Название</th><th>Дата начала</th>
   <th>Дата окончания</th><th>Кафедра</th><th>Тип мероприятия</th>
   <th>Ссылка на пресс-релиз</th><th>Ссылка на пост-релиз</th><th>Рейтинг</th><th>Предшествующее мероприятие</th>
+  <th>Год плана</th>
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
@@ -124,6 +125,7 @@ $res = mysqli_query($connect, $sql);
 	IDCathedra = ".$item['CodeCathedra'];
 	$res2 =  mysqli_query($connect, $sql2);
 	 echo '<td>'.mysqli_fetch_array( $res2 )['Cathedra'].'</td>'; 
+	
 	 $sql3 = "SELECT `EventType` FROM `eventtypes` WHERE 
 	 IDEventType = ".$item['CodeEventType'];
 	$res3 =  mysqli_query($connect, $sql3);
@@ -137,6 +139,17 @@ $res = mysqli_query($connect, $sql);
 	if ($res4 !=NULL)
 	{
 		echo '<td>'.mysqli_fetch_array( $res4 )['EventName'].'</td>'; 
+	}
+	else
+	{
+		echo '<td></td>'; 
+	}
+	$sql4 = "SELECT `CalendarYear` FROM `plans` WHERE 
+	 IDPlan = ".$item['CodePlan'];
+	$res4 =  mysqli_query($connect, $sql4);
+	if ($res4 !=NULL)
+	{
+		echo '<td>'.mysqli_fetch_array( $res4 )['CalendarYear'].'</td>'; 
 	}
 	else
 	{
@@ -374,7 +387,7 @@ CodeCollection = '".$CodeCollection."',CodeExecutiveSecretary = '".$CodeExecutiv
    WHERE IDEvent=".$id;
    //
    mysqli_query ($connect, $query ); 
-  // die(var_dump($_POST, $_GET, $id));
+ //  die(var_dump($_POST, $_GET, $CodePlan));
   
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();

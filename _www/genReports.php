@@ -167,32 +167,6 @@ switch ($item['EventType'])
  {
 	case 'конференция':
 	
-		// $styleTable = array('borderSize' => 6, 'borderColor' => '999999');
-		// $cellRowSpan = array('vMerge' => 'restart', 'valign' => 'center', 'bgColor' => 'FFFF00');
-		// $cellRowContinue = array('vMerge' => 'continue');
-		// $cellColSpan = array('gridSpan' => 2, 'valign' => 'center');
-		// $cellHCentered = array('align' => 'center');
-		// $cellVCentered = array('valign' => 'center');
-
-		
-		// $table->addRow();
-
-		// $cell1 = $table->addCell(2000, $cellRowSpan);
-		// $textrun1 = $cell1->addTextRun($cellHCentered);
-		// $textrun1->addText(htmlspecialchars('A'));
-		// $textrun1->addFootnote()->addText(htmlspecialchars('Row span'));
-
-		
-	
-		// $table->addCell(2000, $cellRowSpan)->addText(htmlspecialchars('E'), null, $cellHCentered);
-
-		// $table->addRow();
-		// $table->addCell(null, $cellRowContinue);
-		// $table->addCell(2000, $cellVCentered)->addText(htmlspecialchars('C'), null, $cellHCentered);
-		// $table->addCell(2000, $cellVCentered)->addText(htmlspecialchars('D'), null, $cellHCentered);
-		// $table->addCell(null, $cellRowContinue);
-	
-	
 	
 		$section->addTextBreak(1);
 		$TableName = "Отчёт по конференции";
@@ -207,41 +181,41 @@ switch ($item['EventType'])
 		$styleTable = array('borderSize' => 6, 'borderColor' => '999999');
 		$cellRowSpan = array('vMerge' => 'restart', 'align' => 'left');
 		$cellRowContinue = array('vMerge' => 'continue');
-		$cellColSpan = array('gridSpan' => 2, 'valign' => 'center');
+		$cellColSpan3 = array('gridSpan' => 3, 'valign' => 'center');
+		$cellColSpan4 = array('gridSpan' => 4, 'valign' => 'center');
+		$cellColSpan2 = array('gridSpan' => 4, 'valign' => 'center');
 		$cellHCentered = array('align' => 'center');
 		$cellVCentered = array('valign' => 'center');
 		$cellLeft = array('align' => 'left');
 		
 		$table = $section->addTable($TableName);
-		$RIGHT_COLUMN_WIDTH = 7500;
+		$RIGHT_COLUMN_WIDTH = 1800;
+		
 	$table->addRow();
-		$table->addCell(2000)->addText(htmlspecialchars('Вид, статус и уровень:'));
-		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan);
+		$table->addCell(1800)->addText(htmlspecialchars('Вид, статус и уровень:'));
+		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
 		$textrun2 = $cell2->addTextRun($cellLeft);
 		$textrun2->addText(htmlspecialchars("{$item['Level']}"." "."{$item['Status']}"." "
 		."{$item['EventType']}"));
 		
-		
 	$table->addRow();
-		$table->addCell(2000)->addText(htmlspecialchars('Название:'));
-		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan);
+		$table->addCell(1800)->addText(htmlspecialchars('Название:'));
+		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
 		$textrun2 = $cell2->addTextRun($cellLeft);
 		$textrun2->addText(htmlspecialchars("\"{$item['EventName']}\""));
 		//$table->addCell($RIGHT_COLUMN_WIDTH)->addText(htmlspecialchars("\"{$item['EventName']}\""));
 		
 	$table->addRow();
-		$table->addCell(2000)->addText(htmlspecialchars('Место проведения:'));
-		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan);
+		$table->addCell(1800)->addText(htmlspecialchars('Место проведения:'));
+		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
 		$textrun2 = $cell2->addTextRun($cellLeft);
 		$textrun2->addText(htmlspecialchars('г.Донецк, Донецкий национальный технический университет'));
 		
-		
 	$table->addRow();
-		$table->addCell(2000)->addText(htmlspecialchars('Даты проведения:'));
-		
+		$table->addCell(1800)->addText(htmlspecialchars('Даты проведения:'));
 		$StartDate = strtotime($item['StartDate']);
 		$EndDate = strtotime($item['ExpirationDate']);
-		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan);
+		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
 		$textrun2 = $cell2->addTextRun($cellLeft);
 		$textrun2->addText(htmlspecialchars(date('d.m.Y',($StartDate))." - ".date('d.m.Y',($EndDate))));
 		
@@ -260,30 +234,86 @@ switch ($item['EventType'])
 
 
 	$table->addRow();
-		$table->addCell(2000)->addText(htmlspecialchars('Соорганизаторы:'));
-		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan);
+		$table->addCell(1800)->addText(htmlspecialchars('Соорганизаторы:'));
+		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
 		$textrun2 = $cell2->addTextRun($cellLeft);
 		$textrun2->addText($partnersStr);
 		
-
 		$sqlSectionsOfEvent = "SELECT Section, COUNT(IDPublication) as NumOfPublications FROM events INNER JOIN sections ON IDEvent = CodeEvent INNER JOIN publications ON IDSection = CodeSection WHERE IDEvent = ".$IDEvent." GROUP BY Section";
-	$table->addRow();
-	
-	$cell1 = $table->addCell(2000, $cellRowSpan);
-		$textrun1 = $cell1->addTextRun($cellHCentered);
-		$textrun1->addText(htmlspecialchars('Секции и количество докладчиков:'));
-		//$textrun1->addFootnote()->addText(htmlspecialchars('Row span'));
 		
-		$table->addCell(3750)->addText('');
-	    $table->addCell(3750)->addText('');
+		
 	$table->addRow();
-		$cell1 = $table->addCell(2000, $cellRowContinue);
-		$table->addCell(3750)->addText('');
-	    $table->addCell(3750)->addText('');
-	$table->addRow();
-		$cell1 = $table->addCell(2000, $cellRowContinue);
-		$table->addCell(3750)->addText('');
-	    $table->addCell(3750)->addText('');
+		$cell1 = $table->addCell(1800, $cellRowSpan);
+		$textrun1 = $cell1->addTextRun($cellLeft);
+		$textrun1->addText(htmlspecialchars('Секции и количество докладчиков:'));
+		
+		$sectionsOfEventResult = mysqli_query($connect, $sqlSectionsOfEvent);
+		$itemSections = mysqli_fetch_array($sectionsOfEventResult);
+		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan3);
+		$textrun2 = $cell2->addTextRun($cellLeft);
+		$textrun2->addText(htmlspecialchars("1. ".$itemSections['Section']));
+		//$table->addCell(1800)->addText();
+	    $table->addCell(1800)->addText(htmlspecialchars($itemSections['NumOfPublications']));
+		
+		$counter = 2;
+		$totalSumOfPublicators = $itemSections['NumOfPublications'];
+		while($itemSections = mysqli_fetch_array($sectionsOfEventResult))
+		{
+			$table->addRow();
+				$cell1 = $table->addCell(1800, $cellRowContinue);
+				$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan3);
+				$textrun2 = $cell2->addTextRun($cellLeft);
+				$textrun2->addText(htmlspecialchars(htmlspecialchars($counter++.". ".$itemSections['Section'])));
+							
+				$totalSumOfPublicators += $itemSections['NumOfPublications'];
+				
+				$table->addCell(1800)->addText(htmlspecialchars($itemSections['NumOfPublications']));
+		}
+	 $table->addRow();
+		 $table->addCell(1800)->addText(htmlspecialchars('Общее количество зарегистрированных участников:'));
+		 $cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
+		 $textrun2 = $cell2->addTextRun($cellLeft);
+		 $textrun2->addText(htmlspecialchars($totalSumOfPublicators)." чел.");
+		  $sqlStudentsDonntu = "SELECT FIO, `Group`, Theme FROM events INNER JOIN sections ON IDEvent = CodeEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN groups ON CodeGroup = IDGroup INNER JOIN cathedrae ON publicators.CodeCathedra = IDCathedra INNER JOIN faculties ON CodeFaculty = IDFaculty INNER JOIN universities ON CodeUniversity = IDUniversity WHERE University = 'ДонНТУ' AND HasReport = 1 AND IDEvent =".$IDEvent;
+		 $resStudentsDonntu = mysqli_query($connect, $sqlStudentsDonntu);
+		
+		 
+		 for($i = 1;  $itemStudentsDonntu = mysqli_fetch_array($resStudentsDonntu); $i++) 
+		 {
+		 $table->addRow();
+			 if ($i == 1)
+			 {
+				 $cell1 = $table->addCell(1800, $cellRowSpan);
+					$textrun1 = $cell1->addTextRun($cellLeft);
+					$textrun1->addText(htmlspecialchars('В т.ч. участие студентов ДонНТУ с докладами и публикациями:'));
+			 }
+			 else
+			 {
+				 $cell1 = $table->addCell(1800, $cellRowContinue);
+				 
+			 }
+			$cell2=$table->addCell(1800)->addText(htmlspecialchars($itemStudentsDonntu['FIO']));
+			$cell3=$table->addCell(1800)->addText(htmlspecialchars("гр. ".$itemStudentsDonntu['Group']));
+			$cell4 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan2);
+			$textrun4 = $cell4->addTextRun($cellLeft);
+			$textrun4->addText(htmlspecialchars($itemStudentsDonntu['Theme']));
+			
+		 }
+		 
+	 $table->addRow();
+		$cell1 = $table->addCell(1800, $cellRowSpan);
+		$textrun1 = $cell1->addTextRun($cellLeft);
+		$textrun1->addText(htmlspecialchars('В т.ч. участие представителей сторонних вузов, предприятий и организаций:'));
+		$table->addCell(1800)->addText('');
+	    $table->addCell(1800)->addText('');
+		$table->addCell(1800)->addText('');
+	    $table->addCell(1800)->addText('');
+	 $table->addRow();
+		$cell1 = $table->addCell(1800, $cellRowContinue);
+		$table->addCell(1800)->addText('');
+	    $table->addCell(1800)->addText('');
+		$table->addCell(1800)->addText('');
+	    $table->addCell(1800)->addText('');
 		break;
 }
 

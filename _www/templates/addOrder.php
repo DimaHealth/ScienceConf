@@ -19,7 +19,7 @@
 				
                 <tr> 
                     <td style="color: #fff;">Номер приказа</td>
-                    <td><input type="number" name="OrderNumber" value="" required="" /></td>
+                    <td><input type="text" name="OrderNumber" value="" required="" /></td>
                 </tr>
 				
                 <tr> 
