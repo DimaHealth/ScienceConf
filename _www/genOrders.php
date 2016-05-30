@@ -84,6 +84,7 @@ $result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($conne
 						<li ><a href="genPlans.php">Планы</a></li>
 						<li class="active"><a href="genOrders.php">Приказы</a></li>
 						<li><a href="genReports.php">Отчеты</a></li>
+						<li><a href="genPeriodReport.php">Отчет за  период  </a></li>
                   </ul>
 				</nav>
 			</div>

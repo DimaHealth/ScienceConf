@@ -84,6 +84,7 @@ $result = mysqli_query($connect, $query) or die ( "Error : ".mysqli_error($conne
 						<li class="active"><a href="genPlans.php">Планы</a></li>
 						<li><a href="genOrders.php">Приказы</a></li>
 						<li><a href="genReports.php">Отчеты</a></li>
+						<li><a href="genPeriodReport.php">Отчет за  период  </a></li>
                   </ul>
 				</nav>
 			</div>
@@ -167,7 +168,7 @@ $section->addTextBreak(1);
 $TableName = "План мероприятий на ".mysqli_fetch_array( $res2 )['CalendarYear']." год";
 $section->addText(htmlspecialchars("{$TableName}"), $header);
 
-$styleTable = array('borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80);
+$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
 $styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
 $styleCell = array('valign' => 'center');
 $styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
