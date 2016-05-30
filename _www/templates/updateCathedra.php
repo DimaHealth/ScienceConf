@@ -31,8 +31,7 @@
 				<?php
 					require("dbconnect.php");
 
-					$sql = "SELECT * FROM faculties";
-
+					$sql = "SELECT `IDFaculty`,`Faculty`, University FROM `faculties` INNER JOIN universities ON CodeUniversity = IDUniversity";
 					$result_select = mysqli_query($connect, $sql);
 
 					/*Выпадающий список*/
@@ -40,7 +39,7 @@
 					echo "<select  name = CodeFaculty>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+						echo "<option value = '$arr[0]'> $arr[1] , $arr[2] </option>";
 					}
 
 					echo "<option value = '' > </option>";echo "</select>";

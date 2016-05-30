@@ -141,7 +141,7 @@ $res = mysqli_query($connect, $sql);
     echo '<table border="1" class="table" >';      
    
   echo '<tr><th>IDCathedra</th><th>Кафедра</th><th>Телефон</th>
-  <th>E-mail</th><th>Факультет</th>
+  <th>E-mail</th><th>Факультет, Университет</th>
   <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
@@ -151,9 +151,11 @@ $res = mysqli_query($connect, $sql);
     echo '<td>'.$item['Phone'].'</td>'; 
     echo '<td>'.$item['Email'].'</td>'; 
     
-	$sql2 = "SELECT `Faculty` FROM `faculties` WHERE IDFaculty = ".$item['CodeFaculty'];
+	$sql2 = "SELECT `Faculty`, University FROM `faculties` INNER JOIN universities ON CodeUniversity = IDUniversity WHERE IDFaculty = ".$item['CodeFaculty'];
 	$res2 =  mysqli_query($connect, $sql2);
-	 echo '<td>'.mysqli_fetch_array( $res2 )['Faculty'].'</td>';
+		$fakultyAndUniversity = mysqli_fetch_array( $res2 );
+	 echo '<td>'.$fakultyAndUniversity['Faculty'].', '.$fakultyAndUniversity['University'].'</td>'; 
+		
     echo '<td><a href="?action=editform&id='.$item['IDCathedra'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDCathedra'].'">Удл.</a></td>'; 
     echo '</tr>'; 
