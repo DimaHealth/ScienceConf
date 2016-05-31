@@ -40,10 +40,11 @@
 					echo "<select  name = CodeUniversity>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+                             	$selected = $arr['IDUniversity'] == $item['CodeUniversity'];
+								echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1]</option>";
 					}
 
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td> 
 		</tr> 

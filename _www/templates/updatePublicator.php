@@ -36,7 +36,9 @@
 					/*Выпадающий список*/
 					echo "<select  name = CodeGroup>";
 					while($arr = mysqli_fetch_array($result_select)) {
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+							$selected = $arr['IDGroup'] == $item['CodeGroup'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1] </option>";
 					}
 					echo "<option value = '' > </option>";echo "</select>";
 				?>
@@ -54,7 +56,9 @@
 					/*Выпадающий список*/
 					echo "<select  name = CodeCathedra>";
 					while($arr = mysqli_fetch_array($result_select)) {
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+							$selected = $arr['IDCathedra'] == $item['CodeCathedra'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1] </option>";
 					}
 					echo "<option value = '' > </option>";echo "</select>";
 				?>

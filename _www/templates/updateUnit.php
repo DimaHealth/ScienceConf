@@ -25,10 +25,12 @@
 					echo "<select  name = CodeDepartment>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+							$selected = $arr['IDDepartment'] == $item['CodeDepartment'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1] </option>";
 					}
 
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td> 
 		</tr> 
@@ -48,10 +50,12 @@
 					echo "<select  name = CodeEmployee>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+							$selected = $arr['IDEmployee'] == $item['CodeEmployee'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1] </option>";
 					}
 
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td> 
 		</tr> 

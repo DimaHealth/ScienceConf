@@ -13,6 +13,7 @@
 	<tr> 
 			<td style="color: #fff;">Студент</td>
 			<td style="color: #000;">
+
 				<?php
 					require("dbconnect.php");
 					$sql = "SELECT * FROM publicators";
@@ -21,9 +22,11 @@
 					/*Выпадающий список*/
 					echo "<select  name = CodeStudent>";
 					while($arr = mysqli_fetch_array($result_select)) {
-						echo "<option value = '$arr[0]' > $arr[3]</option>";
+						$selected = $arr['IDPublicator'] == $item['CodeStudent'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[3]</option>";
 					}
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td>
 		</tr>
@@ -39,7 +42,9 @@
 					/*Выпадающий список*/
 					echo "<select  name = CodeSection>";
 					while($arr = mysqli_fetch_array($result_select)) {
-						echo "<option value = '$arr[0]' > $arr[1], $arr[2]</option>";
+						$selected = $arr['IDSection'] == $item['CodeSection'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1], $arr[2] </option>";
 					}
 					echo "<option value = '' > </option>";echo "</select>";
 				?>
@@ -62,7 +67,9 @@
 					/*Выпадающий список*/
 					echo "<select  name = CodeHead>";
 					while($arr = mysqli_fetch_array($result_select)) {
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+							$selected = $arr['IDEmployee'] == $item['CodeHead'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1] </option>";
 					}
 					echo "<option value = '' > </option>";echo "</select>";
 				?>

@@ -30,10 +30,12 @@
 					echo "<select  name = CodePost>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+						          	$selected = $arr['IDPost'] == $item['CodePost'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1]</option>";
 					}
 
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td> 
 		</tr> 
@@ -53,10 +55,12 @@
 					echo "<select  name = CodeDegree>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+						          	$selected = $arr['IDDegree'] == $item['CodeDegree'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1]</option>";
 					}
 
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td> 
 		</tr> 
@@ -76,10 +80,12 @@
 					echo "<select  name = CodeRank>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]' > $arr[1]</option>";
+						          	$selected = $arr['IDRank'] == $item['CodeRank'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1]</option>";
 					}
 
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td> 
 		</tr> 
@@ -108,10 +114,12 @@
 					echo "<select  name = CodeCathedra>";
 
 					while($arr = mysqli_fetch_array($result_select)){
-						echo "<option value = '$arr[0]'> $arr[1] </option>";
+						          	$selected = $arr['IDCathedra'] == $item['CodeCathedra'];
+						
+						echo "<option value = '$arr[0]'".($selected ? "selected" : "")."> $arr[1]</option>";
 					}
 
-					echo "<option value = '' > </option>";echo "</select>";
+					echo "</select>";
 				?>
 			</td>
 		</tr>
