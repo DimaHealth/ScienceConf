@@ -176,6 +176,7 @@ $phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
 		$cellHCentered = array('align' => 'center');
 		$cellVCentered = array('valign' => 'center');
 		$cellLeft = array('align' => 'left');
+		$cellRight = array('align' => 'right');
 		
 $table = $section->addTable($TableName);
 
@@ -379,7 +380,7 @@ $table->addRow(900);
 		$textrun4->addText(htmlspecialchars($outsidePlan));
 		
 	$table->addRow();
-		$table->addCell(2000)->addText(htmlspecialchars("Всего:"));
+		$table->addCell(7000)->addTextRun($cellRight)->addText(htmlspecialchars("Всего:"));
 		
 
 		$cell1 = $table->addCell(1800);
@@ -393,11 +394,152 @@ $table->addRow(900);
 		$cell3 = $table->addCell(1800);
 		$textrun3 = $cell3->addTextRun($cellHCentered);
 		$textrun3->addText(htmlspecialchars($sumcancelled +$sumpostponed));
-		
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
 				
 		$cell4 = $table->addCell(1800);
 		$textrun4 = $cell4->addTextRun($cellHCentered);
 		$textrun4->addText(htmlspecialchars($sumoutsidePlan));
+		
+		
+///////////////////////////////////////////////////////////////////=========================================================////
+////////////////////////////////////////////////////////////////		
+		
+		
+		$section->addTextBreak(1);
+		$TableName = "Кол-во сотрудников учавствовавших в организации НТМ в период  ".$StartDate." - ".$EndDate;
+		$section->addText(htmlspecialchars("{$TableName}"), $header);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$fontStyle = array('bold' => true, 'align' => 'center');
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '999999');
+		$cellRowSpan = array('vMerge' => 'restart', 'align' => 'left');
+		$cellRowContinue = array('vMerge' => 'continue');
+		$cellColSpan3 = array('gridSpan' => 3, 'valign' => 'center');
+		$cellColSpan4 = array('gridSpan' => 4, 'valign' => 'center');
+		$cellColSpan2 = array('gridSpan' => 2, 'valign' => 'center');
+		$cellHCentered = array('align' => 'center');
+		$cellVCentered = array('valign' => 'center');
+		$cellLeft = array('align' => 'left');
+		$cellRight = array('align' => 'right');
+		
+		
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		
+		$table2 = $section->addTable($TableName);
+		
+	$table2->addRow();
+		$table2->addCell(7000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Факультет"));
+		$table2->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Кол-во"));
+		
+		$sqlNumOfEmployees = "SELECT Faculty, COUNT(IDEvent) AS NumberOfEmployees FROM events INNER JOIN involvedemployees ON CodeEvent = IDEvent INNER JOIN employees ON CodeEmployee = IDEmployee INNER JOIN cathedrae ON employees.CodeCathedra = IDCathedra INNER JOIN faculties ON CodeFaculty = IDFaculty WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') GROUP BY Faculty ORDER BY NumberOfEmployees DESC ";
+		$resNumOfEmployees = mysqli_query($connect, $sqlNumOfEmployees);
+		
+		$sum = 0;
+		while($itemNumOfEmployees = mysqli_fetch_array($resNumOfEmployees))
+		{
+			$table2->addRow();
+				$table2->addCell(7000)->addTextRun($cellLeft)->addText(htmlspecialchars($itemNumOfEmployees['Faculty']));
+				
+				$table2->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemNumOfEmployees['NumberOfEmployees']));
+				
+				$sum += $itemNumOfEmployees['NumberOfEmployees'];
+		}
+		
+		$table2->addRow();
+			$table2->addCell(7000)->addTextRun($cellRight)->addText(htmlspecialchars("Всего:"));
+			$table2->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($sum));
+		
+		
+		
+		////////////////////////////////////////////////////////
+		//================================================//////
+		////////////////////////////////////////////////////////
+		
+				
+		
+		
+		$section->addTextBreak(1);
+		$TableName = "Кол-во участником НТМ в период  ".$StartDate." - ".$EndDate;
+		$section->addText(htmlspecialchars("{$TableName}"), $header);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$fontStyle = array('bold' => true, 'align' => 'center');
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '999999');
+		$cellRowSpan = array('vMerge' => 'restart', 'align' => 'left');
+		$cellRowContinue = array('vMerge' => 'continue');
+		$cellColSpan3 = array('gridSpan' => 3, 'valign' => 'center');
+		$cellColSpan4 = array('gridSpan' => 4, 'valign' => 'center');
+		$cellColSpan2 = array('gridSpan' => 2, 'valign' => 'center');
+		$cellHCentered = array('align' => 'center');
+		$cellVCentered = array('valign' => 'center');
+		$cellLeft = array('align' => 'left');
+		$cellRight = array('align' => 'right');
+		
+		
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		
+		$table3 = $section->addTable($TableName);
+		
+	$table3->addRow();
+		$table3->addCell(5000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Вид мероприятия"));
+		$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Суммарное кол-во"));
+		$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Кол-во студентов"));
+		
+		
+		
+		$sqlNumOfParticipants = "SELECT `Status`, COUNT(IDPublicator) AS NumberOfStudents, (SELECT COUNT(IDPublicator) FROM publicators  INNER JOIN publications ON CodeStudent = IDPublicator INNER JOIN sections ON CodeSection = IDSection INNER JOIN events ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE publicators.IsSchoolChild = 1 AND `Status` = 'для студентов' AND DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') ) AS scholarsforstudents, (SELECT COUNT(IDPublicator) FROM publicators  INNER JOIN publications ON CodeStudent = IDPublicator INNER JOIN sections ON CodeSection = IDSection INNER JOIN events ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE publicators.IsSchoolChild = 1 AND `Status` = 'общее мероприятие' AND DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') ) AS scholarsall, (SELECT COUNT(IDPublicator) FROM publicators  INNER JOIN publications ON CodeStudent = IDPublicator INNER JOIN sections ON CodeSection = IDSection INNER JOIN events ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE publicators.IsSchoolChild = 1 AND `Status` = 'для молодых ученых' AND DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') ) AS scholarsScience, SUM(NumberOfParticipants)
+		AS partParticip FROM `events` INNER JOIN `status` ON CodeStatus = IDStatus INNER JOIN sections ON CodeEvent = IDEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN partners ON partners.CodeEvent = IDEvent WHERE DATE(StartDate) >= DATE('2014-03-15') AND DATE(ExpirationDate) <= DATE('2017-03-15') GROUP BY Status";
+		// $sqlNumOfEmployees = "SELECT `Status`, COUNT(IDPublicator) AS NumberOfStudents, SUM(NumberOfParticipants)
+		// AS partParticip FROM `events` INNER JOIN `status` ON CodeStatus = IDStatus INNER JOIN sections ON CodeEvent = IDEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN partners ON partners.CodeEvent = IDEvent GROUP BY `Status`";
+		
+		$resNumOfParticipants = mysqli_query($connect, $sqlNumOfParticipants);
+		
+		// $scholarsinEventsForStudents = 0;
+		// $scholarsinEventsForScientist = 2;
+		$totalSum = 0;
+		$totalNumOfStudents = 0;
+		while($itemNumOfParticipants = mysqli_fetch_array($resNumOfParticipants))
+		{
+		$table3->addRow();
+			$table3->addCell(5000)->addTextRun($cellLeft)->addText(htmlspecialchars($itemNumOfParticipants['Status']));
+			$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemNumOfParticipants['NumberOfStudents'] + $itemNumOfParticipants['partParticip']));
+			
+			$totalSum += $itemNumOfParticipants['NumberOfStudents'] + $itemNumOfParticipants['partParticip'];
+			
+			if ($itemNumOfParticipants['Status']=="общее мероприятие")
+			{
+				$scholarsinCommonEvents = $itemNumOfParticipants['scholarsall'];
+				$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemNumOfParticipants['NumberOfStudents']-$scholarsinCommonEvents));
+				$totalNumOfStudents += $itemNumOfParticipants['NumberOfStudents']-$scholarsinCommonEvents;
+			}
+			 else
+			 {
+				$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemNumOfParticipants['NumberOfStudents']));
+				$totalNumOfStudents += $itemNumOfParticipants['NumberOfStudents'];
+			 }
+			
+		}
+		
+		$table3->addRow();
+				$table3->addCell(5000)->addTextRun($cellRight)->addText(htmlspecialchars("Всего: "));
+				$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($totalSum));
+				$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($totalNumOfStudents));
 		
 		
 // Save file
