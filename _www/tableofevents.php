@@ -196,26 +196,73 @@ require("dbconnect.php");
    // `RatingMark`, посчитать рейтинговую оценку в контексте полученных данных
   // '$RatingMark',
   
-  $query = " INSERT INTO `events`(`EventName`, `StartDate`,
-  `ExpirationDate`, `CodeCathedra`,
-  `CodeEventType`, `PressReleaseRef`,
-  `PostReleaseRef`, `CodeExecutiveSecretary`,
-  `CodePlan`, `CodeOrder`,
-  `NumberOfTeachersDonNTU`, `CodeStatus`,
-  `CodeLevel`, `Website`, `ReferenceToProgram`,
-  `Comments`, `CodePreviosEvent`,
-  `CodeCollection`,
-  `ExpectedCountries`)
-  VALUES ('$EventName','$StartDate',
-  '$ExpirationDate','$CodeCathedra',
-  '$CodeEventType','$PressReleaseRef',
-  '$PostReleaseRef','$CodeExecutiveSecretary',
-  '$CodePlan','$CodeOrder',
-  '$NumberOfTeachersDonNTU','$CodeStatus',
-  '$CodeLevel', '$Website','$ReferenceToProgram','$Comments',
+ 
+  
+if($CodePreviosEvent == NULL )
+{
+	if ($CodePlan!=NULL)
+	{
+				$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+		  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+		  `CodePlan`, `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+		  `ReferenceToProgram`,  `Comments`,`CodeCollection`,  `ExpectedCountries`)
+		  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+		  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+		  '$CodePlan','$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+		  '$ReferenceToProgram','$Comments','$CodeCollection','$ExpectedCountries')"; 
+		 //die(var_dump($_POST, $_GET, $CodePreviosEvent));
+		  mysqli_query ($connect, $query ); 
+	}
+	else
+	{
+			$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+			  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+			   `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+			 `ReferenceToProgram`,  `Comments`,
+			  `CodeCollection`,  `ExpectedCountries`)
+			  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+			  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+			  '$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+			 '$ReferenceToProgram','$Comments','$CodeCollection','$ExpectedCountries')"; 
+			 //die(var_dump($_POST, $_GET, $CodePreviosEvent));
+			  mysqli_query ($connect, $query ); 
+	}
+	
+		
+}
+	else if ($CodePlan == NULL)
+	{
+				$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+	  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+	   `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+	  `ReferenceToProgram`,  `Comments`, `CodePreviosEvent`, `CodeCollection`,  `ExpectedCountries`)
+	  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+	  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+	  '$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+	  '$ReferenceToProgram','$Comments', 
+	  '$CodePreviosEvent','$CodeCollection','$ExpectedCountries')"; 
+	 //die(var_dump($_POST, $_GET, $CodePreviosEvent));
+	  mysqli_query ($connect, $query ); 
+	}
+	
+
+else if ($CodePlan!=NULL && $CodePreviosEvent!=NULL)
+{
+	$query = " INSERT INTO `events`(`EventName`, `StartDate`,  `ExpirationDate`, `CodeCathedra`,
+  `CodeEventType`, `PressReleaseRef`,  `PostReleaseRef`, `CodeExecutiveSecretary`,
+  `CodePlan`, `CodeOrder`,  `NumberOfTeachersDonNTU`, `CodeStatus`,  `CodeLevel`, `Website`,
+  `ReferenceToProgram`,  `Comments`,
+  `CodePreviosEvent`, `CodeCollection`,  `ExpectedCountries`)
+  VALUES ('$EventName','$StartDate',  '$ExpirationDate','$CodeCathedra',
+  '$CodeEventType','$PressReleaseRef',  '$PostReleaseRef','$CodeExecutiveSecretary',
+  '$CodePlan','$CodeOrder',  '$NumberOfTeachersDonNTU','$CodeStatus',  '$CodeLevel', '$Website',
+  '$ReferenceToProgram','$Comments',
   '$CodePreviosEvent','$CodeCollection','$ExpectedCountries')"; 
- //die(var_dump($_POST, $_GET, $EventName));
+ //die(var_dump($_POST, $_GET, $CodePreviosEvent));
   mysqli_query ($connect, $query ); 
+}
+
+  
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 }
