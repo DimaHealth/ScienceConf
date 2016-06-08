@@ -55,6 +55,32 @@ echo "<option value = '' > </option>";echo "</select>";
 ?>
 </td>
   </tr>
+   <tr>
+  <td style="color: #fff;">Страна</td>
+  <td style="color: #000;">
+  <?php
+require("dbconnect.php");
+
+$sql = "SELECT IDCity, City, Country FROM cities INNER JOIN countries ON CodeCountry = IDCountry";
+
+$result_select = mysqli_query($connect, $sql);
+
+
+/*Выпадающий список*/
+
+echo "<select  name = CodeCity>";
+echo "<option value='NULL'></option>";
+while($arr = mysqli_fetch_array($result_select)){
+
+echo "<option value = '$arr[0]' > $arr[1], $arr[2]</option>";
+
+}
+
+echo "</select>";
+
+?>
+</td>
+  </tr>
     <tr>
   <td style="color: #fff;">Кол-во участников</td>
   <td><input type="number" name="NumberOfParticipants" required=" "/></td>

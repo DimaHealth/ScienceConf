@@ -149,7 +149,7 @@ $header = array('size' => 16, 'bold' => true, 'halign' => 'center');
 
 $IDEvent = mysqli_escape_string($connect, $_POST['IDEvent'] ); 
 	
- $sql = "SELECT `EventName`, `StartDate`, `ExpirationDate`, `EventType`, `Status`, `Level`, `Partner` FROM (`events` INNER JOIN `eventtypes` ON `CodeEventType` = `IDEventType` INNER JOIN `status` ON `CodeStatus` = `IDStatus` INNER JOIN `levels` ON `CodeLevel` = `IDLevel` INNER JOIN `partners` ON `IDEvent` = `CodeEvent`)  WHERE `IDEvent`= ".$IDEvent." GROUP BY `Partner` ";
+ $sql = "SELECT `EventName`, `StartDate`, `ExpirationDate`, `EventType`, `Status`, `Level`, `Partner`, cities.City, countries.Country FROM (`events` INNER JOIN `eventtypes` ON `CodeEventType` = `IDEventType` INNER JOIN `status` ON `CodeStatus` = `IDStatus` INNER JOIN `levels` ON `CodeLevel` = `IDLevel` INNER JOIN `partners` ON `IDEvent` = `CodeEvent` INNER JOIN cities ON partners.CodeCity = cities.IDCity INNER JOIN countries ON cities.CodeCountry = countries.IDCountry)  WHERE `IDEvent`= ".$IDEvent." GROUP BY `Partner` ";
  
 $res = mysqli_query($connect, $sql);
 $flag = 0;
@@ -195,8 +195,8 @@ switch ($item['EventType'])
 		$table->addCell(1800)->addText(htmlspecialchars('Вид, статус и уровень:'));
 		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
 		$textrun2 = $cell2->addTextRun($cellLeft);
-		$textrun2->addText(htmlspecialchars("{$item['Level']}"." "."{$item['Status']}"." "
-		."{$item['EventType']}"));
+		$textrun2->addText(htmlspecialchars("{$item['Level']}"." "."{$item['EventType']}"." "
+		."{$item['Status']}"));
 		
 	$table->addRow();
 		$table->addCell(1800)->addText(htmlspecialchars('Название:'));
@@ -227,12 +227,10 @@ switch ($item['EventType'])
 		{
 			while($item = mysqli_fetch_array( $res ))
 			{
-				$partnersStr .= $counter++.". ".$item['Partner']."\n";
+				$partnersStr .= $counter++.". ".$item['Partner']."(".$item['City'].", ".$item['Country'].")\n";
 				
 			}
 		}
-
-
 	$table->addRow();
 		$table->addCell(1800)->addText(htmlspecialchars('Соорганизаторы:'));
 		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
@@ -303,29 +301,43 @@ switch ($item['EventType'])
 		 $sqlStudentsNotDonntu = "SELECT FIO, typeOfStudy, University, City, Country, publicators.Phone, publicators.Email FROM events INNER JOIN sections ON IDEvent = CodeEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN cathedrae ON publicators.CodeCathedra = IDCathedra INNER JOIN faculties ON CodeFaculty = IDFaculty INNER JOIN universities ON CodeUniversity = IDUniversity INNER JOIN cities ON CodeCity = IDCity INNER JOIN countries ON CodeCountry = IDCountry WHERE University <> 'ДонНТУ' AND IDEvent =".$IDEvent;
 		 
 		 $resStudentsNotDonntu = mysqli_query($connect, $sqlStudentsNotDonntu);
-		 
-		 for($i = 1;  $itemStudentsNotDonntu = mysqli_fetch_array($resStudentsNotDonntu); $i++) 
+		 if ( $itemStudentsNotDonntu = mysqli_fetch_array($resStudentsNotDonntu)) 
 		 {
-		  $table->addRow();
-			 if ($i == 1)
-			 {
+			$table->addRow();
+			 $cell1 = $table->addCell(1800, $cellRowSpan);
+						$textrun1 = $cell1->addTextRun($cellLeft);
+						$textrun1->addText(htmlspecialchars('В т.ч. участие представителей сторонних вузов, предприятий и организаций:'));
+			$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['FIO']));
+			$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['typeOfStudy'] == 1 ? 'заочное участие' : 'очное участие'));
+			$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['University']." (".$itemStudentsNotDonntu['City'].", ".$itemStudentsNotDonntu['Country'].")"));
+			$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['Phone'].", ".$itemStudentsNotDonntu['Email']));
 			
-				$cell1 = $table->addCell(1800, $cellRowSpan);
-				$textrun1 = $cell1->addTextRun($cellLeft);
-				$textrun1->addText(htmlspecialchars('В т.ч. участие представителей сторонних вузов, предприятий и организаций:'));
-			 }
-			 else
-			 {
-				$cell1 = $table->addCell(1800, $cellRowContinue);
-				 
-			 }
-
-				$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['FIO']));
-				$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['typeOfStudy'] == 1 ? 'заочное участие' : 'очное участие'));
-				$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['University']." (".$itemStudentsNotDonntu['City'].", ".$itemStudentsNotDonntu['Country'].")"));
-				$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['Phone'].", ".$itemStudentsNotDonntu['Email']));
-			
+			  while($itemStudentsNotDonntu = mysqli_fetch_array($resStudentsNotDonntu)) 
+				 {
+				  $table->addRow();
+					 
+						$cell1 = $table->addCell(1800, $cellRowContinue);
+						 $table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['FIO']));
+						$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['typeOfStudy'] == 1 ? 'заочное участие' : 'очное участие'));
+						$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['University']." (".$itemStudentsNotDonntu['City'].", ".$itemStudentsNotDonntu['Country'].")"));
+						$table->addCell(1800)->addText(htmlspecialchars($itemStudentsNotDonntu['Phone'].", ".$itemStudentsNotDonntu['Email']));
+					
+				 }
 		 }
+		 else
+		 {
+			  $table->addRow();
+			  	$cell1 = $table->addCell(1800, $cellRowSpan);
+						$textrun1 = $cell1->addTextRun($cellLeft);
+						$textrun1->addText(htmlspecialchars('В т.ч. участие представителей сторонних вузов, предприятий и организаций:'));
+						//$cell1 = $table->addCell(1800, $cellRowContinue);
+						$table->addCell(1800)->addText(htmlspecialchars(''));
+						$table->addCell(1800)->addText(htmlspecialchars(''));
+						$table->addCell(1800)->addText(htmlspecialchars(''));
+						$table->addCell(1800)->addText(htmlspecialchars(''));
+						
+		 }
+		
 		
 		$sql = "SELECT `ReferenceToCollection` FROM (`events` INNER JOIN collections ON CodeCollection = IDCollection)  WHERE `IDEvent`= ".$IDEvent;
 		$res = mysqli_query($connect, $sql);
@@ -388,8 +400,8 @@ switch ($item['EventType'])
 		$table->addCell(1800)->addText(htmlspecialchars('Вид, статус и уровень:'));
 		$cell2 = $table->addCell($RIGHT_COLUMN_WIDTH, $cellColSpan4);
 		$textrun2 = $cell2->addTextRun($cellLeft);
-		$textrun2->addText(htmlspecialchars("{$item['Level']}"." "."{$item['Status']}"." "
-		."{$item['EventType']}"));
+		$textrun2->addText(htmlspecialchars("{$item['Level']}"." "."{$item['EventType']}"." "
+		."{$item['Status']}"));
 		
 	$table->addRow();
 		$table->addCell(1800)->addText(htmlspecialchars('Название:'));
@@ -420,7 +432,7 @@ switch ($item['EventType'])
 		{
 			while($item = mysqli_fetch_array( $res ))
 			{
-				$partnersStr .= $counter++.". ".$item['Partner']."\n";
+				$partnersStr .= $counter++.". ".$item['Partner']."(".$item['City'].", ".$item['Country'].")\n";
 				
 			}
 		}
@@ -438,7 +450,7 @@ switch ($item['EventType'])
 	$table->addRow();
 		$cell1 = $table->addCell(1800, $cellRowSpan);
 		$textrun1 = $cell1->addTextRun($cellLeft);
-		$textrun1->addText(htmlspecialchars('Секции и количество докладчиков:'));
+		$textrun1->addText(htmlspecialchars('Секции и количество принимавших участие:'));
 		
 		$sectionsOfEventResult = mysqli_query($connect, $sqlSectionsOfEvent);
 		$itemSections = mysqli_fetch_array($sectionsOfEventResult);

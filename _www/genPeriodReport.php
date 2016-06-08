@@ -500,27 +500,32 @@ $table->addRow(900);
 		$table3->addCell(5000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Вид мероприятия"));
 		$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Суммарное кол-во"));
 		$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Кол-во студентов"));
+				
 		
-		
-		
-		$sqlNumOfParticipants = "SELECT `Status`, COUNT(IDPublicator) AS NumberOfStudents, (SELECT COUNT(IDPublicator) FROM publicators  INNER JOIN publications ON CodeStudent = IDPublicator INNER JOIN sections ON CodeSection = IDSection INNER JOIN events ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE publicators.IsSchoolChild = 1 AND `Status` = 'для студентов' AND DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') ) AS scholarsforstudents, (SELECT COUNT(IDPublicator) FROM publicators  INNER JOIN publications ON CodeStudent = IDPublicator INNER JOIN sections ON CodeSection = IDSection INNER JOIN events ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE publicators.IsSchoolChild = 1 AND `Status` = 'общее мероприятие' AND DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') ) AS scholarsall, (SELECT COUNT(IDPublicator) FROM publicators  INNER JOIN publications ON CodeStudent = IDPublicator INNER JOIN sections ON CodeSection = IDSection INNER JOIN events ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE publicators.IsSchoolChild = 1 AND `Status` = 'для молодых ученых' AND DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') ) AS scholarsScience, SUM(NumberOfParticipants)
-		AS partParticip FROM `events` INNER JOIN `status` ON CodeStatus = IDStatus INNER JOIN sections ON CodeEvent = IDEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN partners ON partners.CodeEvent = IDEvent WHERE DATE(StartDate) >= DATE('2014-03-15') AND DATE(ExpirationDate) <= DATE('2017-03-15') GROUP BY Status";
+		$sqlNumOfParticipants = "SELECT Status, COUNT(IDPublicator) AS NumberOfStudents,   (SELECT COUNT(IDPublicator) FROM publicators  INNER JOIN publications ON CodeStudent = IDPublicator INNER JOIN sections ON CodeSection = IDSection INNER JOIN events ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE publicators.IsSchoolChild = 1 AND `Status` = 'общее мероприятие' AND DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') ) AS scholarsall FROM `events` INNER JOIN `status` ON CodeStatus = IDStatus INNER JOIN sections ON CodeEvent = IDEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator  WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') GROUP BY Status";
 		// $sqlNumOfEmployees = "SELECT `Status`, COUNT(IDPublicator) AS NumberOfStudents, SUM(NumberOfParticipants)
 		// AS partParticip FROM `events` INNER JOIN `status` ON CodeStatus = IDStatus INNER JOIN sections ON CodeEvent = IDEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN partners ON partners.CodeEvent = IDEvent GROUP BY `Status`";
+		$sqlNumOfParticipants2 = "SELECT SUM(NumberOfParticipants) AS partParticip FROM events INNER JOIN `status`
+		ON CodeStatus = IDStatus INNER JOIN partners ON partners.CodeEvent = IDEvent
+		WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') GROUP BY `Status`";
+		
+		$resNumOfParticipants2 = mysqli_query($connect, $sqlNumOfParticipants2);
+		
 		
 		$resNumOfParticipants = mysqli_query($connect, $sqlNumOfParticipants);
-		
+		//die(var_dump($_POST, $_GET, $resNumOfParticipants));
 		// $scholarsinEventsForStudents = 0;
 		// $scholarsinEventsForScientist = 2;
 		$totalSum = 0;
 		$totalNumOfStudents = 0;
 		while($itemNumOfParticipants = mysqli_fetch_array($resNumOfParticipants))
 		{
+			$itemNumOfParticipants2 = mysqli_fetch_array($resNumOfParticipants2);
 		$table3->addRow();
 			$table3->addCell(5000)->addTextRun($cellLeft)->addText(htmlspecialchars($itemNumOfParticipants['Status']));
-			$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemNumOfParticipants['NumberOfStudents'] + $itemNumOfParticipants['partParticip']));
+			$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemNumOfParticipants['NumberOfStudents'] + $itemNumOfParticipants2['partParticip']));
 			
-			$totalSum += $itemNumOfParticipants['NumberOfStudents'] + $itemNumOfParticipants['partParticip'];
+			$totalSum += $itemNumOfParticipants['NumberOfStudents'] + $itemNumOfParticipants2['partParticip'];
 			
 			if ($itemNumOfParticipants['Status']=="общее мероприятие")
 			{
@@ -541,6 +546,98 @@ $table->addRow(900);
 				$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($totalSum));
 				$table3->addCell(2000)->addTextRun($cellHCentered)->addText(htmlspecialchars($totalNumOfStudents));
 		
+		
+		
+		
+		
+		////////////////////////////////////////////////////////
+		//================================================//////
+		////////////////////////////////////////////////////////
+		
+		
+		
+		
+		
+		
+				$section->addPageBreak(1);
+		$TableName = "Вузы, предприятия и организации из числа участников НТМ на базе ДонНТУ в  период  ".$StartDate." - ".$EndDate;
+		$section->addText(htmlspecialchars("{$TableName}"), $header);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$fontStyle = array('bold' => true, 'align' => 'center');
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '999999');
+		$cellRowSpan = array('vMerge' => 'restart', 'align' => 'left');
+		$cellRowContinue = array('vMerge' => 'continue');
+		$cellColSpan3 = array('gridSpan' => 3, 'valign' => 'center');
+		$cellColSpan4 = array('gridSpan' => 4, 'valign' => 'center');
+		$cellColSpan2 = array('gridSpan' => 2, 'valign' => 'center');
+		$cellHCentered = array('align' => 'center');
+		$cellVCentered = array('valign' => 'center');
+		$cellLeft = array('align' => 'left');
+		$cellRight = array('align' => 'right');
+		
+		
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		
+		$table4 = $section->addTable($TableName);
+		
+
+		$sqlPartnersInEvents = "SELECT * FROM ((SELECT Country, University AS Partner FROM events INNER JOIN sections ON CodeEvent = IDEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN cathedrae ON publicators.CodeCathedra = IDCathedra INNER JOIN faculties ON CodeFaculty = IDFaculty INNER JOIN universities ON CodeUniversity = IDUniversity INNER JOIN cities ON CodeCity = IDCity INNER JOIN countries ON CodeCountry = IDCountry WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."')) UNION (SELECT Country, Partner FROM events INNER JOIN partners ON CodeEvent = IDEvent INNER JOIN cities ON CodeCity = IDCity INNER JOIN countries ON CodeCountry = IDCountry WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."'))) AS t1 ORDER BY Country, Partner ASC";
+		$resPartnersInEvents = mysqli_query($connect, $sqlPartnersInEvents);
+		$counter = 0;
+		$i = 0;
+		$countryVal = "";
+		$countryValNew = "";
+		$partners = "";
+		
+		
+	$table4->addRow();
+		$table4->addCell(500)->addTextRun($cellHCentered)->addText(htmlspecialchars("№ п.п"));
+		$table4->addCell(3000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Страна"));
+		$table4->addCell(3000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Вузы и организации"));
+		$table4->addCell(3000)->addTextRun($cellHCentered)->addText(htmlspecialchars("Количество"));
+		
+		while($item = mysqli_fetch_array($resPartnersInEvents)) 
+		{
+			
+			$countryValNew = $item['Country'];
+			if ($countryValNew  != $countryVal && $countryVal != "") 
+			{
+				$i++;
+				$table4->addRow();
+				$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($i));
+				$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($countryVal));
+				$table4->addCell(500, $cellRowSpan)->addTextRun($cellLeft)->addText(htmlspecialchars($partners));
+				$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($counter));
+				
+				$counter = 0;
+				$partners = "";
+			}
+			else 
+			{
+				$counter++;
+				$partners .= $item['Partner']."\n";
+			}
+			
+			$countryVal = $countryValNew;
+		}
+		
+		if ($partners != "") {
+			$i++;
+			$table4->addRow();
+			$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($i));
+			$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($countryVal));
+			$table4->addCell(500, $cellRowSpan)->addTextRun($cellLeft)->addText(htmlspecialchars($partners));
+			$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($counter));
+		}
 		
 // Save file
 echo write($phpWord, basename(__FILE__, '.php'), $writers);

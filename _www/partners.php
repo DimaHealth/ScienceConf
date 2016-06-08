@@ -130,9 +130,9 @@ $res = mysqli_query($connect, $sql);
     echo '<table border="1" class="table">';      
    
   echo '<tr class="my-bold-font"><th>IDPartner</th><th>Партнер</th><th>Телефон</th>
-  <th>Web-сайт</th><th>Email</th><th>Мероприятие</th>
+  <th>Web-сайт</th><th>Email</th><th>Мероприятие</th><th>Город,Страна</th>
   <th>Кол-во участников</th>
-  <th>Ред.</th><th>Удл.</th></tr>'; 
+  <th></th><th></th></tr>'; 
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr class="my-bold-font">'; 
@@ -144,6 +144,21 @@ $res = mysqli_query($connect, $sql);
 	 $sql3 = "SELECT `EventName` FROM `events` WHERE  IDEvent = ".$item['CodeEvent'];
 	$res3 =  mysqli_query($connect, $sql3);
 	 echo '<td>'.mysqli_fetch_array( $res3 )['EventName'].'</td>'; 
+	 
+	  	$sql4 = "SELECT `City`, `Country` FROM `cities` INNER JOIN `countries` ON `CodeCountry` = `IDCountry` WHERE IDCity =".$item['CodeCity'];
+	$res4 =  mysqli_query($connect, $sql4);
+	
+	if ($res4 != NULL)
+	{
+		$countryandcity = mysqli_fetch_array( $res4 );
+	 echo '<td>'.$countryandcity['City'].', '.$countryandcity['Country'].'</td>'; 
+	}
+	else
+	{
+		echo '<td></td>'; 
+	}
+	 
+	 
     echo '<td>'.$item['NumberOfParticipants'].'</td>'; 
     echo '<td><a href="?action=editform&id='.$item['IDPartner'].'">Ред.</a></td>'; 
     echo '<td><a href="?action=delete&id='.$item['IDPartner'].'">Удл.</a></td>'; 
@@ -171,11 +186,12 @@ require("dbconnect.php");
   $Website = mysqli_escape_string($connect, $_POST['Website'] ); 
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
+  $CodeCity = mysqli_escape_string($connect, $_POST['CodeCity'] ); 
   $NumberOfParticipants = mysqli_escape_string($connect, $_POST['NumberOfParticipants'] ); 
   $query = " INSERT INTO `partners`(`Partner`, `Phone`,`Website`, `Email`,
- `CodeEvent`, `NumberOfParticipants`) 
+ `CodeEvent`, `NumberOfParticipants`, `CodeCity`) 
  VALUES ('$Partner',' $Phone','$Website',
- ' $Email','$CodeEvent','$NumberOfParticipants')"; 
+ ' $Email','$CodeEvent','$NumberOfParticipants','$CodeCity')"; 
   mysqli_query ($connect, $query ); 
  // die(var_dump($_POST, $_GET, $Partner));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
@@ -208,14 +224,14 @@ $id = mysqli_escape_string($connect, $_GET['IDPartner'] );
   $Email = mysqli_escape_string($connect, $_POST['Email'] ); 
   $CodeEvent = mysqli_escape_string($connect, $_POST['CodeEvent'] ); 
   $NumberOfParticipants = mysqli_escape_string($connect, $_POST['NumberOfParticipants'] ); 
-
+   $CodeCity = mysqli_escape_string($connect, $_POST['CodeCity'] ); 
    $query = "UPDATE partners SET Email = '".$Email."', Partner='".$Partner."', Phone ='".$Phone."', Website = '".$Website."',
-   CodeEvent = '".$CodeEvent."', NumberOfParticipants = '".$NumberOfParticipants."'
+   CodeEvent = '".$CodeEvent."', CodeCity = ".$CodeCity.", NumberOfParticipants = '".$NumberOfParticipants."'
    WHERE IDPartner=".$id;
    mysqli_query ($connect, $query ); 
-   print($Email);
+ //  print($Email);
  //  die(var_dump($_POST, $_GET, $Email));
-  //  die(var_dump($_POST, $_GET, $id));
+   // die(var_dump($_POST, $_GET, $id));
   header( 'Location: '.$_SERVER['PHP_SELF'] );
   die();
 } 
