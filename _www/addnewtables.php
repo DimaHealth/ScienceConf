@@ -88,19 +88,20 @@ die();
      </nav>
 	   </div>
 	     <nav class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
-         <ul class="nav navbar-nav navbar-right">
+         <ul class="nav navbar-nav navbar-left">
 	      <li><a href="collections.php">Сборники</a></li>
           <li><a href="orders.php">Приказы</a></li>
           <li><a href="orderformations.php">Формирование приказов</a></li>
           <li><a href="mailings.php">Рассылки</a></li>
 		  <li><a href="involvedemployees.php">Сотрудники по мероприятиям</a></li>
-          <li><a href="marks.php">Оценки</a></li>
-          <li><a href="plans.php">Планы</a></li>
-          <li><a href="publications.php">Публикации</a></li>
-          <li><a href="publicators.php">Публикующиеся</a></li>
+           <li><a href="plans.php">Планы</a></li>
+          <li><a href="publications.php">Публикации</a></li> 
+		  <li><a href="publicators.php">Публикующиеся</a></li>
+		  
           <li><a href="sections.php">Секции</a></li>
         </ul>
       </nav>
+	  
     </header>
 	
 

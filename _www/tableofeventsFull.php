@@ -108,7 +108,7 @@ $res = mysqli_query($connect, $sql);
   echo '<div class="col_66">';
     echo '<table border="1" class="table">';      
    
-  echo '<tr><th>IDEvent</th><th>Название</th><th>Дата начала</th>
+  echo '<tr><th>Название</th><th>Дата начала</th>
   <th>Дата окончания</th><th>Кафедра</th><th>Тип мероприятия</th>
   <th>Ссылка на пресс-релиз</th><th>Ссылка на пост-релиз</th><th>Рейтинг</th><th>Предшествующее мероприятие</th>
   <th>Год плана</th>
@@ -116,8 +116,7 @@ $res = mysqli_query($connect, $sql);
   while ( $item = mysqli_fetch_array( $res ) ) 
   { 
     echo '<tr class="my-bold-font">'; 
-	echo '<td>'.$item['IDEvent'].'</td>'; 
-    echo '<td>'.$item['EventName'].'</td>'; 
+	echo '<td>'.$item['EventName'].'</td>'; 
     echo '<td>'.$item['StartDate'].'</td>'; 
     echo '<td>'.$item['ExpirationDate'].'</td>'; 
 	

@@ -597,7 +597,7 @@ $table->addRow(900);
 		$countryVal = "";
 		$countryValNew = "";
 		$partners = "";
-		
+		$totalCounter = 0;
 		
 	$table4->addRow();
 		$table4->addCell(500)->addTextRun($cellHCentered)->addText(htmlspecialchars("№ п.п"));
@@ -618,6 +618,7 @@ $table->addRow(900);
 				$table4->addCell(500, $cellRowSpan)->addTextRun($cellLeft)->addText(htmlspecialchars($partners));
 				$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($counter));
 				
+				$totalCounter += $counter;
 				$counter = 0;
 				$partners = "";
 			}
@@ -637,9 +638,328 @@ $table->addRow(900);
 			$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($countryVal));
 			$table4->addCell(500, $cellRowSpan)->addTextRun($cellLeft)->addText(htmlspecialchars($partners));
 			$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($counter));
+			$totalCounter += $counter;
+		}
+			$table4->addRow();
+			// $table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText();
+			// $table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText();
+			$table4->addCell(500, $cellColSpan3)->addTextRun($cellRight)->addText(htmlspecialchars("Всего:"));
+			$table4->addCell(500, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars($totalCounter));
+			
+			
+			
+			
+			
+		////////////////////////////////////////////////////////
+		//================================================//////
+		////////////////////////////////////////////////////////
+		
+		
+		
+		
+		
+		
+				$section->addPageBreak(1);
+		$TableName = "Рейтинговая оценка НТМ, проведенных в ДонНТУ в период  ".$StartDate." - ".$EndDate;
+		$section->addText(htmlspecialchars("{$TableName}"), $header);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+		$styleCell = array('valign' => 'center');
+		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+		$fontStyle = array('bold' => true, 'align' => 'center');
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '999999');
+		$cellRowSpan = array('vMerge' => 'restart', 'align' => 'left');
+		$cellRowContinue = array('vMerge' => 'continue');
+		$cellColSpan3 = array('gridSpan' => 3, 'valign' => 'center');
+		$cellColSpan4 = array('gridSpan' => 4, 'valign' => 'center');
+		$cellColSpan5 = array('gridSpan' => 5, 'valign' => 'center');
+		$cellColSpan2 = array('gridSpan' => 2, 'valign' => 'center');
+		$cellHCentered = array('align' => 'center');
+		$cellVCentered = array('valign' => 'center');
+		$cellLeft = array('align' => 'left');
+		$cellRight = array('align' => 'right');
+		$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+		
+		$sqlEventsInfo = "SELECT * FROM events INNER JOIN collections ON CodeCollection = IDCollection WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."')";
+		
+		$resEventsInfo = mysqli_query($connect, $sqlEventsInfo);
+				//страны СНГ
+				$SIO = array("Азербайджан", "Армения", "Белоруссия", "Казахстан","Киргизия","Молдавия","Россия","Таджикистан", "Туркменистан", "Узбекистан", "Украина");
+				//станы ЕС
+				
+				$EU = array("Австрия", "Италия", "Словакия
+					Бельгия", "Кипр", "Словения
+					Болгария", "Латвия", "Финляндия
+					Великобритания", "Литва", "Франция
+					Венгрия", "Люксембург", "Хорватия
+					Германия", "Мальта", "Чехия
+					Греция", "Нидерланды", "Швеция
+					Дания", "Польша", "Эстония
+					Ирландия", "Португалия", " 
+					Испания", "Румыния" );
+		while ($item = mysqli_fetch_array($resEventsInfo))
+		{
+			
+			$eventMark = 0;
+			if ($item['CodePreviosEvent'] != NULL)
+			{
+				$eventMark += 100;
+			}
+			if ($item['isNameChanged'] == 1)
+			{
+				$eventMark -= 100;
+			}
+			if ($item['areViewAndStatusChanged'] == 1)
+			{
+				$eventMark -= 100;
+			}
+			if ($item['isDateChanged'] == 1)
+			{
+				$eventMark -= 100;
+			}
+			if ($item['areStatusAndTypeConfirmed'] == 0)
+			{
+				$eventMark -= 100;
+			}
+			if ($item['isCarriedOutsidePlan'] == 0)
+			{
+				$eventMark -= 200;
+			}
+			if ($item['Website'] != 'нет')
+			{
+				$eventMark += 100;
+			}
+			if ($item['PressReleaseRef'] != 'нет')
+			{
+				$eventMark += 100;
+			}
+			if ($item['PostReleaseRef'] != 'нет')
+			{
+				$eventMark += 100;
+			}
+			if ($item['ReferenceToProgram'] != 'нет')
+			{
+				$eventMark += 100;
+			}
+			if ($item['ElectronicCloseView'] == 1)
+			{
+				$eventMark += 100;
+			}
+			else if ($item['ElectronicOpenView'] == 1)
+			{
+				$eventMark += 100;
+			}
+			if ($item['PrintView'] == 1)
+			{
+				$eventMark += 100;
+			}
+			$sqlEventMembers = "SELECT University, Country, IsSchoolChild, TypeOfStudy FROM events INNER JOIN sections ON CodeEvent = IDEvent INNER JOIN publications ON CodeSection = IDSection INNER JOIN publicators ON CodeStudent = IDPublicator INNER JOIN cathedrae ON publicators.CodeCathedra = IDCathedra INNER JOIN faculties ON CodeFaculty = IDFaculty INNER JOIN universities ON CodeUniversity = IDUniversity INNER JOIN cities ON CodeCity = IDCity INNER JOIN countries ON CodeCountry = IDCountry WHERE IDEvent = ".$item['IDEvent'];
+			$resEventMembers = mysqli_query($connect, $sqlEventMembers);
+			while ($itemMembers = mysqli_fetch_array($resEventMembers))
+			{
+				if ($itemMembers['IsSchoolChild'] == 1)
+				{
+					$eventMark += $itemMembers['TypeOfStudy'] == 0 ? 50 : 25;
+				}
+				if ($itemMembers['University'] == "ДонНТУ")
+				{
+					$eventMark += 5;
+				}
+				else
+				{
+					if ($itemMembers['Country'] == "ДНР" || $itemMembers['Country'] == "ЛНР")
+					{
+						$eventMark += $itemMembers['TypeOfStudy'] == 0 ? 10 : 5;
+					}
+				}
+
+					
+				if (in_array ($itemMembers['Country'] ,$SIO))
+				{
+					$eventMark += $itemMembers['TypeOfStudy'] == 0 ? 20 : 10;
+				}
+				else if (in_array ($itemMembers['Country'] ,$EU))
+				{
+					$eventMark += $itemMembers['TypeOfStudy'] == 0 ? 30 : 15;
+				}
+				else
+				{
+					$eventMark += $itemMembers['TypeOfStudy'] == 0 ? 40 : 20;
+				}
+			}
+			
+			$sqlUpdateMark = "UPDATE `events` SET RatingMark= ".$eventMark." WHERE IDEvent =".$item['IDEvent'];
+			mysqli_query($connect, $sqlUpdateMark);
+			
+		
 		}
 		
-// Save file
+		
+		
+		
+		$table5 = $section->addTable($TableName);
+		$size = 4500;
+		$table5->addRow();
+			$table5->addCell(900, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars("Место:"));
+			$table5->addCell(4700, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars("Название НТМ"));
+			$table5->addCell($size,$cellColSpan3)->addTextRun($cellHCentered)->addText(htmlspecialchars("Количество"));
+			
+			
+		$table5->addRow();
+			$table5->addCell(900,$cellRowContinue)->addTextRun($cellHCentered)->addText(htmlspecialchars(""));
+			$table5->addCell(4700,$cellRowContinue)->addTextRun($cellHCentered)->addText(htmlspecialchars(""));
+			$table5->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars("баллов"));
+			$table5->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars("членов оргкомитета"));
+			$table5->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars("баллов на 1-го члена"));
+			
+			$sqlEventsWithMarks = "SELECT Status, EventName, RatingMark, COUNT(IDInvolvedEmployee) as InvolvedEmployeesNum, ROUND(RatingMark / COUNT(IDInvolvedEmployee), 2) as MarkPerPerson FROM events INNER JOIN involvedemployees ON CodeEvent = IDEvent INNER JOIN status ON CodeStatus = IDStatus WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') GROUP BY EventName ORDER BY Status DESC, RatingMark DESC";
+			$resEventsWithMarks = mysqli_query($connect, $sqlEventsWithMarks);
+			
+			$oldStatus = "";
+			$newStatus = "";
+			$counter;
+			while ($itemEventsWithMarks = mysqli_fetch_array($resEventsWithMarks))
+			{
+				$newStatus = $itemEventsWithMarks['Status'];
+				if ($newStatus != $oldStatus)
+				{
+					$table5->addRow();
+						$table5->addCell(3000,$cellColSpan5)->addTextRun($cellHCentered)->addText(htmlspecialchars($newStatus));
+						$counter = 1;
+				}
+				
+				$table5->addRow();
+						$table5->addCell(900)->addTextRun($cellHCentered)->addText(htmlspecialchars($counter++));
+						$table5->addCell(4700)->addTextRun($cellLeft)->addText(htmlspecialchars($itemEventsWithMarks['EventName']));
+						$table5->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemEventsWithMarks['RatingMark']));
+						$table5->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemEventsWithMarks['InvolvedEmployeesNum']));
+						$table5->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars($itemEventsWithMarks['MarkPerPerson']));
+						
+				$oldStatus = $newStatus;
+			}
+			
+			class EmployeeMarks
+			{
+				public $FIO, $commonMark, $forScientistsMark, $forStudentsMark, $totalMark;
+			}
+			
+			$sqlEmployeesMarks = "SELECT employees.FIO, status.Status,SUM( ROUND(findMarkPerPerson(IDEvent), 2)) as SUMMark from events INNER JOIN involvedemployees on CodeEvent = IDEvent INNER JOIN status on CodeStatus = IDStatus INNER JOIN employees on CodeEmployee = IDEmployee WHERE DATE(StartDate) >= DATE('".$StartDate."') AND DATE(ExpirationDate) <= DATE('".$EndDate."') GROUP BY FIO, Status";
+			$resEmployeesMarks = mysqli_query($connect, $sqlEmployeesMarks);
+			
+			$employeesMarksArray;
+			
+			$oldFIO = "";
+			$newFIO = "";
+			
+			$forScientistsMark = 0; $forStudentsMark = 0; $commonMark = 0; $FIO = "";
+			$arrayCounter = 0;
+			$counter = 0;
+			while ($itemEmployessMarks = mysqli_fetch_array($resEmployeesMarks))
+			{
+				$newFIO = $itemEmployessMarks['FIO'];
+				if ($newFIO != $oldFIO && $FIO != "")
+				{
+					$employeesMarksArray[$arrayCounter] = new EmployeeMarks();
+					$employeesMarksArray[$arrayCounter]->forScientistsMark = $forScientistsMark;
+					$employeesMarksArray[$arrayCounter]->forStudentsMark = $forStudentsMark;
+					$employeesMarksArray[$arrayCounter]->commonMark = $commonMark;
+					$employeesMarksArray[$arrayCounter]->totalMark = $forScientistsMark * 0.3 + $forStudentsMark * 0.3 + $commonMark * 0.4;
+					$employeesMarksArray[$arrayCounter]->FIO = $FIO;
+					$arrayCounter++;
+					$forScientistsMark = $forStudentsMark = $commonMark = 0;
+					$counter = 0;
+				}
+				switch ($counter++) 
+				{
+					case 0:
+						$forScientistsMark = $itemEmployessMarks['SUMMark'];
+						break;
+					case 1:
+						$forStudentsMark = $itemEmployessMarks['SUMMark'];
+						break;
+					case 2:
+						$commonMark = $itemEmployessMarks['SUMMark'];
+						break;
+				}
+				
+				$FIO = $itemEmployessMarks['FIO'];
+				$oldFIO = $newFIO;
+			}
+			
+			$employeesMarksArray[$arrayCounter] = new EmployeeMarks();
+			$employeesMarksArray[$arrayCounter]->forScientistsMark = $forScientistsMark;
+			$employeesMarksArray[$arrayCounter]->forStudentsMark = $forStudentsMark;
+			$employeesMarksArray[$arrayCounter]->commonMark = $commonMark;
+			$employeesMarksArray[$arrayCounter]->totalMark = $forScientistsMark * 0.3 + $forStudentsMark * 0.3 + $commonMark * 0.4;
+			$employeesMarksArray[$arrayCounter]->FIO = $FIO;
+			
+
+
+			
+			usort($employeesMarksArray, function ($a, $b) {return $a->totalMark < $b->totalMark;});
+			
+			$section->addPageBreak(1);
+				$TableName = "Рейтинговая оценка НТМ, проведенных в ДонНТУ в период  ".$StartDate." - ".$EndDate;
+				$section->addText(htmlspecialchars("{$TableName}"), $header);
+				$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+				$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+				$styleCell = array('valign' => 'center');
+				$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+				$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+				$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
+				$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+				$styleCell = array('valign' => 'center');
+				$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+				$fontStyle = array('bold' => true, 'align' => 'center');
+				$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+				$styleTable = array('borderSize' => 6, 'borderColor' => '999999');
+				$cellRowSpan = array('vMerge' => 'restart', 'align' => 'left');
+				$cellRowContinue = array('vMerge' => 'continue');
+				$cellColSpan3 = array('gridSpan' => 3, 'valign' => 'center');
+				$cellColSpan4 = array('gridSpan' => 4, 'valign' => 'center');
+				$cellColSpan5 = array('gridSpan' => 5, 'valign' => 'center');
+				$cellColSpan2 = array('gridSpan' => 2, 'valign' => 'center');
+				$cellHCentered = array('align' => 'center');
+				$cellVCentered = array('valign' => 'center');
+				$cellLeft = array('align' => 'left');
+				$cellRight = array('align' => 'right');
+				$phpWord->addTableStyle($TableName, $styleTable, $styleFirstRow);
+				
+				
+				$table6 = $section->addTable($TableName);
+				$size = 4600;
+				$table6->addRow();
+					$table6->addCell($size/5, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars("Место:"));
+					$table6->addCell($size*0.7, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars("ФИО"));
+					$table6->addCell($size,$cellColSpan3)->addTextRun($cellHCentered)->addText(htmlspecialchars("Количество баллов за организацию и проведение"));
+					$table6->addCell($size/5, $cellRowSpan)->addTextRun($cellHCentered)->addText(htmlspecialchars("Cумма баллов:"));
+					
+				$table6->addRow();
+					$table6->addCell($size/5,$cellRowContinue)->addTextRun($cellHCentered)->addText(htmlspecialchars(""));
+					$table6->addCell($size*0.7,$cellRowContinue)->addTextRun($cellHCentered)->addText(htmlspecialchars(""));
+					$table6->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars("Общие мероприятия (в. к. 0.4)"));
+					$table6->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars("Конференции молодых ученых аспирантов и студентов (в. к. 0.3)"));
+					$table6->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars("Студенческие олимпиады и конкурсы (в. к. 0.3)"));
+					$table6->addCell($size/5,$cellRowContinue)->addTextRun($cellHCentered)->addText(htmlspecialchars(""));
+					
+					for($i = 0;$i < count($employeesMarksArray); $i++)
+					{
+						$table6->addRow();
+							$table6->addCell($size/5)->addTextRun($cellHCentered)->addText(htmlspecialchars($i+1));
+							$table6->addCell($size*0.7)->addTextRun($cellHCentered)->addText(htmlspecialchars($employeesMarksArray[$i]->FIO));
+							$table6->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars($employeesMarksArray[$i]->commonMark));
+							$table6->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars($employeesMarksArray[$i]->forScientistsMark));
+							$table6->addCell($size/3)->addTextRun($cellHCentered)->addText(htmlspecialchars($employeesMarksArray[$i]->forStudentsMark));
+							$table6->addCell($size/5)->addTextRun($cellHCentered)->addText(htmlspecialchars($employeesMarksArray[$i]->totalMark));
+					}
+				
+					// Save file		
 echo write($phpWord, basename(__FILE__, '.php'), $writers);
 if (!CLI)
 {
