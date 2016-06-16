@@ -377,7 +377,7 @@ switch ($item['EventType'])
 		$TableName = "Отчёт по олимпиаде";
 		$section->addText(htmlspecialchars("{$TableName}"), $header);
 
-		$styleTable = array('borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80);
+		$styleTable = array('borderSize' => 6, 'borderColor' => '000000', 'cellMargin' => 80);
 		$styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
 		$styleCell = array('valign' => 'center');
 		$styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);

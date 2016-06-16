@@ -160,7 +160,7 @@ $CodePlan = mysqli_escape_string($connect, $_POST['CodePlan'] );
  ON `CodeLevel` = `IdLevel` INNER JOIN `employees` 
  ON `CodeExecutiveSecretary` = `IdEmployee` INNER JOIN `cathedrae`
  ON employees.CodeCathedra = `IdCathedra` INNER JOIN `posts`
- ON `CodePost` = `IdPost`) WHERE `CodePlan`=".$CodePlan;
+ ON `CodePost` = `IdPost`) WHERE `CodePlan`=".$CodePlan." ORDER BY StartDate";
 $res = mysqli_query($connect, $sql);
 
 // 2. Advanced table
